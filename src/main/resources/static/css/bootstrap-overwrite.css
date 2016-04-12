@@ -1,0 +1,48 @@
+.navbar {
+    margin-top: -70px;
+    height: 160px;
+    border-style: none;
+    border-radius: 0;
+    border-bottom: 1px solid #eee;
+    /*border-bottom: 1px solid #607D8B;*/
+}
+
+.navbar-inverse {
+    background-color: #ffffff;
+}
+
+.list-group {
+    width: 95%;
+}
+
+.list-group-item, .list-group-item:first-child, .list-group-item:last-child {
+    border-radius: 0;
+    border-left-style: none;
+    border-right-style: none;
+}
+
+.list-group-item.active {
+    border-color: #546E7A;
+    background-color: #607D8B;
+}
+
+.list-group-item.active:hover {
+    border-color: #607D8B;
+    background-color: #546E7A;
+}
+
+a {
+    color: #607D8B
+}
+
+footer > div > div > p {
+    text-align: center;
+}
+
+
+
+
+
+
+
+
