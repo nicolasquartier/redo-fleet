@@ -39,6 +39,17 @@ footer > div > div > p {
     text-align: center;
 }
 
+.navbar-toggle {
+    background-color: #607D8B;
+
+}
+
+.collapsed.navbar-toggle:hover .collapsed.navbar-toggle:active {
+    background-color: #546E7A;
+}
+
+
+
 
 
 
