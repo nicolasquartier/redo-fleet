@@ -12,4 +12,9 @@ public class LoginController {
         return "login";
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout() {
+        return "redirect:/login";
+    }
+
 }

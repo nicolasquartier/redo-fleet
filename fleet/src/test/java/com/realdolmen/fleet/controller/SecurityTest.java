@@ -18,9 +18,10 @@ import org.springframework.web.context.WebApplicationContext;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Application.class )
+@ContextConfiguration(classes = Application.class)
 @ActiveProfiles("TST")
 @WebAppConfiguration(value = "resources/templates/")
 public class SecurityTest {
@@ -54,7 +55,20 @@ public class SecurityTest {
 
     @Test
     public void loginUrlIsOpen() throws Exception {
-           preformGetForAndExpect("/login", status().isOk(), status().isOk(), status().isOk());
+        preformGetForAndExpect("/login", status().isOk(), status().isOk(), status().isOk());
+    }
+
+    @Test
+    public void logoutRedirectsToLogin() throws Exception {
+        String requestPath = "/logout";
+        String expectedViewName = "redirect:/login";
+
+        preformGetForAndExpect(requestPath, status().is3xxRedirection(), status().is3xxRedirection(), status().is3xxRedirection());
+
+        mvc.perform(get(requestPath).with(user("user").roles("USER"))).andExpect(view().name(expectedViewName));
+        mvc.perform(get(requestPath).with(user("user").roles("ADMIN"))).andExpect(view().name(expectedViewName));
+        mvc.perform(get(requestPath)).andExpect(view().name(expectedViewName));
+
     }
 
     private void preformGetForAndExpect(String path, ResultMatcher noUser, ResultMatcher normalUser, ResultMatcher adminUser) throws Exception {
@@ -65,10 +79,6 @@ public class SecurityTest {
         mvc.perform(get(path).with(user("user").roles("ADMIN")))
                 .andExpect(adminUser);
     }
-
-
-
-
 
 
 }
