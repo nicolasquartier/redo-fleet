@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li th:class="${#httpServletRequest.requestURI} == '/mycar' ? 'active' : ''">
-                    <a th:href="@{/mycar}" th:text="#{rdf.mycar}"></a>
+                    <a th:href="@{/cars/mycar}" th:text="#{rdf.mycar}"></a>
                 </li>
                 <li th:class="${#httpServletRequest.requestURI} == '/carcatalog' ? 'active' : ''">
                     <a th:href="@{/cars}" th:text="#{rdf.carcatalog}"></a>
@@ -56,7 +56,7 @@
                     <a href="#">Add Car</a>
                 </li>
                 <li th:class="${#httpServletRequest.requestURI} == '/carcatalog' ? 'active' : ''">
-                    <a th:href="@{/cars}" th:text="#{rdf.carcatalog}"></a>
+                    <a th:href="@{/cars/}" th:text="#{rdf.carcatalog}"></a>
                 </li>
                 <li>
                     <a th:href="test" th:text="#{rdf.contact}"></a>

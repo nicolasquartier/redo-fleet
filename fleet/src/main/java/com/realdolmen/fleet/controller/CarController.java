@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/cars")
 public class CarController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String carcatalog() {
-        return "redirect:/carcatalog";
+        return "carcatalog";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
