@@ -1,0 +1,65 @@
+<div th:fragment="landingPageLogin" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
+    <div class="bodyContainer">
+
+        <!-- Page Content -->
+        <div class="container">
+
+            <div class="row">
+
+                <div layout:fragment="content" class="col-md-9">
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+        <div class="container">
+
+            <!-- REPLACEDBY: footer.html-->
+            <div th:replace="fragments/footer :: footer"></div>
+
+        </div>
+        <!-- /.container -->
+
+        <!-- REPLACEDBY: scripts.html-->
+        <div th:replace="fragments/scripts :: scripts"></div>
+    </div>
+</div>
+
+<div th:fragment="normalPage" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
+    <div class="bodyContainer">
+        <!-- REPLACEDBY: navigation.html-->
+        <div th:replace="fragments/navigation :: top"></div>
+
+        <!-- Page Content -->
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-3" id="sideNav" th:hidden="${#httpServletRequest.requestURI} == '/' ? true : false">
+                    <!-- REPLACEDBY: navigation.html-->
+                    <div th:replace="fragments/navigation :: sideNav" th:remove="tag"></div>
+
+                </div>
+
+                <div layout:fragment="content" class="col-md-9">
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+        <div class="container">
+
+            <!-- REPLACEDBY: footer.html-->
+            <div th:replace="fragments/footer :: footer"></div>
+
+        </div>
+        <!-- /.container -->
+
+        <!-- REPLACEDBY: scripts.html-->
+        <div th:replace="fragments/scripts :: scripts"></div>
+    </div>
+</div>

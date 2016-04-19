@@ -6,38 +6,16 @@
 
 <body>
 
-<!-- REPLACEDBY: navigation.html-->
-<div th:replace="fragments/navigation :: top"></div>
+<div class="bodyContainerBackgroundImg" th:if="${#httpServletRequest.requestURI} == '/'" th:style="'background: url(' + @{../images/areal_dolmen15.jpg} + '); background-size: cover;'">
 
-<!-- Page Content -->
-<div class="container">
-
-    <div class="row">
-
-        <div class="col-md-3">
-                <!-- REPLACEDBY: navigation.html-->
-                <div th:replace="fragments/navigation :: sideNav" th:remove="tag"></div>
-
-        </div>
-
-        <div layout:fragment="content" class="col-md-9">
-        </div>
-
-    </div>
+    <div th:replace="fragments/landingPage :: landingPageLogin"></div>
 
 </div>
-<!-- /.container -->
 
-<div class="container">
-
-    <!-- REPLACEDBY: footer.html-->
-    <div th:replace="fragments/footer :: footer"></div>
+<div class="bodyContainerBackgroundImg" th:unless="${#httpServletRequest.requestURI} == '/'">
+    <div th:replace="fragments/landingPage :: normalPage"></div>
 
 </div>
-<!-- /.container -->
-
-<!-- REPLACEDBY: scripts.html-->
-<div th:replace="fragments/scripts :: scripts"></div>
 
 </body>
 

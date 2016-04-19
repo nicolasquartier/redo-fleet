@@ -1,3 +1,9 @@
+.bodyContainer {
+    background-color: rgba(0,0,0,0.4);
+    background-size:cover;
+    height:1080px;
+}
+
 .logo {
     max-width: 300px;
     height: 80px;
