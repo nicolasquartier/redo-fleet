@@ -10,7 +10,12 @@ public class IndexController {
     // FIXME: 11/04/2016 Should be replaced by index page extending the layout with static content
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
-        return "layout";
+        return "login";
+    }
+
+    @RequestMapping(value = "/overview", method = RequestMethod.GET)
+    public String overview() {
+        return "overview";
     }
 
 }
