@@ -10,6 +10,7 @@ public class FunctionalLevel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Version
     private Long version;
 

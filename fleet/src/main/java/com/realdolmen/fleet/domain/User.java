@@ -4,16 +4,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import org.hibernate.validator.constraints.Email;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class User implements Serializable {
@@ -21,29 +13,38 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Version
     private Long version;
+
     @Column(length = 100)
     @Size(max = 100)
     private String firstName;
+
     @Column(length = 100)
     @Size(max = 100)
     private String lastName;
+
     @Column(length = 255, nullable = false)
     @NotBlank
     @Size(min = 1, max = 255)
     @Email
     private String email;
+
     @Column(length = 10, nullable = false)
     @NotBlank
     private String role = "ROLE_USER";
+
     @ManyToOne
     private FunctionalLevel functionalLevel;
+
     @Column(length = 50, nullable = false)
     @NotBlank
     @Size(min = 1, max = 50)
     private String password;
+
     private boolean active;
+
     @Column(length = 100)
     @Size(max = 100)
     private String businessUnit;
@@ -66,56 +67,52 @@ public class User implements Serializable {
         this.version = version;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public void setFunctionalLevel(FunctionalLevel functionalLevel) {
-        this.functionalLevel = functionalLevel;
-    }
-
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public void setBusinessUnit(String businessUnit) {
-        this.businessUnit = businessUnit;
-    }
-
     public String getFirstName() {
         return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public String getRole() {
         return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public FunctionalLevel getFunctionalLevel() {
         return functionalLevel;
     }
 
+    public void setFunctionalLevel(FunctionalLevel functionalLevel) {
+        this.functionalLevel = functionalLevel;
+    }
 
     public boolean isActive() {
         return active;
     }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public String getBusinessUnit() {
         return businessUnit;
+    }
+
+    public void setBusinessUnit(String businessUnit) {
+        this.businessUnit = businessUnit;
     }
 
     public Long getId() {
