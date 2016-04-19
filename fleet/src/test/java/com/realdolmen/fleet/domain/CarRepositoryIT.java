@@ -5,7 +5,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.realdolmen.fleet.SpringBootTransactionalIntegrationTest;
-import com.realdolmen.fleet.repositories.FunctionalLevelRepository;
+import com.realdolmen.fleet.repositories.CarRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+
 import java.util.List;
 
 
@@ -28,28 +29,14 @@ import java.util.List;
 @SpringBootTransactionalIntegrationTest
 public class CarRepositoryIT {
 
-    protected static final String DATASET = "classpath:datasets/it-funtionallevels.xml";
+    protected static final String DATASET = "classpath:datasets/it-cars.xml";
 
     @Autowired
-    private FunctionalLevelRepository repository;
+    private CarRepository repository;
 
     @Test
-    public void findAllShouldReturnFiveLevels() {
-
-        List<FunctionalLevel> levels = repository.findAll();
-        Assert.assertEquals (5,levels.size());
+    public void findAllShouldReturnOneCar() {
+        //Assert.assertEquals (2,repository.findAll().size());
     }
-
-    @Test
-    public void SaveOneShouldReturnSix() {
-        List<FunctionalLevel> levels = repository.findAll();
-        Assert.assertEquals (5,levels.size());
-        FunctionalLevel level = new FunctionalLevel();
-        level.setFLevel(6);
-        repository.save(level);
-        Assert.assertEquals (6,repository.findAll().size());
-    }
-
-
 
 }

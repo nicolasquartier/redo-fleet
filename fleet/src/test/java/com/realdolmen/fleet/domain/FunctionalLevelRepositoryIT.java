@@ -29,7 +29,7 @@ import java.util.List;
 @SpringBootTransactionalIntegrationTest
 public class FunctionalLevelRepositoryIT {
 
-    protected static final String DATASET = "classpath:datasets/it-funtionallevels.xml";
+    protected static final String DATASET = "classpath:datasets/it-functionallevels.xml";
 
     @Autowired
     private FunctionalLevelRepository repository;
@@ -40,6 +40,17 @@ public class FunctionalLevelRepositoryIT {
         List<FunctionalLevel> levels = repository.findAll();
         Assert.assertEquals (5,levels.size());
     }
+
+    @Test
+    public void SaveOneShouldReturnSix() {
+        List<FunctionalLevel> levels = repository.findAll();
+        Assert.assertEquals (5,levels.size());
+        FunctionalLevel level = new FunctionalLevel();
+        level.setFLevel(6);
+        repository.save(level);
+        Assert.assertEquals (6,repository.findAll().size());
+    }
+
 
 
 }

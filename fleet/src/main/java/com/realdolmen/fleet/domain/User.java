@@ -23,7 +23,6 @@ public class User implements Serializable {
     private Long id;
     @Version
     private Long version;
-
     @Column(length = 100)
     @Size(max = 100)
     private String firstName;
@@ -49,14 +48,7 @@ public class User implements Serializable {
     @Size(max = 100)
     private String businessUnit;
 
-
-
-    @NotNull
-    @Email
-    private String email;
-
     private String username;
-    private String password;
     private Boolean enabled = true;
     private String authorities;
 
@@ -82,9 +74,6 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public void setRole(String role) {
         this.role = role;
@@ -94,9 +83,6 @@ public class User implements Serializable {
         this.functionalLevel = functionalLevel;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public void setActive(boolean active) {
         this.active = active;
@@ -114,9 +100,6 @@ public class User implements Serializable {
         return lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
     public String getRole() {
         return role;
@@ -126,9 +109,6 @@ public class User implements Serializable {
         return functionalLevel;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
     public boolean isActive() {
         return active;
