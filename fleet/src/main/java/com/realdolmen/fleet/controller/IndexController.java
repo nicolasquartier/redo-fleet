@@ -1,6 +1,7 @@
 package com.realdolmen.fleet.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,9 +14,25 @@ public class IndexController {
         return "login";
     }
 
-    @RequestMapping(value = "/overview", method = RequestMethod.GET)
-    public String overview() {
-        return "overview";
+    @RequestMapping(value = "/cars", method = RequestMethod.GET)
+    public String cars() {
+        return "carcatalog";
     }
+
+    @RequestMapping(value = "/cardetail", method = RequestMethod.GET)
+    public String cardetail() {
+        return "cardetail";
+    }
+
+    @RequestMapping(value = "/mycar", method = RequestMethod.GET)
+    public String mycar() {
+        return "mycar";
+    }
+
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String admin() {
+        return "/admin/admin";
+    }
+
 
 }

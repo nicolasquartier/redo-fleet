@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+
     // DOM ready
 
     // Test data
@@ -11,6 +12,9 @@ $( document ).ready(function() {
     // testLocalStorageData();
     // Load profile if it exits
     loadProfile();
+
+    $("#sliderEmission").slider({});
+    $("#sliderHp").slider({});
 });
 
 /**
