@@ -45,6 +45,4 @@ public class ResourceConfig {
 
         return sessionLocaleResolver;
     }
-
-
 }
