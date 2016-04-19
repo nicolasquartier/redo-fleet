@@ -52,10 +52,26 @@ public class SecurityTest {
         preformGetForAndExpect("/", status().isOk(), status().isOk(), status().isOk());
     }
 
-
     @Test
     public void loginUrlIsOpen() throws Exception {
         preformGetForAndExpect("/login", status().isOk(), status().isOk(), status().isOk());
+    }
+
+    @Test
+    public void loggedInUserCanAccessCarsUrl() throws Exception {
+        preformGetForAndExpect("/cars/", status().is3xxRedirection(), status().isOk(), status().isOk());
+    }
+
+    @Test
+    public void loggedInUserCanAccessCardetailUrl() throws Exception {
+        preformGetForAndExpect("/cars/1", status().is3xxRedirection(), status().isOk(), status().isOk());
+    }
+
+    @Test
+    public void loggedInUserCanAccessMyCarUrl() throws Exception {
+        //user who is logged in can acces cars/mycar
+        //fleet admin can't access any cars/mycar
+        preformGetForAndExpect("/cars/mycar", status().is3xxRedirection(), status().isOk(), status().isForbidden());
     }
 
     @Test

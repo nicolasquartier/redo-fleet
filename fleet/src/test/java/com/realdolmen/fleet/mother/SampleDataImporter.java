@@ -32,7 +32,7 @@ public class SampleDataImporter {
     private EntityManager entityManager;
 
     @Test
-    @Ignore
+//    @Ignore
     public void generateSampleData() {
         generateDifferentRoleUsers();
         // TODO: add new method here
