@@ -1,6 +1,5 @@
 package com.realdolmen.fleet.mother;
 
-import com.realdolmen.fleet.SpringBootTransactionalIntegrationTest;
 import com.realdolmen.fleet.TestConfig;
 import com.realdolmen.fleet.domain.User;
 import org.junit.Ignore;
@@ -35,13 +34,20 @@ public class SampleDataImporter {
     @Test
     @Ignore
     public void generateSampleData() {
-        generateUser();
+        generateDifferentRoleUsers();
         // TODO: add new method here
     }
 
-    private void generateUser() {
-        User user = UserMother.init().build();
-        entityManager.persist(user);
+    private void generateDifferentRoleUsers() {
+        User adminUser = UserMother.init().build();
+        adminUser.setUsername("admin");
+        adminUser.setAuthorities("ROLE_ADMIN");
+        entityManager.persist(adminUser);
+
+        User normalUser = UserMother.init().build();
+        normalUser.setUsername("user");
+        normalUser.setAuthorities("ROLE_USER");
+
     }
 
     // TODO: implement method using mother and persist entity
