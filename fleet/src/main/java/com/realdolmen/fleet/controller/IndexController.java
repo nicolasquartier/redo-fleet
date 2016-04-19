@@ -14,25 +14,20 @@ public class IndexController {
         return "login";
     }
 
-    @RequestMapping(value = "/cars", method = RequestMethod.GET)
-    public String cars() {
-        return "carcatalog";
-    }
+//    @RequestMapping(value = "/cars", method = RequestMethod.GET)
+//    public String cars() {
+//        return "carcatalog";
+//    }
 
-    @RequestMapping(value = "/cardetail", method = RequestMethod.GET)
-    public String cardetail() {
-        return "cardetail";
-    }
+//    @RequestMapping(value = "/cardetail", method = RequestMethod.GET)
+//    public String cardetail() {
+//        return "cardetail";
+//    }
 
-    @RequestMapping(value = "/mycar", method = RequestMethod.GET)
-    public String mycar() {
-        return "mycar";
-    }
-
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String admin() {
-        return "/admin/admin";
-    }
+//    @RequestMapping(value = "/mycar", method = RequestMethod.GET)
+//    public String mycar() {
+//        return "mycar";
+//    }
 
 
 }
