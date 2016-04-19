@@ -1,6 +1,7 @@
 package com.realdolmen.fleet.domain;
 
 import com.realdolmen.fleet.SpringBootTransactionalIntegrationTest;
+import com.realdolmen.fleet.mother.UserMother;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +24,7 @@ public class UserIntegrationTest {
 
     @Before
     public void init() {
-        this.user = new User();
+        this.user = UserMother.init().build();
     }
 
     @Test
