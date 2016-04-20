@@ -1,7 +1,9 @@
 package com.realdolmen.fleet.mother;
 
 import com.realdolmen.fleet.TestConfig;
+import com.realdolmen.fleet.domain.FunctionalLevel;
 import com.realdolmen.fleet.domain.User;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,11 +33,20 @@ public class SampleDataImporter {
     @Autowired
     private EntityManager entityManager;
 
+
     @Test
-//    @Ignore
     public void generateSampleData() {
         generateDifferentRoleUsers();
+        generateFunctionalLevels();
         // TODO: add new method here
+    }
+
+    private void generateFunctionalLevels() {
+        for (int i = 1; i < 6; i++) {
+            FunctionalLevel level = FunctionalLevelMother.init().build();
+            level.setFLevel(i);
+            entityManager.persist(level);
+        }
     }
 
     private void generateDifferentRoleUsers() {
@@ -47,6 +58,7 @@ public class SampleDataImporter {
         User normalUser = UserMother.init().build();
         normalUser.setUsername("user");
         normalUser.setAuthorities("ROLE_USER");
+        entityManager.persist(normalUser);
 
     }
 
