@@ -2,6 +2,7 @@ package com.realdolmen.fleet.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 @Entity
@@ -14,6 +15,7 @@ public class FunctionalLevel implements Serializable {
     @Version
     private Long version;
 
+    @Min(value = 0)
     private int fLevel;
 
     public FunctionalLevel() {

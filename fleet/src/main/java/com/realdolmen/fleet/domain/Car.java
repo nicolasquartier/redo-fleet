@@ -3,8 +3,10 @@ package com.realdolmen.fleet.domain;
 import com.realdolmen.fleet.domain.enums.Brand;
 import com.realdolmen.fleet.domain.enums.CarType;
 import com.realdolmen.fleet.domain.enums.FuelType;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -33,6 +35,7 @@ public class Car implements Serializable {
     @Column(nullable = false)
     private Date productionDate;
 
+    @Min(value = 0)
     private int fiscalHorsePower;
 
     @Enumerated(EnumType.STRING)
@@ -50,11 +53,12 @@ public class Car implements Serializable {
 
     private boolean hybrid;
 
+    @Min(value = 0)
     private int emission;
 
     private boolean active;
 
-    @NotNull
+    @NotBlank
     @ManyToOne
     private FunctionalLevel category;
 
