@@ -32,8 +32,9 @@ import static org.junit.Assert.assertNotNull;
 @SpringBootTransactionalIntegrationTest
 public class CarRepositoryIT {
 
+    //    protected static final String DATASET = "classpath:datasets/it-cars.xml";
     private Car car;
-    private CarMother carMother;
+    private Car carTwo;
 
     @Autowired
     private CarRepository repository;
@@ -46,20 +47,17 @@ public class CarRepositoryIT {
         FunctionalLevel category = new FunctionalLevel();
         category.setFLevel(1);
         entityManager.persist(category);
-        carMother = new CarMother();
-        FunctionalLevel functionalLevel = FunctionalLevelMother.init().build();
-        functionalLevel.setFLevel(1);
-        entityManager.persist(functionalLevel);
 
-        CarMother carMother = CarMother.init();
-        carMother.setCategoryOrFunctionLevel(functionalLevel);
-        this.car = carMother.build();
-        this.car.setCategory(category);
+        this.car = CarMother.init().setCategoryOrFunctionLevel(category).build();
+        entityManager.persist(car);
+
+        this.carTwo = CarMother.init().setCategoryOrFunctionLevel(category).build();
+        entityManager.persist(carTwo);
+
     }
 
     @Test
     public void shouldReturnCarId() {
-        entityManager.persist(this.car);
         assertNotNull(this.car.getId());
         assertEquals(new Long(1L), this.car.getId());
     }
@@ -67,7 +65,7 @@ public class CarRepositoryIT {
     @Test
     @Ignore
     public void findAllShouldReturnOneCar() {
-        assertEquals(2, repository.findAll());
+        assertEquals(2, repository.findAll().size());
     }
 
 }

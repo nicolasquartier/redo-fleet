@@ -3,14 +3,11 @@ package com.realdolmen.fleet.domain;
 import com.realdolmen.fleet.domain.enums.Brand;
 import com.realdolmen.fleet.domain.enums.CarType;
 import com.realdolmen.fleet.domain.enums.FuelType;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -57,23 +54,13 @@ public class Car implements Serializable {
     private int emission;
 
     private boolean active;
-    
+
     @ManyToOne
     private FunctionalLevel category;
 
-    private String imageUrl;
-
-
+    private String thumbnail;
 
     public Car() {
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public Long getVersion() {
@@ -188,4 +175,11 @@ public class Car implements Serializable {
         this.category = category;
     }
 
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
 }

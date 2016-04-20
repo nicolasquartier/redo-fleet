@@ -68,7 +68,7 @@ public class SampleDataImporter {
         carRepo.deleteAll();
         generateCars();
         generateDifferentRoleUsers();
-
+        generateAuthoritiesForDiffrentRoles();
         generateOneCar();
         // TODO: add new method here
     }
@@ -110,7 +110,7 @@ public class SampleDataImporter {
         car.setHybrid(hybrid);
         car.setProductionDate(date);
         car.setPack(pack);
-        car.setImageUrl(imageUrl);
+        car.setThumbnail(imageUrl);
 
         entityManager.persist(car);
     }
@@ -302,6 +302,7 @@ public class SampleDataImporter {
     }
 
 
+    @Transactional
     private void generateAuthoritiesForDiffrentRoles() {
         Authorities adminRole = AuthoritiesMother.init().build();
         adminRole.setUsername("admin");

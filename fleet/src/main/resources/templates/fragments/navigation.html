@@ -24,9 +24,6 @@
                 <li th:class="${#httpServletRequest.requestURI} == '/carcatalog' ? 'active' : ''">
                     <a th:href="@{/cars}" th:text="#{rdf.carcatalog}"></a>
                 </li>
-                <li>
-                    <a href="#">Other Navigation Items</a>
-                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -98,8 +95,9 @@
 </div>
 
 <!-- Filter cars -->
+<!--TODO: remove hidden to use the filter SPRINT1-->
 <div th:fragment="filter" th:remove="tag">
-    <div class="panel panel-default col-md-3" id="filter" >
+    <div class="panel panel-default col-md-3" id="filter" style="display: none" >
         <div class="panel-heading">
             <h3 class="panel-title">Filter</h3>
         </div>
