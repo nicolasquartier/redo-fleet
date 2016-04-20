@@ -1,11 +1,11 @@
 .bodyContainer {
-    background-color: rgba(0,0,0,0.1);
-    background-size:cover;
-    height:1080px;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-size: cover;
+    height: 1080px;
 }
 
 main {
-    margin-top:20px;
+    margin-top: 20px;
 }
 
 .logo {
@@ -24,7 +24,7 @@ ul.nav.navbar-nav {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    height:180px;
+    height: 180px;
 }
 
 .thumb {
@@ -40,7 +40,7 @@ ul.nav.navbar-nav {
 }
 
 .thumb a:hover {
-    color:WHITE;
+    color: WHITE;
 }
 
 .thumb a img {
@@ -51,78 +51,82 @@ ul.nav.navbar-nav {
     max-width: 400px;
 }
 
-
 .backgroundCarBrandAndModel {
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     position: relative;
-    top:-80px;
+    top: -80px;
     font-size: 2em;
-    color:WHITE;
+    color: WHITE;
     text-transform: uppercase;
-    padding-left:20px;
-    max-width:300px;
+    padding-left: 20px;
+    max-width: 300px;
 }
 
 .backgroundCarBrandAndModel p {
-    margin:0;
+    margin: 0;
 }
 
 div#carimageMain {
-    float:left;
-    max-width:500px;
-    max-height:500px;
-    overflow:hidden;
+    float: left;
+    max-width: 500px;
+    max-height: 500px;
+    overflow: hidden;
 }
 
 div#carimageMain .img-responsive {
-    margin:0px;
-    float:left;
+    margin: 0px;
+    float: left;
     object-fit: cover;
     width: 500px;
     height: 500px;
 }
 
 div#cardetails {
-    float:right;
-    width:630px;
-    height:500px;
+    float: right;
+    width: 630px;
+    height: 500px;
 }
 
 div#cardetails table {
     margin-bottom: 0px;
 }
 
-div#cardetails tr{
-    height:25px;
+div#cardetails tr {
+    height: 25px;
     line-height: 25px;
 }
 
 div#cardetails td.title {
     font-weight: bold;
-    float:right;
+    float: right;
 }
 
 div#cardetails p.btnOrderNow {
-    width:630px;
+    width: 630px;
 }
 
-div#carimagesthumbnails img{
+div#carimagesthumbnails img {
     object-fit: cover;
     width: 95px;
     height: 95px;
 }
 
 #sideNav {
-    float:left;
+    float: left;
     position: relative;
-    width:375px;
-    top:50px;
+    width: 375px;
+    top: 50px;
 }
 
 #filter {
-    float:left;
+    float: left;
     position: relative;
-    top:200px;
-    width:375px;
+    top: 200px;
+    width: 375px;
+}
 
+.Image404 {
+    display: block;
+    margin: 0 auto;
+    margin-top: 150px;
 }

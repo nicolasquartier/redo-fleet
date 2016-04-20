@@ -22,19 +22,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-//            .and()
             .authorizeRequests()
-//                .antMatchers("/admin/**")
-//                    .hasRole("ADMIN")
-//                .antMatchers("/cars/**")
-//                    .hasRole("USER")
-//                .antMatchers("/", "/login", "/logout", "/css/**", "/fonts/**", "/js/**", "/images/**")
-//                    .permitAll()
+                .antMatchers("/admin/**")
+                    .hasRole("ADMIN")
+                .antMatchers("/cars/**")
+                    .hasRole("USER")
+                .antMatchers("/", "/login", "/logout", "/css/**", "/fonts/**", "/js/**", "/images/**", "/403", "/404")
+                    .permitAll()
 //            .anyRequest()
 //                .authenticated()
-                .and()
-            .exceptionHandling().accessDeniedPage("/403")
-//                .and()
             .and()
                 .formLogin()
                 .loginPage("/login")
@@ -42,6 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/logout")
                 .permitAll()
+            .and()
+                .exceptionHandling().accessDeniedPage("/403")
+            .and()
         ;
     }
 

@@ -4,10 +4,9 @@
 <div layout:fragment="content" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
     <header class="header-container">
         <div class="container">
-            <h1 class="page-header">Access Denied</h1>
-            <p class="lead">You don't have access to this page.</p>
-            <!--<a th:href="@{/login}" th:text="Go back to login"></a>-->
-            <a th:href="@{/login}" th:text="#{rdf.goBackToLogin}"></a>
+            <h1 class="page-header">Page not found!</h1>
+            <p class="lead">The requested page is not found.</p>
+            <img th:src="@{/images/404Car.png}" alt="404: Page not found" class="Image404"/>
         </div>
     </header>
 </div>
