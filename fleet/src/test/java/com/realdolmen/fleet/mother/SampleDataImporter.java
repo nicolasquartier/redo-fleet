@@ -1,7 +1,5 @@
 package com.realdolmen.fleet.mother;
 
-import com.realdolmen.fleet.Application;
-import com.realdolmen.fleet.SpringBootTransactionalIntegrationTest;
 import com.realdolmen.fleet.TestConfig;
 import com.realdolmen.fleet.config.SecurityConfig;
 import com.realdolmen.fleet.domain.Authorities;
@@ -12,7 +10,6 @@ import com.realdolmen.fleet.domain.enums.Brand;
 import com.realdolmen.fleet.domain.enums.FuelType;
 import com.realdolmen.fleet.repositories.CarRepository;
 import com.realdolmen.fleet.repositories.FunctionalLevelRepository;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,13 +20,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -61,15 +54,17 @@ public class SampleDataImporter {
 
     @Test
 //    @Ignore
+    @Ignore
+    @Rollback(false)
     @Transactional
     public void generateSampleData() {
-        levelRepo.deleteAll();
+//        levelRepo.deleteAll();
         generateFunctionalLevels();
-        carRepo.deleteAll();
+//        carRepo.deleteAll();
         generateCars();
         generateDifferentRoleUsers();
         generateAuthoritiesForDiffrentRoles();
-        generateOneCar();
+        //generateOneCar();
         // TODO: add new method here
     }
 
