@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<!-- Navigation -->
+<!-- User-Navigation -->
 <nav th:fragment="top" class="navbar navbar-inverse" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -34,7 +34,7 @@
     <!-- /.container -->
 </nav>
 
-<!-- Navigation -->
+<!-- Admin-Navigation -->
 <nav th:fragment="adminTop" class="navbar navbar-inverse" role="navigation">
     <div class="borderTop"></div>
     <div class="container">
@@ -68,6 +68,25 @@
     <!-- /.container -->
 </nav>
 
+<!-- Error-Navigation -->
+<nav th:fragment="errorTop" class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a id="navbar-logo" title="REDO FLEET" class="navbar-brand" th:href="@{/}">Logo</a>
+        </div>
+
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
 
 <!-- Side Navigation -->
 <div th:fragment="sideNav" th:remove="tag">
@@ -81,7 +100,7 @@
 <!-- Filter cars -->
 <div th:fragment="filter" th:remove="tag">
 
-    <div class="panel panel-default">
+    <div class="panel panel-default col-md-3" id="filter" >
         <div class="panel-heading">
             <h3 class="panel-title">Filter</h3>
         </div>
