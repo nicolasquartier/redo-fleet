@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <body>
 
 <!-- User-Navigation -->
@@ -23,6 +24,9 @@
                 </li>
                 <li th:class="${#httpServletRequest.requestURI} == '/carcatalog' ? 'active' : ''">
                     <a th:href="@{/cars}" th:text="#{rdf.carcatalog}"></a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="logoutLink">
+                    <a th:href="@{/logout}" th:text="'Logout'"></a>
                 </li>
             </ul>
         </div>
@@ -57,6 +61,9 @@
                 </li>
                 <li>
                     <a th:href="test" th:text="#{rdf.contact}"></a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="logoutLink">
+                    <a th:href="@{/logout}" th:text="Logout">Logout</a>
                 </li>
             </ul>
         </div>

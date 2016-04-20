@@ -151,3 +151,7 @@ div#carimagesthumbnails img {
 .messageSuccess {
     color: #addd9a;
 }
+
+.logoutLink {
+    float:right;
+}
