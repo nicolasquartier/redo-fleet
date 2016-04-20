@@ -44,7 +44,7 @@ public class FunctionalLevelRepositoryIT {
 
     @Before
     public void init() {
-        this.functionalLevelMother = new FunctionalLevelMother();
+        this.functionalLevelMother = FunctionalLevelMother.init();
         this.functionalLevel = this.functionalLevelMother.build();
     }
 

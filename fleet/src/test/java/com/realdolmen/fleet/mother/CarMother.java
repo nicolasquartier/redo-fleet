@@ -14,7 +14,7 @@ public class CarMother {
 
     Car car;
 
-    public CarMother() {
+    private CarMother() {
         this.car = new Car();
         car.setActive(true);
         car.setBrand(Brand.AUDI);
@@ -24,6 +24,10 @@ public class CarMother {
         car.setFiscalHorsePower(10);
         car.setHybrid(false);
         car.setProductionDate(new Date());
+    }
+
+    public static CarMother init() {
+        return new CarMother();
     }
 
     public void setCategoryOrFunctionLevel(FunctionalLevel category) {

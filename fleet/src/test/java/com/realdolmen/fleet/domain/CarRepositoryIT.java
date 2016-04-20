@@ -3,6 +3,7 @@ package com.realdolmen.fleet.domain;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.realdolmen.fleet.SpringBootTransactionalIntegrationTest;
 import com.realdolmen.fleet.mother.CarMother;
+import com.realdolmen.fleet.mother.FunctionalLevelMother;
 import com.realdolmen.fleet.repositories.CarRepository;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -42,12 +43,12 @@ public class CarRepositoryIT {
 
     @Before
     public void init() {
-        FunctionalLevel category = new FunctionalLevel();
-        category.setFLevel(1);
-        entityManager.persist(category);
+        FunctionalLevel functionalLevel = FunctionalLevelMother.init().build();
+        functionalLevel.setFLevel(1);
+        entityManager.persist(functionalLevel);
 
-        CarMother carMother = new CarMother();
-        carMother.setCategoryOrFunctionLevel(category);
+        CarMother carMother = CarMother.init();
+        carMother.setCategoryOrFunctionLevel(functionalLevel);
         this.car = carMother.build();
     }
 

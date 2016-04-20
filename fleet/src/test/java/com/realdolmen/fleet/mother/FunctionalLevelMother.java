@@ -6,7 +6,7 @@ public class FunctionalLevelMother {
 
     FunctionalLevel functionalLevel;
 
-    public FunctionalLevelMother() {
+    private FunctionalLevelMother() {
         this.functionalLevel = new FunctionalLevel();
         this.functionalLevel.setFLevel(1);
     }

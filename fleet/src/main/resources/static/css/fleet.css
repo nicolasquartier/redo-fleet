@@ -96,9 +96,18 @@ div#cardetails tr {
     line-height: 25px;
 }
 
+div#cardetails td {
+}
+
 div#cardetails td.title {
     font-weight: bold;
     float: right;
+    width: 105px;
+    text-align: right;
+}
+
+div#cardetails td.cardetails label {
+    font-weight: normal;
 }
 
 div#cardetails p.btnOrderNow {

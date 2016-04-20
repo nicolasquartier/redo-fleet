@@ -3,14 +3,15 @@ package com.realdolmen.fleet.mother;
 import com.realdolmen.fleet.TestConfig;
 import com.realdolmen.fleet.config.SecurityConfig;
 import com.realdolmen.fleet.domain.Authorities;
+import com.realdolmen.fleet.domain.Car;
 import com.realdolmen.fleet.domain.FunctionalLevel;
 import com.realdolmen.fleet.domain.User;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
@@ -40,12 +41,26 @@ public class SampleDataImporter {
     private PasswordEncoder passwordEncoder;
 
     @Test
+//    @Rollback(false)
     @Ignore
     public void generateSampleData() {
         generateDifferentRoleUsers();
         generateAuthoritiesForDiffrentRoles();
         generateFunctionalLevels();
+        generateOneCar();
         // TODO: add new method here
+    }
+
+    private void generateOneCar() {
+        CarMother carMother = CarMother.init();
+
+        FunctionalLevel category = new FunctionalLevel();
+        category.setFLevel(1);
+        entityManager.persist(category);
+        carMother.setCategoryOrFunctionLevel(category);
+
+        Car car = carMother.build();
+        entityManager.persist(car);
     }
 
     private void generateFunctionalLevels() {
