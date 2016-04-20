@@ -15,8 +15,10 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -49,13 +51,26 @@ public class SecurityTest {
 
     @Test
     public void rootUrlsAreOpen() throws Exception {
-        preformGetForAndExpect("/", status().isOk(), status().isOk(), status().isOk());
+        preformGetForAndExpect("/", status().is3xxRedirection(), status().is3xxRedirection(), status().is3xxRedirection());
     }
+
+    @Test
+    public void pageNotFoundPageUrlsAreOpen() throws Exception {
+        preformGetForAndExpect("/404", status().isOk(), status().isOk(), status().isOk());
+    }
+
+    @Test
+    public void forbiddenUrlPageUrlsAreOpen() throws Exception {
+        preformGetForAndExpect("/403", status().isOk(), status().isOk(), status().isOk());
+    }
+
 
     @Test
     public void loginUrlIsOpen() throws Exception {
         preformGetForAndExpect("/login", status().isOk(), status().isOk(), status().isOk());
+        preformGetForAndExpectView("/login", "login");
     }
+
 
     @Test
     public void loggedInUserCanAccessCarsUrl() throws Exception {
@@ -77,14 +92,7 @@ public class SecurityTest {
     @Test
     public void logoutRedirectsToLogin() throws Exception {
         String requestPath = "/logout";
-        String expectedViewName = "redirect:/login";
-
-        preformGetForAndExpect(requestPath, status().is3xxRedirection(), status().is3xxRedirection(), status().is3xxRedirection());
-
-        mvc.perform(get(requestPath).with(user("user").roles("USER"))).andExpect(view().name(expectedViewName));
-        mvc.perform(get(requestPath).with(user("user").roles("ADMIN"))).andExpect(view().name(expectedViewName));
-        mvc.perform(get(requestPath)).andExpect(view().name(expectedViewName));
-
+        preformPostWithCSRFForAndExpect(requestPath, status().is3xxRedirection(), status().is3xxRedirection(), status().is3xxRedirection());
     }
 
     private void preformGetForAndExpect(String path, ResultMatcher noUser, ResultMatcher normalUser, ResultMatcher adminUser) throws Exception {
@@ -96,5 +104,24 @@ public class SecurityTest {
                 .andExpect(adminUser);
     }
 
+    private void preformGetForAndExpectView(String path, String expectedView) throws Exception {
+        mvc.perform(get(path))
+                .andExpect(view().name(expectedView));
+        mvc.perform(get(path).with(user("user").roles("USER")))
+                .andExpect(view().name(expectedView));
+        mvc.perform(get(path).with(user("user").roles("ADMIN")))
+                .andExpect(view().name(expectedView));
+    }
+
+
+
+    private void preformPostWithCSRFForAndExpect(String path, ResultMatcher noUser, ResultMatcher normalUser, ResultMatcher adminUser) throws Exception {
+        mvc.perform(get(path))
+                .andExpect(noUser);
+        mvc.perform(get(path).with(user("user").roles("USER")).with(csrf()))
+                .andExpect(normalUser);
+        mvc.perform(get(path).with(user("user").roles("ADMIN")).with(csrf()))
+                .andExpect(adminUser);
+    }
 
 }

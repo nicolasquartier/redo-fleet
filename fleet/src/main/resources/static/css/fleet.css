@@ -130,3 +130,15 @@ div#carimagesthumbnails img {
     margin: 0 auto;
     margin-top: 150px;
 }
+
+.message {
+    padding: 7px;
+}
+
+.messageError {
+    color: #b48484;
+}
+
+.messageSuccess {
+    color: #addd9a;
+}

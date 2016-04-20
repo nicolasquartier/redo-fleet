@@ -50,7 +50,7 @@ function loadProfile() {
         $("#profile-img").attr("src",profileImgSrc);
         $("#profile-name").html(profileName);
         $("#reauth-email").html(profileReAuthEmail);
-        $("#inputEmail").hide();
+        $("#username").hide();
         $("#remember").hide();
     });
 }

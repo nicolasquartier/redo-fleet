@@ -6,8 +6,11 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "users")
 public class User implements Serializable {
 
     @Id
@@ -31,27 +34,21 @@ public class User implements Serializable {
     @Email
     private String email;
 
-    @Column(length = 10, nullable = false)
     @NotBlank
-    private String role = "ROLE_USER";
+    private String username;
 
     @ManyToOne
     private FunctionalLevel functionalLevel;
 
-    @Column(length = 50, nullable = false)
     @NotBlank
-    @Size(min = 1, max = 50)
     private String password;
-
-    private boolean active;
 
     @Column(length = 100)
     @Size(max = 100)
     private String businessUnit;
 
-    private String username;
+
     private Boolean enabled = true;
-    private String authorities;
 
     /*
     * Used by JPA
@@ -83,13 +80,6 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public FunctionalLevel getFunctionalLevel() {
         return functionalLevel;
@@ -99,13 +89,7 @@ public class User implements Serializable {
         this.functionalLevel = functionalLevel;
     }
 
-    public boolean isActive() {
-        return active;
-    }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 
     public String getBusinessUnit() {
         return businessUnit;
@@ -155,11 +139,4 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
-    public String getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(String authorities) {
-        this.authorities = authorities;
-    }
 }

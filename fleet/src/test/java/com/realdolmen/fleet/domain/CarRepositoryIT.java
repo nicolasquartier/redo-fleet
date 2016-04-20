@@ -33,7 +33,6 @@ public class CarRepositoryIT {
 
     //    protected static final String DATASET = "classpath:datasets/it-cars.xml";
     private Car car;
-    private CarMother carMother;
 
     @Autowired
     private CarRepository repository;
@@ -47,7 +46,7 @@ public class CarRepositoryIT {
         category.setFLevel(1);
         entityManager.persist(category);
 
-        carMother = new CarMother();
+        CarMother carMother = new CarMother();
         carMother.setCategoryOrFunctionLevel(category);
         this.car = carMother.build();
     }

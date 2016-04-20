@@ -1,5 +1,5 @@
 <div th:fragment="landingPageLogin" th:remove="tag" xmlns:th="http://www.thymeleaf.org"
-     xmlns:layout="http://www.w3.org/1999/xhtml">
+     xmlns:layout="http://www.w3.org/1999/xhtml" >
     <div class="bodyContainer">
 
         <!-- Page Content -->
@@ -15,12 +15,12 @@
         </div>
         <!-- /.container -->
 
-        <!--<div class="container">-->
+        <div class="container">
 
             <!-- REPLACEDBY: footer.html-->
             <div th:replace="fragments/footer :: footer"></div>
 
-        <!--</div>-->
+        </div>
         <!-- /.container -->
 
         <!-- REPLACEDBY: scripts.html-->
@@ -36,27 +36,27 @@
         <!-- Page Content -->
         <!--<div class="container">-->
 
-        <!--<div class="col-md-3" id="filter" th:hidden="${#httpServletRequest.requestURI} == '/cars' ? false : true">-->
-            <!--&lt;!&ndash; REPLACEDBY: navigation.html&ndash;&gt;-->
+        <div class="col-md-3" id="filter" th:hidden="${#httpServletRequest.requestURI} == '/cars' ? false : true">
+            <!-- REPLACEDBY: navigation.html-->
+            <div th:replace="fragments/navigation :: filter" th:remove="tag"></div>
+        </div>
 
-        <!--</div>-->
-
-        <!--<div class="row">-->
+        <div class="row">
 
             <div layout:fragment="content" class="col-md-9">
-            <!--</div>-->
+            </div>
 
         </div>
 
         <!--</div>-->
         <!-- /.container -->
 
-        <!--<div class="container">-->
+        <div class="container">
 
             <!-- REPLACEDBY: footer.html-->
             <div th:replace="fragments/footer :: footer"></div>
 
-        <!--</div>-->
+        </div>
         <!-- /.container -->
 
         <!-- REPLACEDBY: scripts.html-->
@@ -87,41 +87,12 @@
         <!--</div>-->
         <!-- /.container -->
 
-        <!--<div class="container">-->
+        <div class="container">
 
             <!-- REPLACEDBY: footer.html-->
             <div th:replace="fragments/footer :: footer"></div>
-
-        <!--</div>-->
-        <!-- /.container -->
-
-        <!-- REPLACEDBY: scripts.html-->
-        <div th:replace="fragments/scripts :: scripts"></div>
-    </div>
-</div>
-
-<div th:fragment="ErrorPage" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
-    <div class="bodyContainer">
-        <!-- REPLACEDBY: navigation.html-->
-        <div th:replace="fragments/navigation :: errorTop"></div>
-
-        <!-- Page Content -->
-
-        <div class="row">
-
-            <div layout:fragment="content" class="col-md-9">
-            </div>
 
         </div>
-
-        <!--</div>-->
-
-        <!--<div class="container">-->
-
-            <!-- REPLACEDBY: footer.html-->
-            <div th:replace="fragments/footer :: footer"></div>
-
-        <!--</div>-->
         <!-- /.container -->
 
         <!-- REPLACEDBY: scripts.html-->

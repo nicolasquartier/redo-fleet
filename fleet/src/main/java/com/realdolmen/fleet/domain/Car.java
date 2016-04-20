@@ -58,7 +58,7 @@ public class Car implements Serializable {
 
     private boolean active;
 
-    @NotBlank
+    @NotNull
     @ManyToOne
     private FunctionalLevel category;
 

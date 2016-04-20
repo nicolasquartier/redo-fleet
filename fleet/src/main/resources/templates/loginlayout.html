@@ -5,10 +5,8 @@
 <div th:replace="fragments/head :: head"></div>
 
 <body>
-<div class="bodyContainerBackgroundImg" th:if="${#httpServletRequest.requestURI} == '/'" th:style="'background: url(' + @{../images/areal_dolmen15.jpg} + '); background-size: cover;'">
-
+<div class="bodyContainerBackgroundImg">
     <div th:replace="fragments/landingPage :: landingPageLogin"></div>
-
 </div>
 </body>
 
