@@ -1,13 +1,7 @@
 package com.realdolmen.fleet.controller;
 
 import com.realdolmen.fleet.Application;
-import com.realdolmen.fleet.domain.Car;
-import com.realdolmen.fleet.domain.FunctionalLevel;
-import com.realdolmen.fleet.domain.enums.Brand;
-import com.realdolmen.fleet.repositories.CarRepository;
-import com.realdolmen.fleet.repositories.FunctionalLevelRepository;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +15,11 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.Date;
-
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = Application.class)
@@ -44,12 +34,6 @@ public class SecurityTest {
 
     @Autowired
     private FilterChainProxy springSecurityFilterChain;
-
-    @Autowired
-    private CarRepository carRepository;
-
-    @Autowired
-    private FunctionalLevelRepository functionalLevelRepository;
 
     @Before
     public void init() {
@@ -93,19 +77,6 @@ public class SecurityTest {
     }
 
     @Test
-    @Ignore
-
-    /*  @TODO: How do we test a URL request where working with a Model is included...
-    *   @FIXME: --> cars/{id} will get details about specific car and add Car-object to model
-    * */
-    public void loggedInUserCanAccessCardetailUrl() throws Exception {
-//        preformGetForAndExpect("/cars/1", status().is3xxRedirection(), status().isOk(), status().isOk());
-
-        preformGetForAndExpectCarModelView("/cars/{id}", status().is3xxRedirection(), status().isOk(), status().isOk());
-    }
-
-
-    @Test
     public void loggedInUserCanAccessCarConfigureUrl() throws Exception {
         preformGetForAndExpect("/cars/1/configure", status().is3xxRedirection(), status().isOk(), status().isOk());
     }
@@ -139,27 +110,6 @@ public class SecurityTest {
                 .andExpect(view().name(expectedView));
         mvc.perform(get(path).with(user("user").roles("ADMIN")))
                 .andExpect(view().name(expectedView));
-    }
-
-    private void preformGetForAndExpectCarModelView(String path, ResultMatcher noUser, ResultMatcher normalUser, ResultMatcher adminUser) throws Exception {
-        Car carFound = new Car();
-        carFound.setId(1L);
-        carFound.setActive(true);
-        carFound.setEmission(100);
-        carFound.setFiscalHorsePower(999);
-        carFound.setHybrid(false);
-        carFound.setProductionDate(new Date());
-
-        when(carRepository.findOne(1L)).thenReturn(carFound);
-
-        mvc.perform(get(path, 1L))
-                .andExpect(noUser);
-        mvc.perform(get(path, 1L).with(user("user").roles("USER")))
-                .andExpect(normalUser)
-                .andExpect(model().attribute("car", hasProperty("id", is(1L))));
-        mvc.perform(get(path, 1L).with(user("user").roles("ADMIN")))
-                .andExpect(adminUser)
-                .andExpect(model().attribute("car", hasProperty("id", is(1L))));
     }
 
     private void preformPostWithCSRFForAndExpect(String path, ResultMatcher noUser, ResultMatcher normalUser, ResultMatcher adminUser) throws Exception {
