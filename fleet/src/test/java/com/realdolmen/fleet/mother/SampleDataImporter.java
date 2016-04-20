@@ -60,7 +60,7 @@ public class SampleDataImporter {
     private PasswordEncoder passwordEncoder;
 
     @Test
-    @Ignore
+//    @Ignore
     @Transactional
     public void generateSampleData() {
         levelRepo.deleteAll();
@@ -264,18 +264,18 @@ public class SampleDataImporter {
         );
     }
 
-    @Transactional
-    private void generateOneCar() {
-        CarMother carMother = CarMother.init();
-
-        FunctionalLevel category = new FunctionalLevel();
-        category.setFLevel(1);
-        entityManager.persist(category);
-        carMother.setCategoryOrFunctionLevel(category);
-
-        Car car = carMother.build();
-        entityManager.persist(car);
-    }
+//    @Transactional
+//    private void generateOneCar() {
+//        CarMother carMother = CarMother.init();
+//
+//        FunctionalLevel category = new FunctionalLevel();
+//        category.setFLevel(1);
+//        entityManager.persist(category);
+//        carMother.setCategoryOrFunctionLevel(category);
+//
+//        Car car = carMother.build();
+//        entityManager.persist(car);
+//    }
 
     private void generateFunctionalLevels() {
         for (Integer i = 1; i <= 7; i++) {
