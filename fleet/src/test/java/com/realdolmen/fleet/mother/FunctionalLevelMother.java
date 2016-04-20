@@ -14,4 +14,8 @@ public class FunctionalLevelMother {
     public FunctionalLevel build() {
         return this.functionalLevel;
     }
+
+    public static FunctionalLevelMother init() {
+        return new FunctionalLevelMother();
+    }
 }
