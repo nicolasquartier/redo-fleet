@@ -14,24 +14,24 @@ public class CarMother {
 
     Car car;
 
-    private CarMother() {
+    public CarMother() {
+        FunctionalLevel level = new FunctionalLevel();
         this.car = new Car();
         car.setActive(true);
         car.setBrand(Brand.AUDI);
         car.setEmission(100);
-
+        car.setCategory(level);
         car.setEmission(100);
         car.setFiscalHorsePower(10);
         car.setHybrid(false);
         car.setProductionDate(new Date());
     }
 
+    public void setCategoryOrFunctionLevel(FunctionalLevel category) {
+        this.car.setCategory(category);}
+
     public static CarMother init() {
         return new CarMother();
-    }
-
-    public void setCategoryOrFunctionLevel(FunctionalLevel category) {
-        this.car.setCategory(category);
     }
 
     public Car build() {

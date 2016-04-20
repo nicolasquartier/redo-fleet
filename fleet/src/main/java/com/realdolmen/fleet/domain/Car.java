@@ -57,12 +57,23 @@ public class Car implements Serializable {
     private int emission;
 
     private boolean active;
-
-    @NotNull
+    
     @ManyToOne
     private FunctionalLevel category;
 
+    private String imageUrl;
+
+
+
     public Car() {
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Long getVersion() {

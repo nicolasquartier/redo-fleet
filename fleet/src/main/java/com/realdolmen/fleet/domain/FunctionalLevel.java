@@ -16,7 +16,7 @@ public class FunctionalLevel implements Serializable {
     private Long version;
 
     @Min(value = 0)
-    private int fLevel;
+    private Integer fLevel;
 
     public FunctionalLevel() {
     }
@@ -37,11 +37,11 @@ public class FunctionalLevel implements Serializable {
         this.version = version;
     }
 
-    public void setFLevel(int funtionalLevel) {
+    public void setFLevel(Integer funtionalLevel) {
         this.fLevel = funtionalLevel;
     }
 
-    public int getFLevel() {
+    public Integer getFLevel() {
         return fLevel;
     }
 }

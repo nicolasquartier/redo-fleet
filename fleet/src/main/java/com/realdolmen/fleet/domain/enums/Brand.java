@@ -9,3 +9,4 @@ public enum Brand {
     VOLKSWAGEN,
     SEAT
 }
+
