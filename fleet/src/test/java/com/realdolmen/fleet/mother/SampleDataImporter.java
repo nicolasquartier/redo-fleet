@@ -281,16 +281,8 @@ public class SampleDataImporter {
         for (Integer i = 1; i <= 7; i++) {
             FunctionalLevel level = FunctionalLevelMother.init().build();
             level.setFLevel(i);
-//            levelRepo.save(level);
             entityManager.persist(level);
         }
-
-
-        FunctionalLevel byFLevel = levelRepo.findByFLevel(1);
-        FunctionalLevel byFLevel2 = levelRepo.findByFLevel(2);
-        FunctionalLevel byFLevel3 = levelRepo.findByFLevel(3);
-        FunctionalLevel byFLevel4 = levelRepo.findByFLevel(4);
-
     }
 
     @Transactional
