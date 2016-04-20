@@ -36,11 +36,6 @@
         <!-- Page Content -->
         <!--<div class="container">-->
 
-        <div class="col-md-3" id="filter" th:hidden="${#httpServletRequest.requestURI} == '/cars' ? false : true">
-            <!-- REPLACEDBY: navigation.html-->
-            <div th:replace="fragments/navigation :: filter" th:remove="tag"></div>
-        </div>
-
         <div class="row">
 
             <div layout:fragment="content" class="col-md-9">
