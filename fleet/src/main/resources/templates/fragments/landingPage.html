@@ -3,25 +3,12 @@
     <div class="bodyContainer">
 
         <!-- Page Content -->
-        <div class="container">
-
-            <div class="row">
-
-                <div layout:fragment="content" class="col-md-9">
-                </div>
-
-            </div>
-
+        <div class="row">
+            <div layout:fragment="content" class="col-md-9"></div>
         </div>
-        <!-- /.container -->
 
-        <div class="container">
-
-            <!-- REPLACEDBY: footer.html-->
-            <div th:replace="fragments/footer :: footer"></div>
-
-        </div>
-        <!-- /.container -->
+        <!-- REPLACEDBY: footer.html-->
+        <div th:replace="fragments/footer :: footer"></div>
 
         <!-- REPLACEDBY: scripts.html-->
         <div th:replace="fragments/scripts :: scripts"></div>
@@ -34,25 +21,12 @@
         <div th:replace="fragments/navigation :: top"></div>
 
         <!-- Page Content -->
-        <!--<div class="container">-->
-
         <div class="row">
-
-            <div layout:fragment="content" class="col-md-9">
-            </div>
-
+            <div layout:fragment="content" class="col-md-9"></div>
         </div>
 
-        <!--</div>-->
-        <!-- /.container -->
-
-        <div class="container">
-
-            <!-- REPLACEDBY: footer.html-->
-            <div th:replace="fragments/footer :: footer"></div>
-
-        </div>
-        <!-- /.container -->
+        <!-- REPLACEDBY: footer.html-->
+        <div th:replace="fragments/footer :: footer"></div>
 
         <!-- REPLACEDBY: scripts.html-->
         <div th:replace="fragments/scripts :: scripts"></div>
@@ -65,63 +39,19 @@
         <div th:replace="fragments/navigation :: adminTop"></div>
 
         <!-- Page Content -->
-        <!--<div class="container">-->
         <div class="col-md-3" id="sideNav">
             <!-- REPLACEDBY: navigation.html-->
             <div th:replace="fragments/navigation :: sideNav" th:remove="tag"></div>
-
         </div>
 
         <div class="row">
-
-            <div layout:fragment="content" class="col-md-9">
-            </div>
-
+            <div layout:fragment="content" class="col-md-9"></div>
         </div>
 
-        <!--</div>-->
-        <!-- /.container -->
-
-        <div class="container">
-
-            <!-- REPLACEDBY: footer.html-->
-            <div th:replace="fragments/footer :: footer"></div>
-
-        </div>
-        <!-- /.container -->
+        <!-- REPLACEDBY: footer.html-->
+        <div th:replace="fragments/footer :: footer"></div>
 
         <!-- REPLACEDBY: scripts.html-->
         <div th:replace="fragments/scripts :: scripts"></div>
-    </div>
-</div>
-
-<div th:fragment="carDetailPage" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
-    <div class="bodyContainer">
-        <!-- REPLACEDBY: navigation.html-->
-        <div th:replace="fragments/navigation :: top"></div>
-
-        <!-- Page Content -->
-        <!--<div class="container">-->
-
-        <div class="row">
-
-            <div layout:fragment="content" class="col-md-9">
-            </div>
-
-        </div>
-
-        <!--</div>-->
-        <!-- /.container -->
-
-        <div class="container">
-
-            <!-- REPLACEDBY: footer.html-->
-            <div th:replace="fragments/footer :: footer"></div>
-
-        </div>
-        <!-- /.container -->
-
-        <!-- REPLACEDBY: scripts.html-->
-        <div th:replace="fragments/scripts :: carDetailscripts"></div>
     </div>
 </div>
