@@ -14,7 +14,7 @@ public class CompanyCar {
     private Car car;
 
     @ManyToMany
-    private List<Option> options = new ArrayList<>();
+    private List<Option> options = new Vector<>();
 
     private Boolean active;
     private Boolean approved;

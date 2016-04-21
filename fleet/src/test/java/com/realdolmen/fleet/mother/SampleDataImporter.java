@@ -80,7 +80,6 @@ public class SampleDataImporter {
         carRepository.deleteAll();
         optionRepository.deleteAll();
         companyCarRepository.deleteAll();
-
         generateSampleData();
     }
 
@@ -91,14 +90,21 @@ public class SampleDataImporter {
 
         CompanyCar companyCar = CompanyCarMother.init().build();
 
+        Car carToSet = carRepository.getOne(id);
+        companyCar.setCar(carToSet);
+
+        entityManager.persist(companyCar);
+        entityManager.flush();
+
         List<Option> options = companyCar.getOptions();
         options.stream().forEach(companyCar::removeOption);
 
-        Car carToSet = carRepository.getOne(id);
         List<Option> optionToSet = optionRepository.findByCar(carToSet);
         optionToSet.stream().forEach(companyCar::addOption);
-        companyCar.setCar(carToSet);
-        companyCarRepository.save(companyCar);
+        optionToSet.stream().forEach(option -> option.addCompanyCar(companyCar));
+
+        entityManager.merge(companyCar);
+        entityManager.flush();
     }
 
     private void generateOptions() {

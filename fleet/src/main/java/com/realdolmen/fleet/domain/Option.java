@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Vector;
 
 @Entity
 @Table(name = "caroption")
@@ -21,7 +22,7 @@ public class Option implements Serializable {
     private Car car;
 
     @ManyToMany(mappedBy = "options")
-    private List<CompanyCar> companyCarList = new ArrayList<>();
+    private List<CompanyCar> companyCarList = new Vector<>();
 
     @Column(length = 300)
     @Size(max = 300)
@@ -66,7 +67,13 @@ public class Option implements Serializable {
         return Collections.unmodifiableList(companyCarList);
     }
 
-//    @Transient
+    public void addCompanyCar(CompanyCar companyCar) {
+        this.companyCarList.add(companyCar);
+    }
+
+    public void removeCompanyCar(CompanyCar companyCar) {
+        this.companyCarList.remove(companyCar);
+    }
     public void setCompanyCarList(List<CompanyCar> companyCarList) {
         this.companyCarList = companyCarList;
     }
