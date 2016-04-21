@@ -1,26 +1,23 @@
 package com.realdolmen.fleet.controller;
 
 import com.realdolmen.fleet.domain.Authorities;
-import com.realdolmen.fleet.domain.User;
 import com.realdolmen.fleet.repositories.AuthoritiesRepository;
-import com.realdolmen.fleet.repositories.UserRepository;
+import com.realdolmen.fleet.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 @Controller
 public class LoginController {
 
     @Autowired
     private AuthoritiesRepository authoritiesRepository;
+
+    @Autowired
+    private AuthService authentication;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String getEmptyLoginForm(Model model,
@@ -41,23 +38,16 @@ public class LoginController {
             return "login";
         }
 
-        if (getAuth().isAuthenticated()) {
-            Authorities auth = authoritiesRepository.findByUsername(getAuth().getName());
+        Authorities auth = authoritiesRepository.findByUsername(authentication.getName());
 
-            if (auth == null) {
-                return "login";
-            }
-            if (auth.getAuthority().equals("ROLE_ADMIN")) {
-                return "redirect:/admin";
-            } else if (auth.getAuthority().equals("ROLE_USER")) {
-                return "redirect:/cars";
-            }
+        if (auth == null) {
+            return "login";
+        }
+        if (auth.getAuthority().equals("ROLE_ADMIN")) {
+            return "redirect:/admin";
+        } else if (auth.getAuthority().equals("ROLE_USER")) {
+            return "redirect:/cars";
         }
         return "login";
     }
-
-    private Authentication getAuth() {
-        return SecurityContextHolder.getContext().getAuthentication();
-    }
-
 }
