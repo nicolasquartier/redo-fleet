@@ -9,14 +9,11 @@ public class OptionMother {
 
     Option option;
 
-    public OptionMother() {
+    private OptionMother() {
         this.option = new Option();
         this.option.setDescription("The mother of all options");
         this.option.setType(OptionType.DEALER);
-    }
-
-    public void setCar(Car car) {
-        this.option.setCar(car);
+        this.option.setCar(CarMother.init().build());
     }
 
     public Option build() {

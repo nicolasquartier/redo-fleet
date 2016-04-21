@@ -2,14 +2,13 @@ package com.realdolmen.fleet.mother;
 
 import com.realdolmen.fleet.TestConfig;
 import com.realdolmen.fleet.config.SecurityConfig;
-import com.realdolmen.fleet.domain.Authorities;
-import com.realdolmen.fleet.domain.Car;
-import com.realdolmen.fleet.domain.FunctionalLevel;
-import com.realdolmen.fleet.domain.User;
+import com.realdolmen.fleet.domain.*;
 import com.realdolmen.fleet.domain.enums.Brand;
 import com.realdolmen.fleet.domain.enums.FuelType;
 import com.realdolmen.fleet.repositories.CarRepository;
+import com.realdolmen.fleet.repositories.CompanyCarRepository;
 import com.realdolmen.fleet.repositories.FunctionalLevelRepository;
+import com.realdolmen.fleet.repositories.OptionRepository;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +24,7 @@ import javax.persistence.EntityManager;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 // To use this class :
 //      - Create a method calling the mother object, set the data, persist
@@ -44,7 +44,14 @@ public class SampleDataImporter {
     private EntityManager entityManager;
 
     @Autowired
-    private CarRepository carRepo;
+    private CarRepository carRepository;
+
+    @Autowired
+    private CompanyCarRepository companyCarRepository;
+
+    @Autowired
+    private OptionRepository optionRepository;
+
     @Autowired
     private FunctionalLevelRepository levelRepo;
 
@@ -55,13 +62,52 @@ public class SampleDataImporter {
     @Ignore
     @Transactional
     public void generateSampleData() {
-        levelRepo.deleteAll();
-        generateFunctionalLevels();
-        carRepo.deleteAll();
-        generateCars();
         generateDifferentRoleUsers();
         generateAuthoritiesForDiffrentRoles();
+
+        generateFunctionalLevels();
+        generateCars();
+        generateOptions();
+        generateCompanyCar();
+
         // TODO: add new method here
+    }
+
+    @Test
+    @Ignore
+    @Transactional
+    public void generateSampleDataWithClearDatabase() {
+        carRepository.deleteAll();
+        optionRepository.deleteAll();
+        companyCarRepository.deleteAll();
+
+        generateSampleData();
+    }
+
+    private void generateCompanyCar() {
+
+        // could loop this by replacing the id with the loop index, be carefull index should stay below #cars
+        Long id = 1L;
+
+        CompanyCar companyCar = CompanyCarMother.init().build();
+
+        List<Option> options = companyCar.getOptions();
+        options.stream().forEach(companyCar::removeOption);
+
+        Car carToSet = carRepository.getOne(id);
+        List<Option> optionToSet = optionRepository.findByCar(carToSet);
+        optionToSet.stream().forEach(companyCar::addOption);
+        companyCar.setCar(carToSet);
+        companyCarRepository.save(companyCar);
+    }
+
+    private void generateOptions() {
+        // there should be 4 cars in the database
+        for (int i = 0; i < 4; i++) {
+            Option option = OptionMother.init().build();
+            option.setCar(carRepository.findAll().get(i));
+            optionRepository.save(option);
+        }
     }
 
     @Transactional
@@ -84,7 +130,6 @@ public class SampleDataImporter {
     ) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
         Car car = CarMother.init().build();
-        String dateInString;
         Date date = new Date();
         try {
             date = sdf.parse(dateString);
@@ -254,19 +299,6 @@ public class SampleDataImporter {
                 "image1.jpg"
         );
     }
-
-//    @Transactional
-//    private void generateOneCar() {
-//        CarMother carMother = CarMother.init();
-//
-//        FunctionalLevel category = new FunctionalLevel();
-//        category.setFLevel(1);
-//        entityManager.persist(category);
-//        carMother.setCategoryOrFunctionLevel(category);
-//
-//        Car car = carMother.build();
-//        entityManager.persist(car);
-//    }
 
     private void generateFunctionalLevels() {
         for (Integer i = 1; i <= 7; i++) {
