@@ -61,7 +61,7 @@ public class EditCarControllerTest {
 
         mvc.perform(get("/admin/cars"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("allcars"))
+                .andExpect(view().name("admin/allcars"))
                 .andExpect(model().attributeExists("cars"))
                 .andExpect(model().attribute("cars", hasSize(4)))
         ;
