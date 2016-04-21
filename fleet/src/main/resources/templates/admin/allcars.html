@@ -1,0 +1,40 @@
+<html layout:decorator="adminlayout"
+      xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div layout:fragment="content" th:remove="tag">
+    <header class="header-container">
+        <div class="container">
+            <h1 class="page-header">overview cars</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <a class="btn btn-lg btn-warning btn-block btn-signin" role="button" th:href="@{cars/create}">Create new car</a>
+        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>brand</th>
+                <th>model</th>
+                <th>FHP</th>
+                <th>FuelType</th>
+                <th>Active</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="car : ${cars}">
+                <td th:text="${car.id}">20</td>
+                <td th:text="${car.brand}">Tata</td>
+                <td th:text="${car.model}">model</td>
+                <td th:text="${car.fiscalHorsePower}">fhp</td>
+                <td th:text="${car.fuelType}">fhp</td>
+                <td th:text="${car.active}? #{true} : #{false}">yes</td>
+                <td><a class="btn btn-lg btn-warning btn-block btn-signin" role="button" th:href="@{cars/{id}(id=${car.id})}">edit</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+</html>
