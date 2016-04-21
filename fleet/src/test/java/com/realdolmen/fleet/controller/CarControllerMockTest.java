@@ -1,6 +1,5 @@
 package com.realdolmen.fleet.controller;
 
-import com.realdolmen.fleet.TestConfig;
 import com.realdolmen.fleet.domain.Car;
 import com.realdolmen.fleet.repositories.CarRepository;
 import org.junit.Before;
@@ -9,8 +8,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -26,10 +23,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(MockitoJUnitRunner.class)
-@ContextConfiguration(classes = TestConfig.class)
-@ActiveProfiles("TST")
 @WebAppConfiguration(value = "resources/templates/")
-public class CarControllerTest {
+public class CarControllerMockTest {
 
     private MockMvc mvc;
 

@@ -13,26 +13,26 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/cars")
-public class EditCarsController {
+public class AdminCarsController {
 
     @Autowired
     private CarRepository carRepository;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String carcatalog(Model model) {
+    public String adminCarOverview(Model model) {
         List<Car> adminCars = carRepository.findAll();
         model.addAttribute("cars", adminCars);
         return "admin/allcars";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String getCarDetail(@PathVariable("id") Long id, Model model) {
+    public String adminEditCar(@PathVariable("id") Long id, Model model) {
         model.addAttribute("car", carRepository.findOne(id));
         return "admin/caredit";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String mycar() {
+    @RequestMapping(value = "create", method = RequestMethod.GET)
+    public String adminCreateCar() {
         return "admin/createcar";
     }
 }

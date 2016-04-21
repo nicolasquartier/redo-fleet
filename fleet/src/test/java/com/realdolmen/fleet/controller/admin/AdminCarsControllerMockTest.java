@@ -1,7 +1,7 @@
-package com.realdolmen.fleet.controller;
+package com.realdolmen.fleet.controller.admin;
 
 import com.realdolmen.fleet.TestConfig;
-import com.realdolmen.fleet.controller.admin.EditCarsController;
+import com.realdolmen.fleet.controller.admin.AdminCarsController;
 import com.realdolmen.fleet.domain.Car;
 import com.realdolmen.fleet.repositories.CarRepository;
 import org.junit.Before;
@@ -25,13 +25,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(MockitoJUnitRunner.class)
-@ContextConfiguration(classes = TestConfig.class)
-@ActiveProfiles("TST")
 @WebAppConfiguration(value = "resources/templates/")
-public class EditCarControllerTest {
-
-//    @Autowired
-//    private WebApplicationContext context;
+public class AdminCarsControllerMockTest {
 
     private MockMvc mvc;
 
@@ -42,13 +37,12 @@ public class EditCarControllerTest {
     private Car carOne, carTwo, carThree, carFour;
 
     @InjectMocks
-    private EditCarsController editCarsController;
+    private AdminCarsController editCarsController;
 
     @Before
     public void init() {
         mvc = MockMvcBuilders
                 .standaloneSetup(editCarsController)
-//                .webAppContextSetup(context)
                 .build();
 
         when(carRepository.findAll()).thenReturn(listOf4Cars());
