@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
@@ -63,6 +64,7 @@ public class SampleDataImporter {
 
     @Test
     @Ignore
+//    @Rollback(false)
     @Transactional
     public void generateSampleData() {
         generateDifferentRoleUsers();

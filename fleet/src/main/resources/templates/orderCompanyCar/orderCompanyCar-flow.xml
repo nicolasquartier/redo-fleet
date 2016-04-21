@@ -4,15 +4,22 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
       start-state="configureCar"
 >
-    <!--<var name="car" class="com.realdolmen.fleet.domain.Car" />-->
+    <var name="companyCar" class="com.realdolmen.fleet.domain.CompanyCar" />
 
     <on-start>
         <set name="requestScope.carId" value="requestParameters.carId" type="long" />
         <evaluate expression="carRepository.findOne(requestScope.carId)" result="conversationScope.car" />
+        <evaluate expression="optionRepository.findByCar(car)" result="conversationScope.car.options" />
     </on-start>
 
     <view-state id="configureCar" view="carConfigure" model="car">
         <transition to="cancel" on="cancel"/>
+        <transition to="confirm" on="confirm"/>
+    </view-state>
+
+    <view-state id="confirm" view="companyCarConfirm" model="companyCar">
+        <transition to="cancel" on="cancel"/>
+        <transition to="confirm" on="confirm"/>
     </view-state>
 
     <end-state id="cancel" view="externalRedirect:/cars"/>

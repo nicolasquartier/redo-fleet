@@ -15,11 +15,6 @@ public class CarsSecurityTest extends AbstractSecurityTest{
     }
 
     @Test
-    public void loggedInUserCanAccessCarConfigureUrl() throws Exception {
-        preformGetForAndExpect("/cars/1/configure", status().is3xxRedirection(), status().isOk(), status().isOk());
-    }
-
-    @Test
     public void loggedInUserCanAccessMyCarUrl() throws Exception {
         preformGetForAndExpect("/cars/mycar", status().is3xxRedirection(), status().isOk(), status().isForbidden());
     }

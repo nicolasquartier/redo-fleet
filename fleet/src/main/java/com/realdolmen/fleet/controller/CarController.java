@@ -29,6 +29,7 @@ public class CarController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getCarDetail(@PathVariable("id") Long id, Model model) {
+        Car car = carRepository.findOne(id);
         model.addAttribute("car", carRepository.findOne(id));
         return "cardetail";
     }

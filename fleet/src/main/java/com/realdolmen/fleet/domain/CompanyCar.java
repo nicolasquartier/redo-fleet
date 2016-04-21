@@ -1,10 +1,11 @@
 package com.realdolmen.fleet.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
-public class CompanyCar {
+public class CompanyCar implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
