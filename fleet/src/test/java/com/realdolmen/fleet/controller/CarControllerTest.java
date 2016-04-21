@@ -31,9 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration(value = "resources/templates/")
 public class CarControllerTest {
 
-//    @Autowired
-//    private WebApplicationContext context;
-
     private MockMvc mvc;
 
     @Mock
@@ -49,16 +46,15 @@ public class CarControllerTest {
     public void init() {
         mvc = MockMvcBuilders
                 .standaloneSetup(carController)
-//                .webAppContextSetup(context)
                 .build();
 
-        when(carRepository.findByActive(true)).thenReturn(listOf4Cars());
     }
 
     @Test
     public void carsAreAvailableOnView() throws Exception {
 
         listOf4Cars();
+        when(carRepository.findByActive(true)).thenReturn(listOf4Cars());
 
         mvc.perform(get("/cars"))
                 .andExpect(status().isOk())
@@ -70,16 +66,17 @@ public class CarControllerTest {
 
     @Test
     public void loggedInUserCanAccessCardetailUrl() throws Exception {
-        preformGetForAndExpectCarModelView("/cars/{id}", status().isOk());
+        Long id = 1L;
+        when(carRepository.findOne(id)).thenReturn(carOne);
+        preformGetForAndExpectCarModelView("/cars/{id}", id, status().isOk());
     }
 
     private List<Car> listOf4Cars() {
         return Arrays.asList(carOne, carTwo, carThree, carFour);
     }
 
-    private void preformGetForAndExpectCarModelView(String path, ResultMatcher normalUser) throws Exception {
-        when(carRepository.findOne(1L)).thenReturn(carOne);
-        mvc.perform(get(path, 1L))
+    private void preformGetForAndExpectCarModelView(String path, Long id, ResultMatcher normalUser) throws Exception {
+        mvc.perform(get(path, id))
                 .andExpect(normalUser)
                 .andExpect(model().attributeExists("car"))
                 .andExpect(model().attribute("car", hasProperty("id")));

@@ -10,6 +10,7 @@ import com.realdolmen.fleet.domain.enums.Brand;
 import com.realdolmen.fleet.domain.enums.FuelType;
 import com.realdolmen.fleet.repositories.CarRepository;
 import com.realdolmen.fleet.repositories.FunctionalLevelRepository;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class SampleDataImporter {
     private PasswordEncoder passwordEncoder;
 
     @Test
-//    @Ignore
+    @Ignore
     @Transactional
     public void generateSampleData() {
         levelRepo.deleteAll();
@@ -60,7 +61,6 @@ public class SampleDataImporter {
         generateCars();
         generateDifferentRoleUsers();
         generateAuthoritiesForDiffrentRoles();
-//        generateOneCar();
         // TODO: add new method here
     }
 

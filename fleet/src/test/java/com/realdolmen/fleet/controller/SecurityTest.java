@@ -83,8 +83,6 @@ public class SecurityTest {
 
     @Test
     public void loggedInUserCanAccessMyCarUrl() throws Exception {
-        //user who is logged in can acces cars/mycar
-        //fleet admin can't access any cars/mycar
         preformGetForAndExpect("/cars/mycar", status().is3xxRedirection(), status().isOk(), status().isForbidden());
     }
 
