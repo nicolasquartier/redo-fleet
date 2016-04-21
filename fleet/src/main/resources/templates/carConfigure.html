@@ -1,10 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html layout:decorator="layout"
+      xmlns:layout="http://www.thymeleaf.org">
 
-</body>
+<div layout:fragment="content" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
+    <form action="#" th:action="@{/cars}" method="post" th:object="${car}">
+        <header class="header-container">
+            <div class="container">
+                <h1 style="margin-top:30px; margin-bottom: 50px;">Configure your car options:</h1>
+                <h3 class="page-header" th:text="*{brand} + ' ' + *{model}"></h3>
+            </div>
+        </header>
+
+        <main class="container">
+            <h2>Car info:</h2>
+            <div id="cardetailsConfigure">
+            <table class="table table-striped table-responsive">
+            <tr>
+            <td class="title">Brand:</td>
+            <td class="cardetails"><label th:text="*{brand}"></label></td>
+            </tr>
+            <tr>
+            <td class="title">Model:</td>
+            <td class="cardetails"><label th:text="*{model}"></label></td>
+            </tr>
+            <tr>
+            <td class="title">Type:</td>
+            <td class="cardetails"><label th:text="*{type}"></label></td>
+            </tr>
+            <tr>
+            <td class="title">Category:</td>
+            <td class="cardetails"><label th:text="*{category.fLevel}"></label></td>
+            </tr>
+            <tr>
+            <td class="title">Fueltype:</td>
+            <td class="cardetails"><label th:text="*{fuelType}"></label></td>
+            </tr>
+            <tr>
+            <td class="title">HP:</td>
+            <td class="cardetails"><label th:text="*{fiscalHorsePower}"></label></td>
+            </tr>
+            <tr>
+            <td class="title">Pack:</td>
+            <td class="cardetails"><label th:text="*{pack}"></label></td>
+            </tr>
+            <tr>
+            <td class="title">Hybride:</td>
+            <td class="cardetails"><label th:text="*{hybrid}"></label></td>
+            </tr>
+            <tr>
+            <td class="title">Emission:</td>
+            <td class="cardetails"><label th:text="*{emission}"></label></td>
+            </tr>
+            <tr>
+            <td class="OneColumnWithSizeOfTwo">
+            </td>
+            <td></td>
+            </tr>
+            </table>
+            <p class="btnOrderNow">
+
+            </p>
+            </div>
+
+            <h2>Configure options:</h2>
+            <div id="carOptions">
+
+            </div>
+            <a th:href="@{${flowExecutionUrl}(_eventId=cancel)}" class="btn btn-default">Cancel</a>
+        </main>
+    </form>
+</div>
 </html>

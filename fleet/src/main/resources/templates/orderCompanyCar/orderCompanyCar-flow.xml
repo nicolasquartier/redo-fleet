@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      start-state="configureCar"
+>
+    <!--<var name="car" class="com.realdolmen.fleet.domain.Car" />-->
+
+    <on-start>
+        <set name="requestScope.carId" value="requestParameters.carId" type="long" />
+        <evaluate expression="carRepository.findOne(requestScope.carId)" result="conversationScope.car" />
+    </on-start>
+
+    <view-state id="configureCar" view="carConfigure" model="car">
+        <transition to="cancel" on="cancel"/>
+    </view-state>
+
+    <end-state id="cancel" view="externalRedirect:/cars"/>
+</flow>

@@ -33,11 +33,6 @@ public class CarController {
         return "cardetail";
     }
 
-    @RequestMapping(value = "{id}/configure", method = RequestMethod.GET)
-    public String cardetailConfigureOptions(@PathVariable("id") Long id, Model model) {
-        return "carcatalog";
-    }
-
     @RequestMapping(value = "/mycar", method = RequestMethod.GET)
     public String mycar() {
         return "mycar";

@@ -15,8 +15,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import javax.sql.DataSource;
 
 @Configuration
-@Profile(value = {"PRD", "TST"})
 @EnableWebSecurity
+@Profile(value = {"PRD", "TST"})
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

@@ -3,6 +3,7 @@
 
 <div layout:fragment="content" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
     <form action="#" th:action="@{/cars}" method="post" th:object="${car}">
+        <input type="hidden" name="hiddenCarId" th:text="*{id}" />
         <header class="header-container">
             <div class="container">
                 <h1 class="page-header" th:text="*{brand} + ' ' + *{model}"></h1>
@@ -64,9 +65,14 @@
                     </tr>
                 </table>
                 <p class="btnOrderNow">
-                    <!--<button class="btn btn-lg btn-warning btn-block btn-signin" type="submit">Choose &amp; Configure</button>-->
-                    <a th:href="*{id} + '/configure'" class="btn btn-lg btn-warning btn-block btn-signin" role="button">Choose
-                        &amp; Configure</a>
+                    <!--<a th:href="'/configure'"-->
+                       <!--class="btn btn-lg btn-warning btn-block btn-signin"-->
+                       <!--role="button">Choose &amp; Configure</a>-->
+
+                    <a th:href="@{/orderCompanyCar} + '?carId=' + *{id}"
+                       class="btn btn-lg btn-warning btn-block btn-signin"
+                       role="button">Choose &amp; Configure</a>
+
                 </p>
             </div>
             <!-- CODE REVIEW :  APRJTWO-10 : Placeholders should not be active in the "ready to release" build -->

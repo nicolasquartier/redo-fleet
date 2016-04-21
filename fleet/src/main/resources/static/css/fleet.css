@@ -87,6 +87,11 @@ div#cardetails {
     height: 500px;
 }
 
+div#cardetailsConfigure {
+    float: left;
+    width:100%;
+}
+
 div#cardetails table {
     margin-bottom: 0px;
 }

@@ -9,7 +9,7 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
 @Configuration
-@Profile("PRD")
+@Profile(value = {"PRD", "TST"})
 public class ThymeleafConfig {
 
     @Autowired

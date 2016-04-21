@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
@@ -12,21 +13,21 @@ import org.thymeleaf.spring4.view.AjaxThymeleafViewResolver;
 import org.thymeleaf.spring4.view.FlowAjaxThymeleafView;
 
 @Configuration
+//@EnableWebMvc
 @Profile(value = {"PRD", "TST"})
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/index").setViewName("index");
-//        registry.addViewController("/").setViewName("index");
-//        registry.addViewController("/login").setViewName("login");
-//    }
 
     @Autowired
     private WebFlowConfig webFlowConfig;
 
     @Autowired
     private SpringTemplateEngine springTemplateEngine;
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
 
     @Bean
     public FlowHandlerMapping flowHandlerMapping() {
@@ -45,7 +46,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public AjaxThymeleafViewResolver ajaxThymeleafViewResolver() {
+    public AjaxThymeleafViewResolver tilesViewResolver() {
         AjaxThymeleafViewResolver viewResolver = new AjaxThymeleafViewResolver();
         viewResolver.setViewClass(FlowAjaxThymeleafView.class);
         viewResolver.setTemplateEngine(springTemplateEngine);
