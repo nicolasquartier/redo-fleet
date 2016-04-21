@@ -10,6 +10,9 @@ public class CompanyCar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Version
+    private Long version;
+
     @ManyToOne
     private Car car;
 
@@ -28,6 +31,14 @@ public class CompanyCar {
 
     /* Used by JPA */
     public CompanyCar() {
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public Long getId() {

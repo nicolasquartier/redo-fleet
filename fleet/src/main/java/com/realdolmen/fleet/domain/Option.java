@@ -31,6 +31,21 @@ public class Option implements Serializable {
     @Enumerated(EnumType.STRING)
     private OptionType type;
 
+    @Version
+    private Long version;
+
+    /* Used by JPA */
+    public Option() {
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
