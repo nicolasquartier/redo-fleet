@@ -18,6 +18,7 @@ public class FunctionalLevel implements Serializable {
     @Min(value = 0)
     private Integer fLevel;
 
+    /* Used by JPA */
     public FunctionalLevel() {
     }
 

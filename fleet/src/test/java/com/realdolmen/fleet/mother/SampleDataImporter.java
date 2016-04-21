@@ -5,10 +5,7 @@ import com.realdolmen.fleet.config.SecurityConfig;
 import com.realdolmen.fleet.domain.*;
 import com.realdolmen.fleet.domain.enums.Brand;
 import com.realdolmen.fleet.domain.enums.FuelType;
-import com.realdolmen.fleet.repositories.CarRepository;
-import com.realdolmen.fleet.repositories.CompanyCarRepository;
-import com.realdolmen.fleet.repositories.FunctionalLevelRepository;
-import com.realdolmen.fleet.repositories.OptionRepository;
+import com.realdolmen.fleet.repositories.*;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,6 +53,12 @@ public class SampleDataImporter {
     private FunctionalLevelRepository levelRepo;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserCarHistoryRepository userCarHistoryRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Test
@@ -69,8 +72,21 @@ public class SampleDataImporter {
         generateCars();
         generateOptions();
         generateCompanyCar();
+        generateUserCarHistory();
 
         // TODO: add new method here
+    }
+
+    @Transactional
+    private void generateUserCarHistory() {
+        // could loop this by replacing the id with the loop index, be carefull index should stay below #cars and #users
+        Long carId = 1L;
+        Long userId = 1L;
+
+        UserCarHistory userCarHistory = UserCarHistoryMother.init().build();
+        userCarHistory.setUser(userRepository.findOne(userId));
+        userCarHistory.setCompanyCar(companyCarRepository.findOne(carId));
+        userCarHistoryRepository.save(userCarHistory);
     }
 
     @Test
@@ -80,25 +96,31 @@ public class SampleDataImporter {
         carRepository.deleteAll();
         optionRepository.deleteAll();
         companyCarRepository.deleteAll();
-
         generateSampleData();
     }
 
     private void generateCompanyCar() {
 
         // could loop this by replacing the id with the loop index, be carefull index should stay below #cars
-        Long id = 1L;
+        Long carId = 1L;
 
         CompanyCar companyCar = CompanyCarMother.init().build();
+
+        Car carToSet = carRepository.getOne(carId);
+        companyCar.setCar(carToSet);
+
+        entityManager.persist(companyCar);
+        entityManager.flush();
 
         List<Option> options = companyCar.getOptions();
         options.stream().forEach(companyCar::removeOption);
 
-        Car carToSet = carRepository.getOne(id);
         List<Option> optionToSet = optionRepository.findByCar(carToSet);
         optionToSet.stream().forEach(companyCar::addOption);
-        companyCar.setCar(carToSet);
-        companyCarRepository.save(companyCar);
+        optionToSet.stream().forEach(option -> option.addCompanyCar(companyCar));
+
+        entityManager.merge(companyCar);
+        entityManager.flush();
     }
 
     private void generateOptions() {

@@ -60,6 +60,7 @@ public class Car implements Serializable {
 
     private String thumbnail;
 
+    /* Used by JPA */
     public Car() {
     }
 
