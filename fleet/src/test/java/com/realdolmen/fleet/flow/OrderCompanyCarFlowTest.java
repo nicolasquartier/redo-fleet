@@ -1,7 +1,7 @@
 package com.realdolmen.fleet.flow;
 
 
-import com.realdolmen.fleet.controller.CompanyCarController;
+import com.realdolmen.fleet.service.impl.CompanyCarServiceImpl;
 import com.realdolmen.fleet.domain.Car;
 import com.realdolmen.fleet.domain.CompanyCar;
 import com.realdolmen.fleet.domain.Option;
@@ -38,7 +38,7 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
     private OptionRepository optionRepository;
 
     @Mock
-    private CompanyCarController companyCarController;
+    private CompanyCarServiceImpl companyCarController;
 
     @Mock
     private FunctionalLevelRepository functionalLevelRepository;
@@ -70,7 +70,7 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
     public void init() {
         when(carRepository.findOne(any(Long.class))).thenReturn(car);
         when(optionRepository.findByCar(any(Car.class))).thenReturn(Arrays.asList(optionOne, optionTwo));
-        when(companyCarController.createCompanyCar(any(Car.class), Matchers.anyListOf(Option.class))).thenReturn(companyCar);
+        when(companyCarController.createCompanyCarWithOptions(any(Car.class), Matchers.anyListOf(Option.class))).thenReturn(companyCar);
 
         requestContext = new MockRequestContext();
     }

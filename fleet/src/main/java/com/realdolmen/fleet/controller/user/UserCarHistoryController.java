@@ -3,7 +3,7 @@ package com.realdolmen.fleet.controller.user;
 import com.realdolmen.fleet.domain.User;
 import com.realdolmen.fleet.domain.UserCarHistory;
 import com.realdolmen.fleet.repository.UserCarHistoryRepository;
-import com.realdolmen.fleet.service.AuthService;
+import com.realdolmen.fleet.service.impl.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,7 @@ import java.util.Date;
 public class UserCarHistoryController {
 
     @Autowired
-    private AuthService authService;
+    private AuthServiceImpl authService;
 
     @Autowired
     private UserCarHistoryRepository userCarHistoryRepository;

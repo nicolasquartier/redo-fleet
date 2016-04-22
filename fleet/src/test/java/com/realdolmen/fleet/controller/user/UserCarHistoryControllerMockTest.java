@@ -3,8 +3,7 @@ package com.realdolmen.fleet.controller.user;
 import com.realdolmen.fleet.domain.User;
 import com.realdolmen.fleet.domain.UserCarHistory;
 import com.realdolmen.fleet.repository.UserCarHistoryRepository;
-import com.realdolmen.fleet.service.AuthService;
-import org.hamcrest.Matchers;
+import com.realdolmen.fleet.service.impl.AuthServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,7 +46,7 @@ public class UserCarHistoryControllerMockTest {
     private Date date;
 
     @Mock
-    private AuthService authService;
+    private AuthServiceImpl authService;
 
     @Before
     public void init() {

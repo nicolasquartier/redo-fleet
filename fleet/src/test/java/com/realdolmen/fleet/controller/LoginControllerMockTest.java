@@ -2,7 +2,7 @@ package com.realdolmen.fleet.controller;
 
 import com.realdolmen.fleet.domain.Authorities;
 import com.realdolmen.fleet.repository.AuthoritiesRepository;
-import com.realdolmen.fleet.service.AuthService;
+import com.realdolmen.fleet.service.impl.AuthServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +31,7 @@ public class LoginControllerMockTest {
     private Authorities auth;
 
     @Mock
-    private AuthService authentication;
+    private AuthServiceImpl authentication;
 
     @InjectMocks
     private LoginController loginController = new LoginController();

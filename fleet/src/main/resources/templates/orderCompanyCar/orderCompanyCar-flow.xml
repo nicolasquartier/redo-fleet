@@ -19,7 +19,7 @@
     <view-state id="confirm" view="companyCarConfirm">
         <!--@FIXME @TODO: Only persist the companycar after user filled in Fleet Meta Data!-->
         <!--<on-entry>-->
-            <!--<evaluate expression="companyCarController.createCompanyCar(car, car.options)" result="conversationScope.companyCar"/>-->
+            <!--<evaluate expression="companyCarController.createCompanyCarWithOptions(car, car.options)" result="conversationScope.companyCar"/>-->
         <!--</on-entry>-->
         <transition on="back" to="configureCar"/>
         <transition to="fleetMetaData" on="goToFleetMetaData"/>

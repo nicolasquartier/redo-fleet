@@ -30,10 +30,4 @@ public class CarController {
         model.addAttribute("car", carRepository.findOne(id));
         return "cardetail";
     }
-
-    @RequestMapping(value = "{id}/configure", method = RequestMethod.GET)
-    public String cardetailConfigureOptions(@PathVariable("id") Long id, Model model) {
-        return "carcatalog";
-    }
-
 }

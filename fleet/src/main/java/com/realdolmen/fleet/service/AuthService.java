@@ -1,31 +1,13 @@
 package com.realdolmen.fleet.service;
 
 import com.realdolmen.fleet.domain.User;
-import com.realdolmen.fleet.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+public interface AuthService {
 
-@Component
-public class AuthService {
+    Authentication getAuthentication();
 
-    @Autowired
-    private UserRepository userRepository;
+    String getName();
 
-
-    public Authentication getAuthentication() {
-        return SecurityContextHolder.getContext().getAuthentication();
-    }
-
-    public String getName() {
-        return getAuthentication().getName();
-    }
-
-    public User getCurrentUser() {
-        return userRepository.findByUsername(getName());
-    }
+    User getCurrentUser();
 }
