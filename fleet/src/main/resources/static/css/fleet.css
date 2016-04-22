@@ -193,4 +193,42 @@ div#historydetails td.historydetails label {
     font-weight: normal;
 }
 
+#tableMetaData label{
+    position: relative;
+    top: 6px;
+    float: right;
+}
+
+#tableMetaData input[type="radio"] {
+    width: 25px;
+    position: relative;
+    top:-2px;
+    float:left;
+    margin-right: 10px;
+}
+
+#tableMetaData label.lblRadioLabel {
+    float:left;
+    font-weight: normal;
+    margin-right:8px;
+}
+
+#tableMetaData td {
+    width:585px;
+}
+
+.divOrderButtons a{
+    float:left;
+}
+
+.divOrderButtons div.unableOrder a.btn-default, a.btn-danger {
+    position: relative;
+}
+
+.divOrderButtons label {
+    width:620px;
+    position: relative;
+    top: 55px;
+    left: -190px;
+}
 

@@ -6,10 +6,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class UserCarHistory {
+public class UserCarHistory implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +45,8 @@ public class UserCarHistory {
 
     /* Used by JPA */
     public UserCarHistory() {
+        this.user = new User();
+        this.companyCar = new CompanyCar();
     }
 
     public Long getId() {
