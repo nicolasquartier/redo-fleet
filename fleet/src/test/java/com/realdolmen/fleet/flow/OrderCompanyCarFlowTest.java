@@ -8,6 +8,7 @@ import com.realdolmen.fleet.repository.CarRepository;
 import com.realdolmen.fleet.repository.FunctionalLevelRepository;
 import com.realdolmen.fleet.repository.OptionRepository;
 import com.realdolmen.fleet.service.OrderFlowService;
+import com.realdolmen.fleet.service.impl.AuthServiceImpl;
 import com.realdolmen.fleet.service.impl.CompanyCarServiceImpl;
 import com.realdolmen.fleet.vo.OrderViewObject;
 import org.junit.Before;
@@ -33,6 +34,9 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
+
+    @Mock
+    private AuthServiceImpl authService;
 
     @Mock
     private CarRepository carRepository;
@@ -74,6 +78,7 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
         builderContext.registerBean("optionRepository", optionRepository);
         builderContext.registerBean("companyCarController", companyCarController);
         builderContext.registerBean("orderFlowService", orderFlowService);
+        builderContext.registerBean("authServiceImpl", authService);
     }
 
     @Before
@@ -108,7 +113,6 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
     @Test
     public void testConfigureCarToConfirmCarTransistion() {
         setCurrentState("configureCar");
-
         MockExternalContext context = new MockExternalContext();
         context.setCurrentUser("user");
         context.setEventId("confirm");
@@ -118,14 +122,11 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
     }
 
     @Test
-    @Ignore
-    //@FIXME @TODO
     public void testConfirmCarToFleetMetaDataTransistion() {
+        MockExternalContext context = initAndStartFlow();
         setCurrentState("confirm");
         requestContext.getConversationScope().put("orderViewObject", orderViewObject);
 
-        MockExternalContext context = new MockExternalContext();
-        context.setCurrentUser("user");
         context.setEventId("goToFleetMetaData");
         resumeFlow(context);
 
