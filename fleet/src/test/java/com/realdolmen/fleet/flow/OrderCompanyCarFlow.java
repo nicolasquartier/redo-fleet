@@ -1,10 +1,13 @@
 package com.realdolmen.fleet.flow;
 
 
+import com.realdolmen.fleet.controller.CompanyCarController;
 import com.realdolmen.fleet.domain.Car;
 import com.realdolmen.fleet.domain.CompanyCar;
 import com.realdolmen.fleet.domain.FunctionalLevel;
 import com.realdolmen.fleet.domain.Option;
+import com.realdolmen.fleet.domain.enums.Brand;
+import com.realdolmen.fleet.domain.enums.FuelType;
 import com.realdolmen.fleet.mother.CarMother;
 import com.realdolmen.fleet.mother.FunctionalLevelMother;
 import com.realdolmen.fleet.repositories.CarRepository;
@@ -13,6 +16,7 @@ import com.realdolmen.fleet.repositories.OptionRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +33,7 @@ import javax.persistence.EntityManager;
 import javax.validation.OverridesAttribute;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
@@ -43,6 +48,9 @@ public class OrderCompanyCarFlow extends AbstractXmlFlowExecutionTests {
     private OptionRepository optionRepository;
 
     @Mock
+    private CompanyCarController companyCarController;
+
+    @Mock
     private FunctionalLevelRepository functionalLevelRepository;
 
     @Mock
@@ -50,6 +58,9 @@ public class OrderCompanyCarFlow extends AbstractXmlFlowExecutionTests {
 
     @Mock
     private Option optionOne, optionTwo;
+
+    @Mock
+    private CompanyCar companyCar;
 
     private  MockRequestContext requestContext;
 
@@ -62,21 +73,20 @@ public class OrderCompanyCarFlow extends AbstractXmlFlowExecutionTests {
     protected void configureFlowBuilderContext(MockFlowBuilderContext builderContext) {
         builderContext.registerBean("carRepository", carRepository);
         builderContext.registerBean("optionRepository", optionRepository);
+        builderContext.registerBean("companyCarController", companyCarController);
     }
 
     @Before
     public void init() {
         when(carRepository.findOne(any(Long.class))).thenReturn(car);
         when(optionRepository.findByCar(any(Car.class))).thenReturn(Arrays.asList(optionOne, optionTwo));
+        when(companyCarController.createCompanyCar(any(Car.class), Matchers.anyListOf(Option.class))).thenReturn(companyCar);
 
         requestContext = new MockRequestContext();
-
-        System.out.println("start test");
     }
 
     @Test
     public void testStartOrderCompanyCarFlow() {
-
         requestContext.getConversationScope().put("car", car);
 
         MutableAttributeMap input = new LocalAttributeMap<>();
@@ -87,5 +97,38 @@ public class OrderCompanyCarFlow extends AbstractXmlFlowExecutionTests {
 
         assertCurrentStateEquals("configureCar");
         assertTrue(getRequiredConversationAttribute("car") instanceof Car);
+    }
+
+    @Test
+    public void testConfirmCompanyCarFlow() {
+        setCurrentState("configureCar");
+
+        MockExternalContext context = new MockExternalContext();
+        context.setCurrentUser("user");
+        context.setEventId("confirm");
+        resumeFlow(context);
+
+        assertCurrentStateEquals("confirm");
+    }
+
+    public Car createTestCar() {
+        Car car = new Car();
+        FunctionalLevel category = new FunctionalLevel();
+        category.setFLevel(1);
+        car.setCategory(category);
+        car.setEmission(99);
+        car.setBrand(Brand.AUDI);
+        car.setProductionDate(new Date());
+        car.setActive(true);
+        car.setHybrid(false);
+        car.setId(1L);
+        car.setModel("ne witn");
+        car.setPack("zukèèn lik van de acaddemict");
+        car.setFiscalHorsePower(99);
+        car.setFuelType(FuelType.DIESEL);
+        Option option = new Option();
+        option.setDescription("description 1");
+        car.setOptions(Arrays.asList(option));
+        return car;
     }
 }

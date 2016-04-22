@@ -13,51 +13,47 @@
         <main class="container">
             <h2>Car info:</h2>
             <div id="cardetailsConfigure">
-            <table class="table table-striped table-responsive">
-            <tr>
-            <td class="title">Brand:</td>
-            <td class="cardetails"><label th:text="*{brand}"></label></td>
-            </tr>
-            <tr>
-            <td class="title">Model:</td>
-            <td class="cardetails"><label th:text="*{model}"></label></td>
-            </tr>
-            <tr>
-            <td class="title">Type:</td>
-            <td class="cardetails"><label th:text="*{type}"></label></td>
-            </tr>
-            <tr>
-            <td class="title">Category:</td>
-            <td class="cardetails"><label th:text="*{category.fLevel}"></label></td>
-            </tr>
-            <tr>
-            <td class="title">Fueltype:</td>
-            <td class="cardetails"><label th:text="*{fuelType}"></label></td>
-            </tr>
-            <tr>
-            <td class="title">HP:</td>
-            <td class="cardetails"><label th:text="*{fiscalHorsePower}"></label></td>
-            </tr>
-            <tr>
-            <td class="title">Pack:</td>
-            <td class="cardetails"><label th:text="*{pack}"></label></td>
-            </tr>
-            <tr>
-            <td class="title">Hybride:</td>
-            <td class="cardetails"><label th:text="*{hybrid}"></label></td>
-            </tr>
-            <tr>
-            <td class="title">Emission:</td>
-            <td class="cardetails"><label th:text="*{emission}"></label></td>
-            </tr>
-                <tr>
-                    <td class="title">Option:</td>
-                    <td class="cardetails"><label th:text="${car.options}"></label></td>
-                </tr>
-            </table>
-            <p class="btnOrderNow">
+                <table class="table table-striped table-responsive">
+                    <tr>
+                        <td class="title">Brand:</td>
+                        <td class="cardetails"><label th:text="*{brand}"></label></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Model:</td>
+                        <td class="cardetails"><label th:text="*{model}"></label></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Type:</td>
+                        <td class="cardetails"><label th:text="*{type}"></label></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Category:</td>
+                        <td class="cardetails"><label th:text="*{category.fLevel}"></label></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Fueltype:</td>
+                        <td class="cardetails"><label th:text="*{fuelType}"></label></td>
+                    </tr>
+                    <tr>
+                        <td class="title">HP:</td>
+                        <td class="cardetails"><label th:text="*{fiscalHorsePower}"></label></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Pack:</td>
+                        <td class="cardetails"><label th:text="*{pack}"></label></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Hybride:</td>
+                        <td class="cardetails"><label th:text="*{hybrid}"></label></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Emission:</td>
+                        <td class="cardetails"><label th:text="*{emission}"></label></td>
+                    </tr>
+                </table>
+                <p class="btnOrderNow">
 
-            </p>
+                </p>
             </div>
 
             <h2>Configure options:</h2>
@@ -69,8 +65,8 @@
                     </tr>
                 </table>
             </div>
-            <a th:href="@{${flowExecutionUrl}(_eventId=confirm)}" class="btn btn-default">Confirm</a>
-            <a th:href="@{${flowExecutionUrl}(_eventId=cancel)}" class="btn btn-default">Cancel</a>
+            <a th:href="@{${flowExecutionUrl}(_eventId=confirm)}" class="btn btn-primary">Proceed</a>
+            <a th:href="@{${flowExecutionUrl}(_eventId=cancel)}" class="btn btn-danger">Cancel</a>
         </main>
     </form>
 </div>
