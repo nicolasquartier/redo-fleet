@@ -3,7 +3,6 @@ package com.realdolmen.fleet.repository;
 import com.realdolmen.fleet.SpringBootTransactionalIntegrationTest;
 import com.realdolmen.fleet.domain.Authorities;
 import com.realdolmen.fleet.mother.AuthoritiesMother;
-import com.realdolmen.fleet.repositories.AuthoritiesRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

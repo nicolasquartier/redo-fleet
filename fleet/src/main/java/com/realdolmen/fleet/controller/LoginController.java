@@ -1,7 +1,7 @@
 package com.realdolmen.fleet.controller;
 
 import com.realdolmen.fleet.domain.Authorities;
-import com.realdolmen.fleet.repositories.AuthoritiesRepository;
+import com.realdolmen.fleet.repository.AuthoritiesRepository;
 import com.realdolmen.fleet.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -5,14 +5,10 @@ import com.realdolmen.fleet.domain.Car;
 import com.realdolmen.fleet.domain.Option;
 import com.realdolmen.fleet.mother.CarMother;
 import com.realdolmen.fleet.mother.OptionMother;
-import com.realdolmen.fleet.repositories.CarRepository;
-import com.realdolmen.fleet.repositories.OptionRepository;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Arrays;

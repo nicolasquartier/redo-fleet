@@ -1,7 +1,7 @@
 package com.realdolmen.fleet.controller;
 
 import com.realdolmen.fleet.domain.Car;
-import com.realdolmen.fleet.repositories.CarRepository;
+import com.realdolmen.fleet.repository.CarRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

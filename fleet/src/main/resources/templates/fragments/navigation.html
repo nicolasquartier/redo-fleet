@@ -19,8 +19,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li th:class="${#httpServletRequest.requestURI} == '/mycar' ? 'active' : ''">
-                    <a th:href="@{/cars/mycar}" th:text="#{rdf.mycar}"></a>
+                <li th:class="${#httpServletRequest.requestURI} == '/user/car' ? 'active' : ''">
+                    <a th:href="@{/user/car}" th:text="#{rdf.mycar}"></a>
                 </li>
                 <li th:class="${#httpServletRequest.requestURI} == '/carcatalog' ? 'active' : ''">
                     <a th:href="@{/cars}" th:text="#{rdf.carcatalog}"></a>
