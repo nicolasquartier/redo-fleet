@@ -24,12 +24,16 @@ public class OrderViewObject implements Serializable{
         this.userCarHistory = new UserCarHistory();
     }
 
-    public OrderViewObject(CompanyCar companyCar, Car car, List<Option> options, UserCarHistory userCarHistory) {
-        this.companyCar = companyCar;
-        this.car = car;
-        this.options = options;
-        this.userCarHistory = userCarHistory;
-    }
+//    public OrderViewObject() {
+//
+//    }
+
+//    public OrderViewObject(CompanyCar companyCar, Car car, List<Option> options, UserCarHistory userCarHistory) {
+//        this.companyCar = companyCar;
+//        this.car = car;
+//        this.options = options;
+//        this.userCarHistory = userCarHistory;
+//    }
 
     public CompanyCar getCompanyCar() {
         return companyCar;
