@@ -12,12 +12,12 @@ public class ErrorPagesSecurityTest extends AbstractSecurityTest {
 
     @Test
     public void pageNotFoundPageUrlsAreOpen() throws Exception {
-        preformGetForAndExpect("/404", status().isOk(), status().isOk(), status().isOk());
+        performGetForAndExpect("/404", status().isOk(), status().isOk(), status().isOk());
     }
 
     @Test
     public void forbiddenUrlPageUrlsAreOpen() throws Exception {
-        preformGetForAndExpect("/403", status().isOk(), status().isOk(), status().isOk());
+        performGetForAndExpect("/403", status().isOk(), status().isOk(), status().isOk());
     }
 
 

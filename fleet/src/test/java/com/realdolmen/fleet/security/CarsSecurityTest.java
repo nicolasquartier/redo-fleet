@@ -11,11 +11,11 @@ public class CarsSecurityTest extends AbstractSecurityTest{
 
     @Test
     public void loggedInUserCanAccessCarsUrl() throws Exception {
-        preformGetForAndExpect("/cars/", status().is3xxRedirection(), status().isOk(), status().isOk());
+        performGetForAndExpect("/cars/", status().is3xxRedirection(), status().isOk(), status().isOk());
     }
 
     @Test
     public void loggedInUserCanAccessTheirCarUrl() throws Exception {
-        preformGetForAndExpect("/user/car", status().is3xxRedirection(), status().isOk(), status().isForbidden());
+        performGetForAndExpect("/user/car", status().is3xxRedirection(), status().isOk(), status().isForbidden());
     }
 }

@@ -11,22 +11,22 @@ public class LoginSecurityTest extends AbstractSecurityTest{
 
     @Test
     public void loginUrlIsOpen() throws Exception {
-        preformGetForAndExpect("/login", status().isOk(), status().isOk(), status().isOk());
-        preformGetForAndExpectView("/login", "login");
+        performGetForAndExpect("/login", status().isOk(), status().isOk(), status().isOk());
+        performGetForAndExpectView("/login", "login");
     }
 
 
     @Test
     public void loginErrorUrlIsOpen() throws Exception {
-        preformGetForAndExpect("/login?error", status().isOk(), status().isOk(), status().isOk());
-        preformGetForAndExpectView("/login?error", "login");
+        performGetForAndExpect("/login?error", status().isOk(), status().isOk(), status().isOk());
+        performGetForAndExpectView("/login?error", "login");
     }
 
     @Test
     public void logoutRedirectsToLogin() throws Exception {
         String requestPath = "/login?logout";
-        preformGetWithCSRFForAndExpect(requestPath, status().isOk(), status().isOk(), status().isOk());
-        preformGetForAndExpectView("/login?logout", "login");
+        performGetWithCSRFForAndExpect(requestPath, status().isOk(), status().isOk(), status().isOk());
+        performGetForAndExpectView("/login?logout", "login");
     }
 
 }

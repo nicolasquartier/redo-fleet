@@ -48,7 +48,7 @@ public abstract class AbstractSecurityTest {
     }
 
 
-     void preformGetForAndExpect(String path, ResultMatcher noUser, ResultMatcher normalUser, ResultMatcher adminUser) throws Exception {
+     void performGetForAndExpect(String path, ResultMatcher noUser, ResultMatcher normalUser, ResultMatcher adminUser) throws Exception {
        mvc.perform(get(path))
                 .andExpect(noUser);
         mvc.perform(get(path).with(user("user").roles("USER")))
@@ -58,7 +58,7 @@ public abstract class AbstractSecurityTest {
     }
 
 
-    void preformGetForAndExpectView(String path, String expectedView) throws Exception {
+    void performGetForAndExpectView(String path, String expectedView) throws Exception {
         mvc.perform(get(path))
                 .andExpect(view().name(expectedView));
         mvc.perform(get(path).with(user("user").roles("USER")))
@@ -67,12 +67,17 @@ public abstract class AbstractSecurityTest {
                 .andExpect(view().name(expectedView));
     }
 
-    void preformGetWithCSRFForAndExpect(String path, ResultMatcher noUser, ResultMatcher normalUser, ResultMatcher adminUser) throws Exception {
+    void performGetWithCSRFForAndExpect(String path, ResultMatcher noUser, ResultMatcher normalUser, ResultMatcher adminUser) throws Exception {
         mvc.perform(get(path))
                 .andExpect(noUser);
         mvc.perform(get(path).with(user("user").roles("USER")).with(csrf()))
                 .andExpect(normalUser);
         mvc.perform(get(path).with(user("user").roles("ADMIN")).with(csrf()))
                 .andExpect(adminUser);
+    }
+
+    void performGetForNoUserAndExpect(String path, ResultMatcher noUser) throws Exception {
+        mvc.perform(get(path))
+                .andExpect(noUser);
     }
 }

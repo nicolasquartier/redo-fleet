@@ -97,6 +97,9 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
 
         assertCurrentStateEquals("configureCar");
         assertTrue(getRequiredConversationAttribute("car") instanceof Car);
+
+        Car carOnView = (Car) getConversationScope().get("car");
+        assertSame(carOnView, car);
     }
 
     @Test

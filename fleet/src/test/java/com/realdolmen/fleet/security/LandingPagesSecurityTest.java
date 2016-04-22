@@ -12,11 +12,11 @@ public class LandingPagesSecurityTest extends AbstractSecurityTest{
 
     @Test
     public void adminCanAccesAdminUrls() throws Exception {
-        preformGetForAndExpect("/admin", status().is3xxRedirection(), status().isForbidden(), status().isOk());
+        performGetForAndExpect("/admin", status().is3xxRedirection(), status().isForbidden(), status().isOk());
     }
 
     @Test
     public void rootUrlsAreOpen() throws Exception {
-        preformGetForAndExpect("/", status().is3xxRedirection(), status().is3xxRedirection(), status().is3xxRedirection());
+        performGetForAndExpect("/", status().is3xxRedirection(), status().is3xxRedirection(), status().is3xxRedirection());
     }
 }
