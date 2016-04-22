@@ -26,7 +26,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class OrderCompanyCarFlow extends AbstractXmlFlowExecutionTests {
+public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
 
     @Mock
     private CarRepository carRepository;
