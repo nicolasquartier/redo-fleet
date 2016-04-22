@@ -1,7 +1,5 @@
 package com.realdolmen.fleet.mother;
 
-import com.realdolmen.fleet.domain.Car;
-import com.realdolmen.fleet.domain.FunctionalLevel;
 import com.realdolmen.fleet.domain.Option;
 import com.realdolmen.fleet.domain.enums.OptionType;
 
@@ -16,11 +14,11 @@ public class OptionMother {
         this.option.setCar(CarMother.init().build());
     }
 
-    public Option build() {
-        return this.option;
-    }
-
     public static OptionMother init() {
         return new OptionMother();
+    }
+
+    public Option build() {
+        return this.option;
     }
 }

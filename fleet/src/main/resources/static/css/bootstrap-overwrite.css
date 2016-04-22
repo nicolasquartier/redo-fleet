@@ -1,7 +1,7 @@
 .navbar {
-    background:none;
-    color:WHITE;
-    border:none;
+    background: none;
+    color: WHITE;
+    border: none;
     margin-bottom: 0px;
     /*margin-top: -70px;*/
     /*min-height: 160px;*/
@@ -15,37 +15,37 @@
     background: url("../images/simple-car-coloring-pages-7.png") no-repeat left top;
     background-size: cover;
     text-indent: -9999px;
-    width:65px;
+    width: 65px;
 }
 
 #navbar-logo:hover {
     background: url("../images/simple-car-coloring-pages-7-hover.png") no-repeat left top;
     background-size: cover;
     text-indent: -9999px;
-    width:65px;
+    width: 65px;
 }
 
 .navbar-inverse .navbar-nav li a {
-    color:WHITE;
+    color: WHITE;
 }
 
 .navbar-inverse .navbar-nav li a:hover {
     background-color: WHITE;
-    color:#000000;
+    color: #000000;
 }
 
 .navbar-inverse {
     background-color: #34302d;
 }
 
-.navbar-inverse .navbar-nav>.active>a {
+.navbar-inverse .navbar-nav > .active > a {
     background-color: WHITE;
-    color:BLACK;
+    color: BLACK;
 }
 
-.navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+.navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
     background-color: WHITE;
-    color:BLACK;
+    color: BLACK;
     text-decoration: underline;
 }
 

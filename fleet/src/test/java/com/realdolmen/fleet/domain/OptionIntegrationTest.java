@@ -2,7 +2,6 @@ package com.realdolmen.fleet.domain;
 
 
 import com.realdolmen.fleet.SpringBootTransactionalIntegrationTest;
-import com.realdolmen.fleet.domain.Option;
 import com.realdolmen.fleet.mother.OptionMother;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +17,7 @@ import static org.junit.Assert.assertNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTransactionalIntegrationTest
 public class OptionIntegrationTest {
+
     private Option option;
 
     @Autowired

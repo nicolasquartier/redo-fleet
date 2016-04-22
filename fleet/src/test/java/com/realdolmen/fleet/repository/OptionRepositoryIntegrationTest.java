@@ -14,18 +14,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTransactionalIntegrationTest
 public class OptionRepositoryIntegrationTest {
 
-    private Option correctOne, correctTwo, correctThree;
-    private Option falseOne, falseTwo;
-
     List<Option> correctOptions;
     List<Option> falseOptions;
-
+    private Option correctOne, correctTwo, correctThree;
+    private Option falseOne, falseTwo;
     private Car falseCar, correctCar;
 
     @Autowired

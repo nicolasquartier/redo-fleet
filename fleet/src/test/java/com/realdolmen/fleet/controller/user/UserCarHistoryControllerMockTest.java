@@ -3,8 +3,7 @@ package com.realdolmen.fleet.controller.user;
 import com.realdolmen.fleet.domain.User;
 import com.realdolmen.fleet.domain.UserCarHistory;
 import com.realdolmen.fleet.repository.UserCarHistoryRepository;
-import com.realdolmen.fleet.service.AuthService;
-import org.hamcrest.Matchers;
+import com.realdolmen.fleet.service.impl.AuthServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +17,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.Date;
 
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -47,7 +45,7 @@ public class UserCarHistoryControllerMockTest {
     private Date date;
 
     @Mock
-    private AuthService authService;
+    private AuthServiceImpl authService;
 
     @Before
     public void init() {
@@ -63,8 +61,8 @@ public class UserCarHistoryControllerMockTest {
         when(userCarHistoryRepository.findByUserAndEndDateAfter(isA(User.class), isA(Date.class))).thenReturn(history);
 
         mvc.perform(get("/user/car"))
-            .andExpect(view().name("user/car"))
-            .andExpect(model().attributeExists("carHistoryObj"))
+                .andExpect(view().name("user/car"))
+                .andExpect(model().attributeExists("carHistoryObj"))
         ;
     }
 

@@ -1,8 +1,8 @@
 package com.realdolmen.fleet.controller;
 
+import com.realdolmen.fleet.domain.Car;
 import com.realdolmen.fleet.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.realdolmen.fleet.domain.Car;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,10 +30,4 @@ public class CarController {
         model.addAttribute("car", carRepository.findOne(id));
         return "cardetail";
     }
-
-    @RequestMapping(value = "{id}/configure", method = RequestMethod.GET)
-    public String cardetailConfigureOptions(@PathVariable("id") Long id, Model model) {
-        return "carcatalog";
-    }
-
 }

@@ -1,17 +1,14 @@
-package com.realdolmen.fleet.service;
+package com.realdolmen.fleet.service.impl;
 
 import com.realdolmen.fleet.domain.User;
 import com.realdolmen.fleet.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-
-@Component
-public class AuthService {
+@Service
+public class AuthServiceImpl {
 
     @Autowired
     private UserRepository userRepository;

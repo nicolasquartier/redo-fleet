@@ -1,13 +1,13 @@
 package com.realdolmen.fleet.flow;
 
 
-import com.realdolmen.fleet.controller.CompanyCarController;
 import com.realdolmen.fleet.domain.Car;
 import com.realdolmen.fleet.domain.CompanyCar;
 import com.realdolmen.fleet.domain.Option;
 import com.realdolmen.fleet.repository.CarRepository;
 import com.realdolmen.fleet.repository.FunctionalLevelRepository;
 import com.realdolmen.fleet.repository.OptionRepository;
+import com.realdolmen.fleet.service.impl.CompanyCarServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +38,7 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
     private OptionRepository optionRepository;
 
     @Mock
-    private CompanyCarController companyCarController;
+    private CompanyCarServiceImpl companyCarController;
 
     @Mock
     private FunctionalLevelRepository functionalLevelRepository;
@@ -52,7 +52,7 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
     @Mock
     private CompanyCar companyCar;
 
-    private  MockRequestContext requestContext;
+    private MockRequestContext requestContext;
 
     @Override
     protected FlowDefinitionResource getResource(FlowDefinitionResourceFactory flowDefinitionResourceFactory) {
@@ -70,7 +70,7 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
     public void init() {
         when(carRepository.findOne(any(Long.class))).thenReturn(car);
         when(optionRepository.findByCar(any(Car.class))).thenReturn(Arrays.asList(optionOne, optionTwo));
-        when(companyCarController.createCompanyCar(any(Car.class), Matchers.anyListOf(Option.class))).thenReturn(companyCar);
+        when(companyCarController.createCompanyCarWithOptions(any(Car.class), Matchers.anyListOf(Option.class))).thenReturn(companyCar);
 
         requestContext = new MockRequestContext();
     }

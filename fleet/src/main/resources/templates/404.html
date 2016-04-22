@@ -1,7 +1,7 @@
-<html layout:decorator="errorlayout"
-      xmlns:layout="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.thymeleaf.org"
+      layout:decorator="errorlayout">
 
-<div layout:fragment="content" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
+<div xmlns:th="http://www.thymeleaf.org" layout:fragment="content" th:remove="tag">
     <header class="header-container">
         <div class="container">
             <h1 class="page-header">Page not found!</h1>

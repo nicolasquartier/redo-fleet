@@ -2,10 +2,13 @@ package com.realdolmen.fleet.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Vector;
 
 @Entity
-public class CompanyCar implements Serializable{
+public class CompanyCar implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,17 +65,17 @@ public class CompanyCar implements Serializable{
         return Collections.unmodifiableList(options);
     }
 
+    //    @Transient
+    public void setOptions(List<Option> options) {
+        this.options = options;
+    }
+
     public void addOption(Option option) {
         this.options.add(option);
     }
 
     public void removeOption(Option option) {
         this.options.remove(option);
-    }
-
-//    @Transient
-    public void setOptions(List<Option> options) {
-        this.options = options;
     }
 
     public Boolean getActive() {

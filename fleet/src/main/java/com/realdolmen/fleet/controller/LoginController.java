@@ -2,7 +2,7 @@ package com.realdolmen.fleet.controller;
 
 import com.realdolmen.fleet.domain.Authorities;
 import com.realdolmen.fleet.repository.AuthoritiesRepository;
-import com.realdolmen.fleet.service.AuthService;
+import com.realdolmen.fleet.service.impl.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,7 @@ public class LoginController {
     private AuthoritiesRepository authoritiesRepository;
 
     @Autowired
-    private AuthService authentication;
+    private AuthServiceImpl authentication;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String getEmptyLoginForm(Model model,

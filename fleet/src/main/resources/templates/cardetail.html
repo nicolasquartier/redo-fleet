@@ -1,9 +1,9 @@
-<html layout:decorator="layout"
-      xmlns:layout="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.thymeleaf.org"
+      layout:decorator="layout">
 
-<div layout:fragment="content" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
+<div xmlns:th="http://www.thymeleaf.org" layout:fragment="content" th:remove="tag">
     <form action="#" th:action="@{/cars}" method="post" th:object="${car}">
-        <input type="hidden" name="hiddenCarId" th:text="*{id}" />
+        <input type="hidden" name="hiddenCarId" th:text="*{id}"/>
         <header class="header-container">
             <div class="container">
                 <h1 class="page-header" th:text="*{brand} + ' ' + *{model}"></h1>
@@ -61,8 +61,8 @@
                 </table>
                 <p class="btnOrderNow">
                     <!--<a th:href="'/configure'"-->
-                       <!--class="btn btn-lg btn-warning btn-block btn-signin"-->
-                       <!--role="button">Choose &amp; Configure</a>-->
+                    <!--class="btn btn-lg btn-warning btn-block btn-signin"-->
+                    <!--role="button">Choose &amp; Configure</a>-->
 
                     <a th:href="@{/orderCompanyCar} + '?carId=' + *{id}"
                        class="btn btn-lg btn-warning btn-block btn-signin"

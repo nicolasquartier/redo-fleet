@@ -21,8 +21,4 @@ public class ErrorPagesSecurityTest extends AbstractSecurityTest {
     }
 
 
-
-
-
-
 }

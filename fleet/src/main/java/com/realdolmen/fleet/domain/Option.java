@@ -5,7 +5,6 @@ import com.realdolmen.fleet.domain.enums.OptionType;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
@@ -46,40 +45,44 @@ public class Option implements Serializable {
         this.version = version;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Car getCar() {
+        return car;
     }
 
     public void setCar(Car car) {
         this.car = car;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setType(OptionType type) {
-        this.type = type;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-   public Car getCar() {
-        return car;
-    }
-
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public OptionType getType() {
         return type;
     }
 
+    public void setType(OptionType type) {
+        this.type = type;
+    }
+
     public List<CompanyCar> getCompanyCarList() {
         return Collections.unmodifiableList(companyCarList);
+    }
+
+    public void setCompanyCarList(List<CompanyCar> companyCarList) {
+        this.companyCarList = companyCarList;
     }
 
     public void addCompanyCar(CompanyCar companyCar) {
@@ -88,8 +91,5 @@ public class Option implements Serializable {
 
     public void removeCompanyCar(CompanyCar companyCar) {
         this.companyCarList.remove(companyCar);
-    }
-    public void setCompanyCarList(List<CompanyCar> companyCarList) {
-        this.companyCarList = companyCarList;
     }
 }

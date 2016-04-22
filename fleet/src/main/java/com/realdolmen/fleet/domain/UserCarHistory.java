@@ -1,8 +1,5 @@
 package com.realdolmen.fleet.domain;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

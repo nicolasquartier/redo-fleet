@@ -33,7 +33,7 @@
 //    private Authentication authentication;
 //
 //    @InjectMocks
-//    private AuthService authService = new AuthService();
+//    private AuthServiceImpl authService = new AuthServiceImpl();
 //
 //    private static final String EXPECTED_USER_NAME = "user";
 //
