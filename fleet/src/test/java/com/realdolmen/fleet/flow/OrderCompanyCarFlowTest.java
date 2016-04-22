@@ -10,9 +10,9 @@ import com.realdolmen.fleet.domain.enums.Brand;
 import com.realdolmen.fleet.domain.enums.FuelType;
 import com.realdolmen.fleet.mother.CarMother;
 import com.realdolmen.fleet.mother.FunctionalLevelMother;
-import com.realdolmen.fleet.repositories.CarRepository;
-import com.realdolmen.fleet.repositories.FunctionalLevelRepository;
-import com.realdolmen.fleet.repositories.OptionRepository;
+import com.realdolmen.fleet.repository.CarRepository;
+import com.realdolmen.fleet.repository.FunctionalLevelRepository;
+import com.realdolmen.fleet.repository.OptionRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +39,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class OrderCompanyCarFlow extends AbstractXmlFlowExecutionTests {
+public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
 
     @Mock
     private CarRepository carRepository;

@@ -3,8 +3,7 @@ package com.realdolmen.fleet.controller;
 import com.realdolmen.fleet.domain.Car;
 import com.realdolmen.fleet.domain.CompanyCar;
 import com.realdolmen.fleet.domain.Option;
-import com.realdolmen.fleet.repositories.CarRepository;
-import com.realdolmen.fleet.repositories.CompanyCarRepository;
+import com.realdolmen.fleet.repository.CompanyCarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
