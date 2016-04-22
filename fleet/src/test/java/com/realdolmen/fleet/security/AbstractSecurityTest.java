@@ -39,8 +39,8 @@ public abstract class AbstractSecurityTest {
     }
 
 
-     void performGetForAndExpect(String path, ResultMatcher noUser, ResultMatcher normalUser, ResultMatcher adminUser) throws Exception {
-       mvc.perform(get(path))
+    void performGetForAndExpect(String path, ResultMatcher noUser, ResultMatcher normalUser, ResultMatcher adminUser) throws Exception {
+        mvc.perform(get(path))
                 .andExpect(noUser);
         mvc.perform(get(path).with(user("user").roles("USER")))
                 .andExpect(normalUser);

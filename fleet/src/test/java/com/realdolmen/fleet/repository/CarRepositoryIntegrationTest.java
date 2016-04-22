@@ -18,7 +18,8 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
@@ -69,7 +70,7 @@ public class CarRepositoryIntegrationTest {
     public void findByActiveShouldOnlyReturnActiveCars() {
         List<Car> resultActiveCars = carRepository.findByActive(true);
         assertTrue(resultActiveCars.size() == 2);
-        resultActiveCars.forEach(car ->  assertTrue(car.isActive()));
+        resultActiveCars.forEach(car -> assertTrue(car.isActive()));
     }
 
 
@@ -77,7 +78,7 @@ public class CarRepositoryIntegrationTest {
     public void findByActiveShouldOnlyReturnInactiveCars() {
         List<Car> resultActiveCars = carRepository.findByActive(false);
         assertTrue(resultActiveCars.size() == 2);
-        resultActiveCars.forEach(car ->  assertTrue(!car.isActive()));
+        resultActiveCars.forEach(car -> assertTrue(!car.isActive()));
     }
 
 }

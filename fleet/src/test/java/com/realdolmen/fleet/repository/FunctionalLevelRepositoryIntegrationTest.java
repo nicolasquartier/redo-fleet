@@ -14,9 +14,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import static junit.framework.TestCase.assertNotNull;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTransactionalIntegrationTest
@@ -29,7 +27,7 @@ public class FunctionalLevelRepositoryIntegrationTest {
     @Before
     public void init() {
         List<FunctionalLevel> levels = listOfFourLevels();
-        IntStream.range(1,5).forEach(levelIntToSet -> {
+        IntStream.range(1, 5).forEach(levelIntToSet -> {
             FunctionalLevel level = levels.get(levelIntToSet - 1);
             level.setFLevel(levelIntToSet);
         });
@@ -56,7 +54,7 @@ public class FunctionalLevelRepositoryIntegrationTest {
 
     @Test
     public void findByFLevelExpectAllForFLevel() {
-        IntStream.range(1,4).forEach(expectedLevel -> {
+        IntStream.range(1, 4).forEach(expectedLevel -> {
             FunctionalLevel resultLevelObj = functionalLevelRepository.findByFLevel(expectedLevel);
             assertEquals(resultLevelObj.getFLevel(), new Integer(expectedLevel));
         });

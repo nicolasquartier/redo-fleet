@@ -1,8 +1,8 @@
-<html layout:decorator="loginlayout"
-      xmlns:layout="http://www.thymeleaf.org"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="loginlayout">
 
-<div layout:fragment="content" th:remove="tag" >
+<div layout:fragment="content" th:remove="tag">
 
     <div th:replace="fragments/login :: login" th:remove="tag"></div>
 </div>

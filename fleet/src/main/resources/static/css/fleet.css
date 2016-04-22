@@ -89,7 +89,7 @@ div#cardetails {
 
 div#cardetailsConfigure {
     float: left;
-    width:100%;
+    width: 100%;
 }
 
 div#cardetails table {
@@ -159,9 +159,8 @@ div#carimagesthumbnails img {
 }
 
 .logoutLink {
-    float:right;
+    float: right;
 }
-
 
 div#historydetails {
     float: right;

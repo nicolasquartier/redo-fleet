@@ -1,13 +1,13 @@
 package com.realdolmen.fleet.flow;
 
 
-import com.realdolmen.fleet.service.impl.CompanyCarServiceImpl;
 import com.realdolmen.fleet.domain.Car;
 import com.realdolmen.fleet.domain.CompanyCar;
 import com.realdolmen.fleet.domain.Option;
 import com.realdolmen.fleet.repository.CarRepository;
 import com.realdolmen.fleet.repository.FunctionalLevelRepository;
 import com.realdolmen.fleet.repository.OptionRepository;
+import com.realdolmen.fleet.service.impl.CompanyCarServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,7 +52,7 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
     @Mock
     private CompanyCar companyCar;
 
-    private  MockRequestContext requestContext;
+    private MockRequestContext requestContext;
 
     @Override
     protected FlowDefinitionResource getResource(FlowDefinitionResourceFactory flowDefinitionResourceFactory) {

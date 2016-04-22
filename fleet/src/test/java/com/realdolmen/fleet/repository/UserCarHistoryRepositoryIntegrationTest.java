@@ -6,19 +6,18 @@ import com.realdolmen.fleet.domain.User;
 import com.realdolmen.fleet.domain.UserCarHistory;
 import com.realdolmen.fleet.mother.UserCarHistoryMother;
 import com.realdolmen.fleet.mother.UserMother;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Date;
 import java.util.stream.IntStream;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 
 @SpringBootTransactionalIntegrationTest
 @RunWith(SpringJUnit4ClassRunner.class)

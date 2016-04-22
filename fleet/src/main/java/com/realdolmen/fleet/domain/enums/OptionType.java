@@ -1,6 +1,6 @@
 package com.realdolmen.fleet.domain.enums;
 
-public enum  OptionType {
+public enum OptionType {
     FLEET,
     DEALER
 }

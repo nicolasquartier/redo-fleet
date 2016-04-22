@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class LandingPagesSecurityTest extends AbstractSecurityTest{
+public class LandingPagesSecurityTest extends AbstractSecurityTest {
 
 
     @Test

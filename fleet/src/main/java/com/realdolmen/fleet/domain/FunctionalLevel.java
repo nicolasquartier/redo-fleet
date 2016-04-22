@@ -38,11 +38,11 @@ public class FunctionalLevel implements Serializable {
         this.version = version;
     }
 
-    public void setFLevel(Integer funtionalLevel) {
-        this.fLevel = funtionalLevel;
-    }
-
     public Integer getFLevel() {
         return fLevel;
+    }
+
+    public void setFLevel(Integer funtionalLevel) {
+        this.fLevel = funtionalLevel;
     }
 }

@@ -1,7 +1,7 @@
-<html layout:decorator="layout"
-      xmlns:layout="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.thymeleaf.org"
+      layout:decorator="layout">
 
-<div layout:fragment="content" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
+<div xmlns:th="http://www.thymeleaf.org" layout:fragment="content" th:remove="tag">
     <form action="#" th:action="@{/cars}" method="post" th:object="${car}">
         <header class="header-container">
             <div class="container">

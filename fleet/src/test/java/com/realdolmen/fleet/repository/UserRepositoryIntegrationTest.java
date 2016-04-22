@@ -1,18 +1,16 @@
 package com.realdolmen.fleet.repository;
 
 import com.realdolmen.fleet.SpringBootTransactionalIntegrationTest;
-import com.realdolmen.fleet.domain.CompanyCar;
 import com.realdolmen.fleet.domain.User;
-import com.realdolmen.fleet.mother.CompanyCarMother;
 import com.realdolmen.fleet.mother.UserMother;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 @SpringBootTransactionalIntegrationTest
 @RunWith(SpringJUnit4ClassRunner.class)

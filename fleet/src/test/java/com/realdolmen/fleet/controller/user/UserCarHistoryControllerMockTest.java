@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.Date;
 
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -62,8 +61,8 @@ public class UserCarHistoryControllerMockTest {
         when(userCarHistoryRepository.findByUserAndEndDateAfter(isA(User.class), isA(Date.class))).thenReturn(history);
 
         mvc.perform(get("/user/car"))
-            .andExpect(view().name("user/car"))
-            .andExpect(model().attributeExists("carHistoryObj"))
+                .andExpect(view().name("user/car"))
+                .andExpect(model().attributeExists("carHistoryObj"))
         ;
     }
 

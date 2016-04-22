@@ -7,11 +7,11 @@ import com.realdolmen.fleet.repository.CompanyCarRepository;
 import com.realdolmen.fleet.repository.OptionRepository;
 import com.realdolmen.fleet.service.CompanyCarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Controller
+@Service
 public class CompanyCarServiceImpl implements CompanyCarService {
 
     @Autowired

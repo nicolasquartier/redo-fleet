@@ -11,11 +11,11 @@ public class FunctionalLevelMother {
         this.functionalLevel.setFLevel(1);
     }
 
-    public FunctionalLevel build() {
-        return this.functionalLevel;
-    }
-
     public static FunctionalLevelMother init() {
         return new FunctionalLevelMother();
+    }
+
+    public FunctionalLevel build() {
+        return this.functionalLevel;
     }
 }

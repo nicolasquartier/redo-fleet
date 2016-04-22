@@ -6,8 +6,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
@@ -88,7 +86,6 @@ public class User implements Serializable {
     public void setFunctionalLevel(FunctionalLevel functionalLevel) {
         this.functionalLevel = functionalLevel;
     }
-
 
 
     public String getBusinessUnit() {

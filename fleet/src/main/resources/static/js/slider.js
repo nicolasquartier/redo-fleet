@@ -3,7 +3,9 @@
  ========================================================= */
 "use strict";
 
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+function _typeof(obj) {
+    return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj;
+}
 
 /*! =========================================================
  * bootstrap-slider.js
@@ -63,7 +65,8 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
         var slice = Array.prototype.slice;
 
-        function noop() {}
+        function noop() {
+        }
 
         // -------------------------- definition -------------------------- //
 
@@ -699,7 +702,8 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
          part of the plugin's `public` interface
          **************************************************/
         Slider.prototype = {
-            _init: function _init() {}, // NOTE: Must exist to support bridget
+            _init: function _init() {
+            }, // NOTE: Must exist to support bridget
 
             constructor: Slider,
 

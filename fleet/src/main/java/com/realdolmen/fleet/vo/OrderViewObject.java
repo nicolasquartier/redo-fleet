@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderViewObject implements Serializable{
+public class OrderViewObject implements Serializable {
 
     private CompanyCar companyCar;
     private Car car;
