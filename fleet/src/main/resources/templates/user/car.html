@@ -1,0 +1,121 @@
+<html xmlns:layout="http://www.thymeleaf.org"
+      layout:decorator="layout">
+
+<div xmlns:th="http://www.thymeleaf.org" layout:fragment="content" th:remove="tag">
+    <header class="header-container">
+        <div class="container">
+            <h1 class="page-header">Current car</h1>
+            <p class="lead">This page shows all the info about your current car.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div th:if="${carHistoryObj} != null"
+             th:object="${carHistoryObj}">
+            <div id="historydetails">
+                <h4>General info</h4>
+                <table class="table table-striped table-responsive">
+                    <tr>
+                        <td class="title">From:</td>
+                        <td class="historydetails"><label th:text="*{#dates.format(startDate, 'dd-mm-yyyy')}"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title">To:</td>
+                        <td class="historydetails"><label th:text="*{#dates.format(endDate, 'dd-mm-yyyy')}"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title">Approved:</td>
+                        <td class="historydetails"><label
+                                th:text="*{companyCar.approved}? 'Approved by manager' : 'Awaiting manager approval'"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title">Estimated mileage:</td>
+                        <td class="historydetails"><label th:text="*{estimatedMileage} + ' km'"></label></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Category:</td>
+                        <td class="historydetails"><label th:text="*{functionalLevelCopy}"></label></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Chosen category:</td>
+                        <td class="historydetails" th:switch="*{choosenLevel}">
+                            <label th:case="-1">Downgrade</label>
+                            <label th:case="0">Normal</label>
+                            <label th:case="1">Upgrade</label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="OneColumnWithSizeOfTwo">
+                        </td>
+                        <td></td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <div th:object="${carHistoryObj.companyCar.car}">
+                <div id="carimageMain">
+                    <img class="img-responsive" th:if="*{thumbnail != null}"
+                         th:src="@{/images/cars/{imgurl}(imgurl=*{thumbnail})}" th:alt="*{model}"/>
+                    <img class="img-responsive" th:if="${thumbnail == null}" th:src="@{/images/unknownCar.png}"
+                         th:alt="*{model}"/>
+                </div>
+
+                <div id="cardetails">
+                    <h4>Car specifications</h4>
+                    <table class="table table-striped table-responsive">
+                        <tr>
+                            <td class="title">Brand:</td>
+                            <td class="cardetails"><label th:text="*{brand}"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="title">Model:</td>
+                            <td class="cardetails"><label th:text="*{model}"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="title">Type:</td>
+                            <td class="cardetails"><label th:text="*{type}"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="title">Category:</td>
+                            <td class="cardetails"><label th:text="*{category.fLevel}"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="title">Fueltype:</td>
+                            <td class="cardetails"><label th:text="*{fuelType}"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="title">HP:</td>
+                            <td class="cardetails"><label th:text="*{fiscalHorsePower}"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="title">Pack:</td>
+                            <td class="cardetails"><label th:text="*{pack}"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="title">Hybride:</td>
+                            <td class="cardetails"><label th:text="*{hybrid}"></label></td>
+                        </tr>
+                        <tr>
+                            <td class="title">Emission:</td>
+                            <td class="cardetails"><label th:text="*{emission}"></label></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div th:if="${noCarFoundError} != null">
+            <p class="bg-danger message messageError" th:text="${noCarFoundError}"></p>
+        </div>
+
+    </main>
+</div>
+
+
+</html>
