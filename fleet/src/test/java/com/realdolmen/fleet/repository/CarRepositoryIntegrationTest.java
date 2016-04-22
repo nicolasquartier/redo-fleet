@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 
@@ -29,8 +30,8 @@ import static org.junit.Assert.assertTrue;
 public class CarRepositoryIntegrationTest {
 
     private Car activeCar, activeCarTwo, inactiveCar, inactiveCarTwo;
-    private List<Car> activeCars = Arrays.asList(activeCar, activeCarTwo);
-    private List<Car> inactiveCars = Arrays.asList(inactiveCar, inactiveCarTwo);
+    private List<Car> activeCars;
+    private List<Car> inactiveCars;
 
     @Autowired
     private CarRepository carRepository;
@@ -44,6 +45,7 @@ public class CarRepositoryIntegrationTest {
         category.setFLevel(1);
         functionalLevelRepository.save(category);
 
+        activeCars = Arrays.asList(activeCar, activeCarTwo);
         activeCars.forEach(car -> {
             car = CarMother.init().build();
             car.setCategory(category);
@@ -51,6 +53,7 @@ public class CarRepositoryIntegrationTest {
             carRepository.save(car);
         });
 
+        inactiveCars = Arrays.asList(inactiveCar, inactiveCarTwo);
         inactiveCars.forEach(car -> {
             car = CarMother.init().build();
             car.setCategory(category);
@@ -78,7 +81,7 @@ public class CarRepositoryIntegrationTest {
     public void findByActiveShouldOnlyReturnInactiveCars() {
         List<Car> resultActiveCars = carRepository.findByActive(false);
         assertTrue(resultActiveCars.size() == 2);
-        resultActiveCars.forEach(car -> assertTrue(!car.isActive()));
+        resultActiveCars.forEach(car -> assertFalse(car.isActive()));
     }
 
 }
