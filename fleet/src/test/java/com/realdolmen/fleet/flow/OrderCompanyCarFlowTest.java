@@ -80,7 +80,6 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
     public void init() {
         when(carRepository.findOne(any(Long.class))).thenReturn(car);
         when(optionRepository.findByCar(any(Car.class))).thenReturn(Arrays.asList(optionOne, optionTwo));
-        when(companyCarController.createCompanyCarWithOptions(any(Car.class), Matchers.anyListOf(Option.class))).thenReturn(companyCar);
 
         requestContext = new MockRequestContext();
     }
