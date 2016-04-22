@@ -102,12 +102,13 @@ div#cardetails tr {
 }
 
 div#cardetails td {
+    width: 315px;
 }
 
 div#cardetails td.title {
     font-weight: bold;
     float: right;
-    width: 105px;
+    width: 315px;
     text-align: right;
 }
 
@@ -178,12 +179,13 @@ div#historydetails tr {
 }
 
 div#historydetails td {
+    width: 315px;
 }
 
 div#historydetails td.title {
     font-weight: bold;
     float: right;
-    width: 105px;
+    width: 315px;
     text-align: right;
 }
 
