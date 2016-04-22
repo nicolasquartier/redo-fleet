@@ -13,7 +13,6 @@
     </on-start>
 
     <view-state id="configureCar" view="carConfigure" model="car">
-        <transition to="cancel" on="cancel"/>
         <transition to="confirm" on="confirm"/>
     </view-state>
 
@@ -22,21 +21,17 @@
         <!--<on-entry>-->
             <!--<evaluate expression="companyCarController.createCompanyCar(car, car.options)" result="conversationScope.companyCar"/>-->
         <!--</on-entry>-->
+        <transition on="back" to="configureCar"/>
         <transition to="fleetMetaData" on="goToFleetMetaData"/>
-        <transition to="configureCar" on="back"/>
-        <transition to="cancel" on="cancel"/>
     </view-state>
-
 
     <view-state id="fleetMetaData" view="fleetMetaData">
-
+        <!-- @TODO FIXME APRJTWO-17 -->
     </view-state>
-
 
     <end-state id="endState" view="externalRedirect:/cars"/>
 
     <global-transitions>
-        <transition to="endState" on="cancel" validate="false"/>
-        <transition on="back" to="${flowScope.lastStateId}" validate="false"/>
+        <transition on="cancel" to="endState"  validate="false"/>
     </global-transitions>
 </flow>
