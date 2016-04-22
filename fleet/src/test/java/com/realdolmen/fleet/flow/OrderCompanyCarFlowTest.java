@@ -7,8 +7,11 @@ import com.realdolmen.fleet.domain.Option;
 import com.realdolmen.fleet.repository.CarRepository;
 import com.realdolmen.fleet.repository.FunctionalLevelRepository;
 import com.realdolmen.fleet.repository.OptionRepository;
+import com.realdolmen.fleet.service.OrderFlowService;
 import com.realdolmen.fleet.service.impl.CompanyCarServiceImpl;
+import com.realdolmen.fleet.vo.OrderViewObject;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Matchers;
@@ -44,6 +47,9 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
     private FunctionalLevelRepository functionalLevelRepository;
 
     @Mock
+    private OrderFlowService orderFlowService;
+
+    @Mock
     private Car car;
 
     @Mock
@@ -51,6 +57,9 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
 
     @Mock
     private CompanyCar companyCar;
+
+    @Mock
+    private OrderViewObject orderViewObject;
 
     private MockRequestContext requestContext;
 
@@ -64,6 +73,7 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
         builderContext.registerBean("carRepository", carRepository);
         builderContext.registerBean("optionRepository", optionRepository);
         builderContext.registerBean("companyCarController", companyCarController);
+        builderContext.registerBean("orderFlowService", orderFlowService);
     }
 
     @Before
@@ -106,6 +116,22 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
         resumeFlow(context);
 
         assertCurrentStateEquals("confirm");
+    }
+
+    @Test
+    @Ignore
+    //@FIXME @TODO
+    public void testConfirmCarToFleetMetaDataTransistion() {
+        setCurrentState("confirm");
+        requestContext.getConversationScope().put("orderViewObject", orderViewObject);
+
+        MockExternalContext context = new MockExternalContext();
+        context.setCurrentUser("user");
+        context.setEventId("goToFleetMetaData");
+        resumeFlow(context);
+
+        assertCurrentStateEquals("fleetMetaData");
+
     }
 
     @Test
