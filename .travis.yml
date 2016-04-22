@@ -3,4 +3,4 @@ language: java
 jdk:
   - oraclejdk8
 
-script: "mvn surefire:test -f fleet/pom.xml -DdatabaseEngine=h2"
+script: "mvn test -f fleet/pom.xml -DdatabaseEngine=h2"
