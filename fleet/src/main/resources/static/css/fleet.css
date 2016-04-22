@@ -160,3 +160,35 @@ div#carimagesthumbnails img {
 .logoutLink {
     float:right;
 }
+
+
+div#historydetails {
+    float: right;
+    width: 630px;
+}
+
+div#historydetails table {
+    margin-bottom: 0px;
+}
+
+div#historydetails tr {
+
+    height: 25px;
+    line-height: 25px;
+}
+
+div#historydetails td {
+}
+
+div#historydetails td.title {
+    font-weight: bold;
+    float: right;
+    width: 105px;
+    text-align: right;
+}
+
+div#historydetails td.historydetails label {
+    font-weight: normal;
+}
+
+

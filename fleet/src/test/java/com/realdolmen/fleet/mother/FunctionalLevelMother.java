@@ -4,7 +4,7 @@ import com.realdolmen.fleet.domain.FunctionalLevel;
 
 public class FunctionalLevelMother {
 
-    FunctionalLevel functionalLevel;
+    private FunctionalLevel functionalLevel;
 
     private FunctionalLevelMother() {
         this.functionalLevel = new FunctionalLevel();

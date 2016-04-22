@@ -1,7 +1,6 @@
-package com.realdolmen.fleet.repositories;
+package com.realdolmen.fleet.repository;
 
 import com.realdolmen.fleet.domain.FunctionalLevel;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 

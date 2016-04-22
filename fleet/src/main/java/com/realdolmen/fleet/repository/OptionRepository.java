@@ -1,4 +1,4 @@
-package com.realdolmen.fleet.repositories;
+package com.realdolmen.fleet.repository;
 
 import com.realdolmen.fleet.domain.Car;
 import com.realdolmen.fleet.domain.Option;

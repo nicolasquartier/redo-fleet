@@ -1,17 +1,13 @@
 package com.realdolmen.fleet.controller.admin;
 
-import com.realdolmen.fleet.TestConfig;
-import com.realdolmen.fleet.controller.admin.AdminCarsController;
 import com.realdolmen.fleet.domain.Car;
-import com.realdolmen.fleet.repositories.CarRepository;
+import com.realdolmen.fleet.repository.CarRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;

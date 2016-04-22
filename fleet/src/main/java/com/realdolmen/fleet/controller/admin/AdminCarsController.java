@@ -1,7 +1,7 @@
 package com.realdolmen.fleet.controller.admin;
 
 import com.realdolmen.fleet.domain.Car;
-import com.realdolmen.fleet.repositories.CarRepository;
+import com.realdolmen.fleet.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
