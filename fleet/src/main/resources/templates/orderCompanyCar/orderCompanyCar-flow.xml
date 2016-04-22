@@ -23,7 +23,7 @@
             <!--<evaluate expression="companyCarController.createCompanyCar(car, car.options)" result="conversationScope.companyCar"/>-->
         <!--</on-entry>-->
         <transition to="fleetMetaData" on="goToFleetMetaData"/>
-        <transition to="configureCar" on="goBack"/>
+        <transition to="configureCar" on="back"/>
         <transition to="cancel" on="cancel"/>
     </view-state>
 
@@ -32,5 +32,11 @@
 
     </view-state>
 
-    <end-state id="cancel" view="externalRedirect:/cars"/>
+
+    <end-state id="endState" view="externalRedirect:/cars"/>
+
+    <global-transitions>
+        <transition to="endState" on="cancel" validate="false"/>
+        <transition on="back" to="${flowScope.lastStateId}" validate="false"/>
+    </global-transitions>
 </flow>

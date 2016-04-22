@@ -33,26 +33,16 @@ public class UserCarHistoryRepositoryIntegrationTest {
     @Mock
     private CompanyCar randomCompanyCar;
 
+    @Mock
     private User expectedUser;
 
     @Before
     public void init() {
-        save3RandomUsers();
-        addRandomHistoryObjectsToExistingUsers();
+//        save3RandomUsers();
+//        addRandomHistoryObjectsToExistingUsers();
 
-        expectedUser = UserMother.init().build();
-        userRepository.save(expectedUser);
-
-    }
-
-    private void addRandomHistoryObjectsToExistingUsers() {
-        Iterable<User> users = userRepository.findAll();
-        users.forEach(user -> {
-            UserCarHistory history = UserCarHistoryMother.init().build();
-            history.setUser(user);
-            history.setCompanyCar(randomCompanyCar);
-            userCarHistoryRepository.save(history);
-        });
+//        expectedUser = UserMother.init().build();
+//        userRepository.save(expectedUser);
     }
 
     @Test
@@ -73,6 +63,16 @@ public class UserCarHistoryRepositoryIntegrationTest {
             User user = UserMother.init().build();
             user.setUsername("random" + index);
             userRepository.save(user);
+        });
+    }
+
+    private void addRandomHistoryObjectsToExistingUsers() {
+        Iterable<User> users = userRepository.findAll();
+        users.forEach(user -> {
+            UserCarHistory history = UserCarHistoryMother.init().build();
+            history.setUser(user);
+            history.setCompanyCar(randomCompanyCar);
+            userCarHistoryRepository.save(history);
         });
     }
 }

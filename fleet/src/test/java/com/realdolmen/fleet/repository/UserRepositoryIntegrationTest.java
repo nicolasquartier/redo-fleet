@@ -35,17 +35,17 @@ public class UserRepositoryIntegrationTest {
         saveUserWithUsername("random");
     }
 
-    private User saveUserWithUsername(String usernameToSet) {
-        User user = UserMother.init().build();
-        user.setUsername(usernameToSet);
-        userRepository.save(user);
-        return user;
-    }
-
     @Test
     public void findByUserNameGetsTheCorrectUsername() {
         User resultUser = userRepository.findByUsername(expectedUsername);
         assertEquals(expectedUsername, resultUser.getUsername());
         assertSame(expectedUser, resultUser);
+    }
+
+    private User saveUserWithUsername(String usernameToSet) {
+        User user = UserMother.init().build();
+        user.setUsername(usernameToSet);
+        userRepository.save(user);
+        return user;
     }
 }

@@ -41,7 +41,7 @@ public class UserCarHistoryControllerMockTest {
     private User user;
 
     @InjectMocks
-    private UserCarHistoryController userCarHistoryController = new UserCarHistoryController();
+    private UserCarHistoryController userCarHistoryController/* = new UserCarHistoryController()*/;
 
     @Mock
     private Date date;
@@ -56,11 +56,12 @@ public class UserCarHistoryControllerMockTest {
                 .build();
 
         when(authService.getCurrentUser()).thenReturn(user);
-        when(userCarHistoryRepository.findByUserAndEndDateAfter(isA(User.class), isA(Date.class))).thenReturn(history);
     }
 
     @Test
     public void userCarHistoryIsOnView() throws Exception {
+        when(userCarHistoryRepository.findByUserAndEndDateAfter(isA(User.class), isA(Date.class))).thenReturn(history);
+
         mvc.perform(get("/user/car"))
             .andExpect(view().name("user/car"))
             .andExpect(model().attributeExists("carHistoryObj"))
