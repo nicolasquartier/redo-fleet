@@ -1,6 +1,6 @@
-<html xmlns:layout="http://www.thymeleaf.org"
-      xmlns:th="http://www.thymeleaf.org"
-      layout:decorator="adminlayout">
+<html layout:decorator="adminlayout"
+      xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org">
 
 <div layout:fragment="content" th:remove="tag">
     <header class="header-container">
@@ -31,8 +31,7 @@
                 <td th:text="${car.fiscalHorsePower}">fhp</td>
                 <td th:text="${car.fuelType}">fhp</td>
                 <td th:text="${car.active}? #{true} : #{false}">yes</td>
-                <td><a class="btn btn-lg btn-warning btn-block btn-signin" role="button"
-                       th:href="@{cars/{id}(id=${car.id})}">edit</a></td>
+                <td><a class="btn btn-lg btn-warning btn-block btn-signin" role="button" th:href="@{/admin/cars/$(car.id)/update}">edit</a></td>
             </tr>
             </tbody>
         </table>

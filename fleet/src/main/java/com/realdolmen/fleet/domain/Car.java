@@ -3,11 +3,13 @@ package com.realdolmen.fleet.domain;
 import com.realdolmen.fleet.domain.enums.Brand;
 import com.realdolmen.fleet.domain.enums.CarType;
 import com.realdolmen.fleet.domain.enums.FuelType;
+import com.realdolmen.fleet.domain.enums.RimType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -28,9 +30,8 @@ public class Car implements Serializable {
     @Size(max = 100)
     private String model;
 
-    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date productionDate;
+    private LocalDate productionDate;
 
     @Min(value = 0)
     private int fiscalHorsePower;
@@ -55,6 +56,19 @@ public class Car implements Serializable {
 
     private boolean active;
 
+    @Enumerated(EnumType.STRING)
+    private RimType rimType;
+
+    private int idealKm;
+    private int maxKm;
+    private double listPrice;
+    private double monthlyBenefit;
+    private double upgradeAmount;
+    private double downgradeAmount;
+    private int hPower;
+    private String engine;
+
+
     @ManyToOne
     private FunctionalLevel category;
 
@@ -62,6 +76,78 @@ public class Car implements Serializable {
 
     /* Used by JPA */
     public Car() {
+    }
+
+    public int getIdealKm() {
+        return idealKm;
+    }
+
+    public void setIdealKm(int idealKm) {
+        this.idealKm = idealKm;
+    }
+
+    public int getMaxKm() {
+        return maxKm;
+    }
+
+    public void setMaxKm(int maxKm) {
+        this.maxKm = maxKm;
+    }
+
+    public double getListPrice() {
+        return listPrice;
+    }
+
+    public void setListPrice(double listPrice) {
+        this.listPrice = listPrice;
+    }
+
+    public double getMonthlyBenefit() {
+        return monthlyBenefit;
+    }
+
+    public void setMonthlyBenefit(double monthlyBenefit) {
+        this.monthlyBenefit = monthlyBenefit;
+    }
+
+    public double getUpgradeAmount() {
+        return upgradeAmount;
+    }
+
+    public void setUpgradeAmount(double upgradeAmount) {
+        this.upgradeAmount = upgradeAmount;
+    }
+
+    public double getDowngradeAmount() {
+        return downgradeAmount;
+    }
+
+    public void setDowngradeAmount(double downgradeAmount) {
+        this.downgradeAmount = downgradeAmount;
+    }
+
+    public int gethPower() {
+        return hPower;
+    }
+
+    public void sethPower(int hPower) {
+        this.hPower = hPower;
+    }
+
+    public String getEngine() {
+        return engine;
+    }
+
+    public void setEngine(String engine) {
+        this.engine = engine;
+    }
+
+    public RimType getRimType() {
+        return rimType;
+    }
+
+    public void setRimType(RimType rimType) {
+        this.rimType = rimType;
     }
 
     public Long getVersion() {
@@ -104,11 +190,11 @@ public class Car implements Serializable {
         this.model = model;
     }
 
-    public Date getProductionDate() {
+    public LocalDate getProductionDate() {
         return productionDate;
     }
 
-    public void setProductionDate(Date productionDate) {
+    public void setProductionDate(LocalDate productionDate) {
         this.productionDate = productionDate;
     }
 
@@ -182,5 +268,10 @@ public class Car implements Serializable {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    //Check if this is for New of Update
+    public boolean isNew() {
+        return (this.id == null);
     }
 }

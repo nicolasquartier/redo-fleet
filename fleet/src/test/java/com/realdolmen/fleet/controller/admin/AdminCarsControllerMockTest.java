@@ -33,7 +33,7 @@ public class AdminCarsControllerMockTest {
     private Car carOne, carTwo, carThree, carFour;
 
     @InjectMocks
-    private AdminCarsController editCarsController;
+    private CarAdminController editCarsController;
 
     @Before
     public void init() {
