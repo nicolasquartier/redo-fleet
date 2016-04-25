@@ -7,6 +7,7 @@ import org.springframework.orm.jpa.JpaOptimisticLockingFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
-
-
-/*
 
 @Controller
 @RequestMapping("/admin/cars")
@@ -32,41 +30,42 @@ public class AdminCarsController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String adminCarOverview(Model model) {
+    public String showCarsOverview(Model model) {
         List<Car> adminCars = carRepository.findAll();
         model.addAttribute("cars", adminCars);
         return "admin/allcars";
     }
 
-   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String showAdminEditCar(@PathVariable("id") long id, Model model) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String showAdminEditCar(@PathVariable Long id, Model model) {
+        Car car =  carRepository.findOne(id);
+        model.addAttribute(car);
         return "/admin/caredit";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public String adminEditCar(
-            @Valid Car car,
-            BindingResult bindingResult,
-            HttpServletRequest request
-    ) {
-
-        if(!bindingResult.hasErrors()) {
-                carRepository.save(car);
-        }
-
-        if(bindingResult.hasErrors()) {
+    public String adminEditCar(@Valid Car car, Errors errors) {
+        if(errors.hasErrors()) {
             return "/admin/caredit";
-            //return "redirect:" + request.getRequestURI();
         }
 
-        return "redirect:/admin/cars/";
-        //return "redirect:" + request.getRequestURI();
+        carRepository.save(car);
+
+        return "redirect:/admin/cars" + car.getId();
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String adminCreateCar() {
+    public String adminCreateCar(Car car) {
         return "admin/createcar";
     }
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    public String adminCreateCar(@Valid Car car, Errors errors) {
+        if(errors.hasErrors()) {
+            return "/admin/createcar";
+        }
 
+        carRepository.save(car);
+
+        return "redirect:/admin/cars" + car.getId();
+    }
 }
-*/

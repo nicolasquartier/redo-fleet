@@ -23,6 +23,9 @@ public class Option implements Serializable {
     @ManyToMany(mappedBy = "options")
     private List<CompanyCar> companyCarList = new Vector<>();
 
+    @ManyToMany(mappedBy = "options")
+    private List<Car> carList = new Vector<>();
+
     @Column(length = 300)
     @Size(max = 300)
     private String description;
@@ -91,5 +94,21 @@ public class Option implements Serializable {
 
     public void removeCompanyCar(CompanyCar companyCar) {
         this.companyCarList.remove(companyCar);
+    }
+
+    public List<Car> getCarList() {
+        return Collections.unmodifiableList(carList);
+    }
+
+    public void setCarList(List<Car> carList) {
+        this.carList = carList;
+    }
+
+    public void addCar(Car car) {
+        this.carList.add(car);
+    }
+
+    public void removeCar(Car car) {
+        this.carList.remove(car);
     }
 }

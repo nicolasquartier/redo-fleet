@@ -31,7 +31,7 @@
                 <td th:text="${car.fiscalHorsePower}">fhp</td>
                 <td th:text="${car.fuelType}">fhp</td>
                 <td th:text="${car.active}? #{true} : #{false}">yes</td>
-                <td><a class="btn btn-lg btn-warning btn-block btn-signin" role="button" th:href="@{/admin/cars/$(car.id)/update}">edit</a></td>
+                <td><a class="btn btn-lg btn-warning btn-block btn-signin" role="button" th:href="@{/admin/cars/{id}(id=${car.id})}">edit</a></td>
             </tr>
             </tbody>
         </table>

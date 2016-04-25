@@ -10,8 +10,10 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 @Entity
 public class Car implements Serializable {
@@ -46,9 +48,6 @@ public class Car implements Serializable {
     @Enumerated(EnumType.STRING)
     private CarType type;
 
-    @OneToMany(mappedBy = "car")
-    private List<Option> options;
-
     private boolean hybrid;
 
     @Min(value = 0)
@@ -68,6 +67,8 @@ public class Car implements Serializable {
     private int hPower;
     private String engine;
 
+    @ManyToMany
+    private List<Option> options = new Vector<>();
 
     @ManyToOne
     private FunctionalLevel category;
@@ -156,14 +157,6 @@ public class Car implements Serializable {
 
     public void setVersion(Long version) {
         this.version = version;
-    }
-
-    public List<Option> getOptions() {
-        return options;
-    }
-
-    public void setOptions(List<Option> options) {
-        this.options = options;
     }
 
     public Long getId() {
@@ -268,6 +261,23 @@ public class Car implements Serializable {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public List<Option> getOptions() {
+        return Collections.unmodifiableList(options);
+    }
+
+    //    @Transient
+    public void setOptions(List<Option> options) {
+        this.options = options;
+    }
+
+    public void addOption(Option option) {
+        this.options.add(option);
+    }
+
+    public void removeOption(Option option) {
+        this.options.remove(option);
     }
 
     //Check if this is for New of Update
