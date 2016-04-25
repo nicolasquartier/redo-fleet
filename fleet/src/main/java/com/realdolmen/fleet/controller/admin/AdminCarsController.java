@@ -51,12 +51,15 @@ public class AdminCarsController {
 
         carRepository.save(car);
 
-        return "redirect:/admin/cars" + car.getId();
+        return "redirect:/admin/cars";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String adminCreateCar(Car car) {
-        return "admin/createcar";
+    public String adminCreateCar(Model model) {
+        Car car = new Car();
+        model.addAttribute(car);
+
+        return "/admin/createcar";
     }
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String adminCreateCar(@Valid Car car, Errors errors) {
@@ -66,6 +69,6 @@ public class AdminCarsController {
 
         carRepository.save(car);
 
-        return "redirect:/admin/cars" + car.getId();
+        return "redirect:/admin/allcars";
     }
 }

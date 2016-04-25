@@ -4,6 +4,7 @@ import com.realdolmen.fleet.domain.enums.Brand;
 import com.realdolmen.fleet.domain.enums.CarType;
 import com.realdolmen.fleet.domain.enums.FuelType;
 import com.realdolmen.fleet.domain.enums.RimType;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -30,6 +31,7 @@ public class Car implements Serializable {
 
     @Column(length = 100)
     @Size(max = 100)
+    @NotBlank
     private String model;
 
     @Column(nullable = false)
