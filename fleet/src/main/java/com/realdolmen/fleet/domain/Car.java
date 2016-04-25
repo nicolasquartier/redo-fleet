@@ -31,7 +31,6 @@ public class Car implements Serializable {
 
     @Column(length = 100)
     @Size(max = 100)
-    @NotBlank
     private String model;
 
     @Column(nullable = false)
