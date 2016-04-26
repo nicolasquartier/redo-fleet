@@ -261,5 +261,9 @@ public class Car implements Serializable {
     public void removeOption(Option option) {
         this.options.remove(option);
     }
+    @Transient
+    public Integer getLevel() {
+        return category.getFLevel();
+    }
 
 }
