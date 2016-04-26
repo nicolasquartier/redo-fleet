@@ -1,6 +1,7 @@
 package com.realdolmen.fleet.service.impl;
 
 import com.realdolmen.fleet.Application;
+import com.realdolmen.fleet.SpringBootTransactionalIntegrationTest;
 import com.realdolmen.fleet.TestConfig;
 import com.realdolmen.fleet.domain.*;
 import com.realdolmen.fleet.mother.*;
@@ -11,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
@@ -18,6 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
@@ -27,6 +30,8 @@ import static org.mockito.Mockito.*;
 @ContextConfiguration(classes = {TestConfig.class, Application.class})
 @TestPropertySource(locations = "/test.properties")
 @ActiveProfiles("TST")
+@SpringBootTransactionalIntegrationTest
+
 public class OrderFlowServiceIntegrationTest {
 
     @Autowired
@@ -130,10 +135,13 @@ public class OrderFlowServiceIntegrationTest {
     public void saveSavesACompanyCar() {
 //        assertNull(companyCarRepository.findOne(1L));
         orderFlowService.save(orderViewObject);
+        List<CompanyCar> all = (List<CompanyCar>) companyCarRepository.findAll();
         CompanyCar result = companyCarRepository.findOne(1L);
 
-        assertNotNull(result.getId());
-        assertCompanyCar(result, orderViewObject.getCompanyCar());
+
+//        assertNotNull(result.getId());
+        assertEquals(all.size(), 1);
+        assertCompanyCar(all.get(0), orderViewObject.getCompanyCar());
     }
 
     private void assertCompanyCar(CompanyCar result, CompanyCar companyCar) {
@@ -144,7 +152,7 @@ public class OrderFlowServiceIntegrationTest {
 
     @Test
     public void saveSavesCompanyCarAndCarRelation() {
-        assertNull(companyCarRepository.findOne(1L));
+//        assertNull(companyCarRepository.findOne(1L));
 
         orderFlowService.save(orderViewObject);
 
@@ -159,9 +167,14 @@ public class OrderFlowServiceIntegrationTest {
         orderFlowService.save(orderViewObject);
 
         UserCarHistory userCarHistory = userCarHistoryRepository.findOne(1L);
+        List<UserCarHistory> all1 = (List<UserCarHistory>) userCarHistoryRepository.findAll();
+        List<CompanyCar> all = (List<CompanyCar>) companyCarRepository.findAll();
         CompanyCar companyCar = companyCarRepository.findOne(1L);
 
-        assertEquals(userCarHistory.getCompanyCar().getId(), companyCar.getId());
+
+//        assertEquals(userCarHistory.getCompanyCar().getId(), companyCar.getId());
+        assertEquals(all1.get(0).getCompanyCar().getId(), all.get(0).getId());
+        assertEquals(all.size(), 1);
     }
 
     // test link cc and options

@@ -6,6 +6,7 @@ import com.realdolmen.fleet.domain.Option;
 import com.realdolmen.fleet.mother.CompanyCarMother;
 import com.realdolmen.fleet.repository.CompanyCarRepository;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

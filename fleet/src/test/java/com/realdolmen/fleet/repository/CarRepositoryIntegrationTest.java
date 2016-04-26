@@ -15,7 +15,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTransactionalIntegrationTest
 public class CarRepositoryIntegrationTest {
