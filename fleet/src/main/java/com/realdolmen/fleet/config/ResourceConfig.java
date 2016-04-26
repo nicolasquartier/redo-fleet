@@ -30,21 +30,5 @@ public class ResourceConfig {
         return messageSource;
     }
 
-    @Bean
-    public LocaleChangeInterceptor localeChangeInterceptor() {
 
-        LocaleChangeInterceptor result = new LocaleChangeInterceptor();
-        result.setParamName("lang");
-
-        return result;
-    }
-
-    @Bean
-    public LocaleResolver localeResolver() {
-
-        SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
-        sessionLocaleResolver.setDefaultLocale(Locale.ENGLISH);
-
-        return sessionLocaleResolver;
-    }
 }

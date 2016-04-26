@@ -5,75 +5,103 @@
 <div layout:fragment="content" th:remove="tag">
     <header class="header-container">
         <div class="container">
-            <h1 class="page-header">CREATE A CAR </h1>
-            <p class="lead">todo</p>
         </div>
     </header>
-
-
     <main class="container">
+        <form th:action="@{/admin/cars/{id}(id=${car.id})}" th:method="post" th:object="${car}">
 
-        <form action="#" th:action="@{/cars}" method="post" th:object="${car}">
+            <h1 class="page-header"><span th:id="${car.model}"/></h1>
 
-            <div id="carimageMain">
-                <img class="img-responsive" th:src="@{/images/unknownCar.png}" alt="unknownCar"/>
-            </div>
-            <div id="cardetails">
-                <table class="table table-striped table-responsive">
-                    <tr>
-                        <td class="title">Brand:</td>
-                        <td class="cardetails"><label th:text="*{brand}"></label></td>
-                    </tr>
-                    <tr>
-                        <td class="title">Model:</td>
-                        <td class="cardetails"><label th:text="*{model}"></label></td>
-                    </tr>
-                    <tr>
-                        <td class="title">Type:</td>
-                        <td class="cardetails"><label th:text="*{type}"></label></td>
-                    </tr>
-                    <tr>
-                        <td class="title">Category:</td>
-                        <td class="cardetails"><label th:text="*{category.fLevel}"></label></td>
-                    </tr>
-                    <tr>
-                        <td class="title">Fueltype:</td>
-                        <td class="cardetails"><label th:text="*{fuelType}"></label></td>
-                    </tr>
-                    <tr>
-                        <td class="title">HP:</td>
-                        <td class="cardetails"><label th:text="*{fiscalHorsePower}"></label></td>
-                    </tr>
-                    <tr>
-                        <td class="title">Pack:</td>
-                        <td class="cardetails"><label th:text="*{pack}"></label></td>
-                    </tr>
-                    <tr>
-                        <td class="title">Hybride:</td>
-                        <td class="cardetails"><label th:text="*{hybrid}"></label></td>
-                    </tr>
-                    <tr>
-                        <td class="title">Emission:</td>
-                        <td class="cardetails"><label th:text="*{emission}"></label></td>
-                    </tr>
-                    <tr>
-                        <td class="OneColumnWithSizeOfTwo">
-                        </td>
-                        <td></td>
-                    </tr>
-                </table>
-            </div>
-            <div id="carimagesthumbnails">
-                <img class="img-responsive thumbnail col-xs-1 col-xs-1" th:src="@{/images/unknownCar.png}"
-                     alt="unknownCar"/>
-                <img class="img-responsive thumbnail col-xs-1 col-xs-1" th:src="@{/images/unknownCar.png}"
-                     alt="unknownCar"/>
-                <img class="img-responsive thumbnail col-xs-1 col-xs-1" th:src="@{/images/unknownCar.png}"
-                     alt="unknownCar"/>
-                <img class="img-responsive thumbnail col-xs-1 col-xs-1" th:src="@{/images/unknownCar.png}"
-                     alt="unknownCar"/>
+            <p>Model: <input type="text" th:field="*{model}" class="form-control"/></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">model Error</p>
+
+            <p>Brand:
+                <select class="form-control">
+                    <option th:each="brand : ${T(com.realdolmen.fleet.domain.enums.Brand).values()}" th:value="${brand}"
+                            th:text="${brand}" th:selected="${brand == car.brand}"></option>
+                </select>
+            </p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">brand Error</p>
+
+            <p>Type:
+                <select class="form-control">
+                    <option th:each="type : ${T(com.realdolmen.fleet.domain.enums.CarType).values()}" th:value="${type}"
+                            th:text="${type}" th:selected="${type == car.type}"></option>
+                </select>
+            </p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('type')}" th:errors="*{type}">model Error</p>
+
+            <div class="input-group date">
+                <input type="text" class="form-control" id="productionDate" th:field="*{productionDate}"
+                       name="productionDate"></input>
             </div>
 
+            <!-- Load jQuery and bootstrap datepicker scripts -->
+            <script th:src="@{/js/jquery.js}"></script>
+            <script th:src="@{/js/bootstrap-datepicker.js}"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#productionDate').datepicker({
+                        format: "mm/dd/yy"
+                    });
+                });
+            </script>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('productionDate')}" th:errors="*{productionDate}">Date Error</p>
+
+            <p>Pack: <input type="text" th:field="*{pack}" class="form-control"/></p>
+            <td th:if="${#fields.hasErrors('pack')}" th:errors="*{pack}">pack Error</td>
+
+            <p>Options:
+                <select class="form-control">
+                </select>
+            </p>
+
+            <p>Fueltype:
+                <select class="form-control">
+                    <option th:each="fueltype : ${T(com.realdolmen.fleet.domain.enums.FuelType).values()}"
+                            th:value="${fueltype}" th:text="${fueltype}"
+                            th:selected="${fueltype == car.fuelType}"></option>
+                </select>
+            </p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('fuelType')}" th:errors="*{fuelType}">type Error</p>
+
+            <p>Emission:<input type="text" th:field="*{emission}" class="form-control"/></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('emission')}" th:errors="*{emission}">emission Error</p>
+
+            <p>RimType:
+                <select class="form-control">
+                    <option th:each="rimtype : ${T(com.realdolmen.fleet.domain.enums.RimType).values()}"
+                            th:value="${rimtype}" th:text="${rimtype}"
+                            th:selected="${rimtype == car.rimType}"></option>
+                </select>
+            </p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('rimType')}" th:errors="*{rimType}">type Error</p>
+
+            <p>Ideal Km:<input type="text" th:field="*{idealKm}" class="form-control"/></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('idealKm')}" th:errors="*{idealKm}">deal km Error</p>
+
+            <p>Maximum Km:<input type="text" th:field="*{maxKm}" class="form-control"/></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('maxKm')}" th:errors="*{maxKm}">emission Error</p>
+
+            <p>List Price:<input type="text" th:field="*{listPrice}" class="form-control"/></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('listPrice')}" th:errors="*{listPrice}">emission Error</p>
+
+            <p>Monthly Benefit:<input type="text" th:field="*{monthlyBenefit}" class="form-control"/></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('monthlyBenefit')}" th:errors="*{monthlyBenefit}">monthlyBenefit Error</p>
+
+            <p>Upgrade Amount:<input type="text" th:field="*{upgradeAmount}" class="form-control"/></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('upgradeAmount')}" th:errors="*{upgradeAmount}">upgradeAmount Error</p>
+
+            <p>Downgrade Amount:<input type="text" th:field="*{downgradeAmount}" class="form-control"/></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('downgradeAmount')}" th:errors="*{downgradeAmount}">downgradeAmount Error</p>
+
+            <p>Horse Power:<input type="text" th:field="*{hPower}" class="form-control"/></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('hPower')}" th:errors="*{hPower}">hPower Error</p>
+
+            <p>Engine:<input type="text" th:field="*{engine}" class="form-control"/></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('engine')}" th:errors="*{engine}">engine Error</p>
+
+            <button type="submit">Submit</button>
         </form>
     </main>
 </div>

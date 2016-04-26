@@ -5,12 +5,14 @@ import com.realdolmen.fleet.config.SecurityConfig;
 import com.realdolmen.fleet.domain.*;
 import com.realdolmen.fleet.domain.enums.Brand;
 import com.realdolmen.fleet.domain.enums.FuelType;
+import com.realdolmen.fleet.domain.enums.RimType;
 import com.realdolmen.fleet.repository.*;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
@@ -18,9 +20,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 // To use this class :
@@ -63,12 +64,11 @@ public class SampleDataImporter {
 
     @Test
     @Ignore
-//    @Rollback(false)
+    @Rollback(false)
     @Transactional
     public void generateSampleData() {
         generateDifferentRoleUsers();
         generateAuthoritiesForDiffrentRoles();
-
         generateFunctionalLevels();
         generateCars();
         generateOptions();
@@ -149,16 +149,21 @@ public class SampleDataImporter {
                              String model,
                              boolean hybrid,
                              String pack,
-                             String imageUrl
+                             String imageUrl,
+                             RimType rimType,
+                             int idealKm,
+                             int maxKm,
+                             double listPrice,
+                             double monthlyBenefit,
+                             double upgradeAmount,
+                             double downgradeAmount,
+                             int hPower,
+                             String engine
+
     ) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
         Car car = CarMother.init().build();
-        Date date = new Date();
-        try {
-            date = sdf.parse(dateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        DateTimeFormatter dTF = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate date = LocalDate.parse(dateString, dTF);
         car.setBrand(brand);
         car.setActive(active);
         car.setCategory(category);
@@ -170,6 +175,15 @@ public class SampleDataImporter {
         car.setProductionDate(date);
         car.setPack(pack);
         car.setThumbnail(imageUrl);
+        car.setRimType(rimType);
+        car.setIdealKm(idealKm);
+        car.setMaxKm(maxKm);
+        car.setListPrice(listPrice);
+        car.setMonthlyBenefit(monthlyBenefit);
+        car.setUpgradeAmount(upgradeAmount);
+        car.setDowngradeAmount(downgradeAmount);
+        car.setHPower(hPower);
+        car.setEngine(engine);
 
         entityManager.persist(car);
     }
@@ -177,7 +191,7 @@ public class SampleDataImporter {
 
     private void generateCars() {
 
-        persistACar("30-8-2016",
+        persistACar("30-08-2016",
                 Brand.SEAT,
                 true,
                 getLevelForFLevel(2),
@@ -187,9 +201,18 @@ public class SampleDataImporter {
                 "Ibiza St 1,6 crtdi 105 pk Style ecomotive",
                 false,
                 "Pack electronic / accoustic parking system/ Seat portable system/ oberg module",
-                "image1.jpg"
+                "image1.jpg",
+                RimType.ALUMINIUM,
+                50000,
+                250000,
+                25000,
+                500,
+                250,
+                250,
+                115,
+                "Vroemmmm"
         );
-        persistACar("30-8-2016",
+        persistACar("30-08-2016",
                 Brand.SEAT,
                 true,
                 getLevelForFLevel(2),
@@ -199,9 +222,18 @@ public class SampleDataImporter {
                 "Leon style 1,6 Tdi 110 pk ecomotive",
                 false,
                 "Pack Dynamic / Full lede",
-                "image1.jpg"
+                "image1.jpg",
+                RimType.ALUMINIUM,
+                50000,
+                250000,
+                25000,
+                500,
+                250,
+                250,
+                115,
+                "Vroemmmm"
         );
-        persistACar("30-8-2016",
+        persistACar("30-08-2016",
                 Brand.SEAT,
                 true,
                 getLevelForFLevel(6),
@@ -211,9 +243,18 @@ public class SampleDataImporter {
                 "Alhambra Style2,0 tdi 150 pk",
                 false,
                 "Pack technology / Pack executive/Alcantara zetels",
-                "image1.jpg"
+                "image1.jpg",
+                RimType.ALUMINIUM,
+                50000,
+                250000,
+                25000,
+                500,
+                250,
+                250,
+                115,
+                "Vroemmmm"
         );
-        persistACar("30-8-2016",
+        persistACar("30-08-2016",
                 Brand.SEAT,
                 true,
                 getLevelForFLevel(6),
@@ -223,9 +264,18 @@ public class SampleDataImporter {
                 "Alhambra Style2,0 tdi 150 pk",
                 false,
                 "Pack technology / Pack executive",
-                "image1.jpg"
+                "image1.jpg",
+                RimType.ALUMINIUM,
+                50000,
+                250000,
+                25000,
+                500,
+                250,
+                250,
+                115,
+                "Vroemmmm"
         );
-        persistACar("30-8-2016",
+        persistACar("30-08-2016",
                 Brand.SKODA,
                 true,
                 getLevelForFLevel(2),
@@ -235,9 +285,18 @@ public class SampleDataImporter {
                 "Octavia Berline 1,6 tdi 110 pk  greenline",
                 false,
                 "Pack Ambition GPs",
-                "image1.jpg"
+                "image1.jpg",
+                RimType.ALUMINIUM,
+                50000,
+                250000,
+                25000,
+                500,
+                250,
+                250,
+                115,
+                "Vroemmmm"
         );
-        persistACar("30-8-2016",
+        persistACar("30-08-2016",
                 Brand.SKODA,
                 true,
                 getLevelForFLevel(5),
@@ -247,9 +306,18 @@ public class SampleDataImporter {
                 "Superb Combi Ambition 2,0CRTDI 150 pk 6v",
                 false,
                 "Pack Ambition Comfort / Pack Ambition GPs/ lichtmetale velgen helios / reserve wiel / bagageruimte afdekking autom/ elektrische opening en sluiting van de achterklep",
-                "image1.jpg"
+                "image1.jpg",
+                RimType.ALUMINIUM,
+                50000,
+                250000,
+                25000,
+                500,
+                250,
+                250,
+                115,
+                "Vroemmmm"
         );
-        persistACar("30-8-2016",
+        persistACar("30-08-2016",
                 Brand.SKODA,
                 true,
                 getLevelForFLevel(4),
@@ -259,9 +327,18 @@ public class SampleDataImporter {
                 "Superb Combi Style 1,6CRTDI 120 pk 6v",
                 false,
                 "Pack Style Comfort / Pack style GPs / Pack style premium / leder interieur",
-                "image1.jpg"
+                "image1.jpg",
+                RimType.ALUMINIUM,
+                50000,
+                250000,
+                25000,
+                500,
+                250,
+                250,
+                115,
+                "Vroemmmm"
         );
-        persistACar("30-8-2016",
+        persistACar("30-08-2016",
                 Brand.SKODA,
                 true,
                 getLevelForFLevel(4),
@@ -271,9 +348,18 @@ public class SampleDataImporter {
                 "Superb Berline Style 1,6CRTDI 120 pk 6v",
                 false,
                 "Pack Style Comfort / Pack style GPs / Pack style premium / leder interieur",
-                "image1.jpg"
+                "image1.jpg",
+                RimType.ALUMINIUM,
+                50000,
+                250000,
+                25000,
+                500,
+                250,
+                250,
+                115,
+                "Vroemmmm"
         );
-        persistACar("30-8-2016",
+        persistACar("30-08-2016",
                 Brand.SKODA,
                 true,
                 getLevelForFLevel(2),
@@ -283,9 +369,18 @@ public class SampleDataImporter {
                 "Octavia combi 1,6 tdi 110 pk  greenline",
                 false,
                 "Pack Ambition GPs",
-                "image1.jpg"
+                "image1.jpg",
+                RimType.ALUMINIUM,
+                50000,
+                250000,
+                25000,
+                500,
+                250,
+                250,
+                115,
+                "Vroemmmm"
         );
-        persistACar("30-8-2016",
+        persistACar("30-08-2016",
                 Brand.SKODA,
                 true,
                 getLevelForFLevel(2),
@@ -295,9 +390,18 @@ public class SampleDataImporter {
                 "Roomster 1,2 crtdi 75 pk",
                 false,
                 "Pack Ambition GPs",
-                "image1.jpg"
+                "image1.jpg",
+                RimType.ALUMINIUM,
+                50000,
+                250000,
+                25000,
+                500,
+                250,
+                250,
+                115,
+                "Vroemmmm"
         );
-        persistACar("30-8-2016",
+        persistACar("30-08-2016",
                 Brand.SKODA,
                 true,
                 getLevelForFLevel(3),
@@ -307,9 +411,18 @@ public class SampleDataImporter {
                 "Superb berline Ambition 1,6 tdi 120 pk 6v",
                 false,
                 "ack Ambition Comfort / Pack Ambition GPs/ lichtmetale velgen orion",
-                "image1.jpg"
+                "image1.jpg",
+                RimType.ALUMINIUM,
+                50000,
+                250000,
+                25000,
+                500,
+                250,
+                250,
+                115,
+                "Vroemmmm"
         );
-        persistACar("30-8-2016",
+        persistACar("30-08-2016",
                 Brand.SKODA,
                 true,
                 getLevelForFLevel(3),
@@ -319,7 +432,16 @@ public class SampleDataImporter {
                 "Superb Combi Ambition 1,6 tdi 120 pk 6v",
                 false,
                 "ack Ambition Comfort / Pack Ambition GPs/ lichtmetale velgen orion",
-                "image1.jpg"
+                "image1.jpg",
+                RimType.ALUMINIUM,
+                50000,
+                250000,
+                25000,
+                500,
+                250,
+                250,
+                115,
+                "Vroemmmm"
         );
     }
 

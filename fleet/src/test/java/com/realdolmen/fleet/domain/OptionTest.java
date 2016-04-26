@@ -10,6 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -20,6 +21,9 @@ public class OptionTest {
 
     @Mock
     private CompanyCar companyCarOne, companyCarTwo, companyCarThree;
+
+    @Mock
+    private Car carOne, carTwo, carThree;
 
     @Mock
     private Car car;
@@ -89,4 +93,5 @@ public class OptionTest {
         option.setType(expected);
         assertSame(expected, option.getType());
     }
+
 }

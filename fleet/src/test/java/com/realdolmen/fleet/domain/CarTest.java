@@ -1,25 +1,22 @@
 package com.realdolmen.fleet.domain;
 
-import com.realdolmen.fleet.domain.enums.Brand;
-import com.realdolmen.fleet.domain.enums.CarType;
-import com.realdolmen.fleet.domain.enums.FuelType;
 import com.realdolmen.fleet.mother.CarMother;
 import com.realdolmen.fleet.mother.FunctionalLevelMother;
-import com.realdolmen.fleet.mother.OptionMother;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import static com.realdolmen.fleet.domain.enums.Brand.VOLKSWAGEN;
-import static com.realdolmen.fleet.domain.enums.CarType.*;
-import static com.realdolmen.fleet.domain.enums.FuelType.*;
+import static com.realdolmen.fleet.domain.enums.CarType.BREAK;
+import static com.realdolmen.fleet.domain.enums.FuelType.DIESEL;
+import static com.realdolmen.fleet.domain.enums.RimType.ALUMINIUM;
 import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -55,7 +52,30 @@ public class CarTest {
         List<Option> options = Arrays.asList(optionOne, optionTwo, optionThree);
         car.setOptions(options);
         assertTrue(3 == car.getOptions().size());
-        assertSame(options, car.getOptions());
+        assertEquals(options, car.getOptions());
+    }
+
+    @Test
+    public void addOption() {
+        car.addOption(optionOne);
+        assertTrue(car.getOptions().size() == 1);
+        assertSame(optionOne, car.getOptions().get(0));
+    }
+
+    @Test
+    public void removeOption() {
+        car.setOptions(new LinkedList<>(Arrays.asList(optionOne, optionTwo, optionThree)));
+        assertTrue(car.getOptions().size() == 3);
+        assertTrue(car.getOptions().contains(optionOne));
+        assertTrue(car.getOptions().contains(optionTwo));
+        assertTrue(car.getOptions().contains(optionThree));
+
+        car.removeOption(optionTwo);
+
+        assertTrue(car.getOptions().size() == 2);
+        assertTrue(car.getOptions().contains(optionOne));
+        assertFalse(car.getOptions().contains(optionTwo));
+        assertTrue(car.getOptions().contains(optionThree));
     }
 
     @Test
@@ -79,7 +99,7 @@ public class CarTest {
 
     @Test
     public void productionDate() {
-        Date expected = new Date();
+        LocalDate expected = LocalDate.of(10,10,10);
         car.setProductionDate(expected);
         assertEquals(expected, car.getProductionDate());
     }
@@ -141,5 +161,65 @@ public class CarTest {
         assertEquals(expected, car.getThumbnail());
     }
 
+    @Test
+    public void rimType() {
+        car.setRimType(ALUMINIUM);
+        assertEquals(ALUMINIUM, car.getRimType());
+    }
 
+    @Test
+    public void idealKm() throws Exception {
+        Integer expected = 666;
+        car.setIdealKm(expected);
+        assertEquals(expected, car.getIdealKm());
+    }
+
+    @Test
+    public void maxKm() throws Exception {
+        Integer expected = 666;
+        car.setMaxKm(expected);
+        assertEquals(expected, car.getMaxKm());
+    }
+
+    @Test
+    public void listPrice() throws Exception {
+        Double expected = 666.66;
+        car.setListPrice(expected);
+        assertEquals(expected, car.getListPrice());
+    }
+
+    @Test
+    public void monthlyBenefit() throws Exception {
+        Double expected = 666.66;
+        car.setMonthlyBenefit(expected);
+        assertEquals(expected, car.getMonthlyBenefit());
+    }
+
+    @Test
+    public void upgradeAmount() throws Exception {
+        Double expected = 666.66;
+        car.setUpgradeAmount(expected);
+        assertEquals(expected, car.getUpgradeAmount());
+    }
+
+    @Test
+    public void downgradeAmount() throws Exception {
+        Double expected = 666.66;
+        car.setDowngradeAmount(expected);
+        assertEquals(expected, car.getDowngradeAmount());
+    }
+
+    @Test
+    public void hPower() throws Exception {
+        Integer expected = 666;
+        car.setHPower(expected);
+        assertEquals(expected, car.getHPower());
+    }
+
+    @Test
+    public void engine() throws Exception {
+        String expected = "beast";
+        car.setEngine(expected);
+        assertEquals(expected, car.getEngine());
+    }
 }

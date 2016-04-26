@@ -11,6 +11,7 @@ import org.springframework.webflow.definition.registry.FlowDefinitionRegistry;
 import org.springframework.webflow.engine.builder.support.FlowBuilderServices;
 import org.springframework.webflow.executor.FlowExecutor;
 import org.springframework.webflow.mvc.builder.MvcViewFactoryCreator;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 import java.util.Arrays;
 
@@ -56,4 +57,10 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
     public LocalValidatorFactoryBean validator() {
         return new LocalValidatorFactoryBean();
     }
+
+    @Bean
+    public Java8TimeDialect java8TimeDialect() {
+        return new Java8TimeDialect();
+    }
+
 }

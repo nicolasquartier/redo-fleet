@@ -3,14 +3,16 @@ package com.realdolmen.fleet.domain;
 import com.realdolmen.fleet.domain.enums.Brand;
 import com.realdolmen.fleet.domain.enums.CarType;
 import com.realdolmen.fleet.domain.enums.FuelType;
+import com.realdolmen.fleet.domain.enums.RimType;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Car implements Serializable {
@@ -29,9 +31,8 @@ public class Car implements Serializable {
     @Size(max = 100)
     private String model;
 
-    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date productionDate;
+    private LocalDate productionDate;
 
     @Min(value = 0)
     private Integer fiscalHorsePower;
@@ -46,15 +47,27 @@ public class Car implements Serializable {
     @Enumerated(EnumType.STRING)
     private CarType type;
 
-    @OneToMany(mappedBy = "car")
-    private List<Option> options = new ArrayList<>();
-
-    private Boolean hybrid;
+    private boolean hybrid;
 
     @Min(value = 0)
     private Integer emission;
 
     private Boolean active;
+
+    @Enumerated(EnumType.STRING)
+    private RimType rimType;
+
+    private Integer idealKm;
+    private Integer maxKm;
+    private Double listPrice;
+    private Double monthlyBenefit;
+    private Double upgradeAmount;
+    private Double downgradeAmount;
+    private Integer hPower;
+    private String engine;
+
+    @ManyToMany
+    private List<Option> options = new ArrayList<>();
 
     @ManyToOne
     private FunctionalLevel category;
@@ -65,20 +78,84 @@ public class Car implements Serializable {
     public Car() {
     }
 
+    public Integer getIdealKm() {
+        return idealKm;
+    }
+
+    public void setIdealKm(Integer idealKm) {
+        this.idealKm = idealKm;
+    }
+
+    public Integer getMaxKm() {
+        return maxKm;
+    }
+
+    public void setMaxKm(Integer maxKm) {
+        this.maxKm = maxKm;
+    }
+
+    public Double getListPrice() {
+        return listPrice;
+    }
+
+    public void setListPrice(Double listPrice) {
+        this.listPrice = listPrice;
+    }
+
+    public Double getMonthlyBenefit() {
+        return monthlyBenefit;
+    }
+
+    public void setMonthlyBenefit(Double monthlyBenefit) {
+        this.monthlyBenefit = monthlyBenefit;
+    }
+
+    public Double getUpgradeAmount() {
+        return upgradeAmount;
+    }
+
+    public void setUpgradeAmount(Double upgradeAmount) {
+        this.upgradeAmount = upgradeAmount;
+    }
+
+    public Double getDowngradeAmount() {
+        return downgradeAmount;
+    }
+
+    public void setDowngradeAmount(Double downgradeAmount) {
+        this.downgradeAmount = downgradeAmount;
+    }
+
+    public Integer getHPower() {
+        return hPower;
+    }
+
+    public void setHPower(Integer hPower) {
+        this.hPower = hPower;
+    }
+
+    public String getEngine() {
+        return engine;
+    }
+
+    public void setEngine(String engine) {
+        this.engine = engine;
+    }
+
+    public RimType getRimType() {
+        return rimType;
+    }
+
+    public void setRimType(RimType rimType) {
+        this.rimType = rimType;
+    }
+
     public Long getVersion() {
         return version;
     }
 
     public void setVersion(Long version) {
         this.version = version;
-    }
-
-    public List<Option> getOptions() {
-        return options;
-    }
-
-    public void setOptions(List<Option> options) {
-        this.options = options;
     }
 
     public Long getId() {
@@ -105,11 +182,11 @@ public class Car implements Serializable {
         this.model = model;
     }
 
-    public Date getProductionDate() {
+    public LocalDate getProductionDate() {
         return productionDate;
     }
 
-    public void setProductionDate(Date productionDate) {
+    public void setProductionDate(LocalDate productionDate) {
         this.productionDate = productionDate;
     }
 
@@ -184,4 +261,21 @@ public class Car implements Serializable {
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
+
+    public List<Option> getOptions() {
+        return Collections.unmodifiableList(options);
+    }
+
+    public void setOptions(List<Option> options) {
+        this.options = options;
+    }
+
+    public void addOption(Option option) {
+        this.options.add(option);
+    }
+
+    public void removeOption(Option option) {
+        this.options.remove(option);
+    }
+
 }

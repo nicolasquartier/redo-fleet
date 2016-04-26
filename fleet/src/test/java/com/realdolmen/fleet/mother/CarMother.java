@@ -6,8 +6,9 @@ import com.realdolmen.fleet.domain.FunctionalLevel;
 import com.realdolmen.fleet.domain.enums.Brand;
 import com.realdolmen.fleet.domain.enums.CarType;
 import com.realdolmen.fleet.domain.enums.FuelType;
+import com.realdolmen.fleet.domain.enums.RimType;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class CarMother {
 
@@ -22,7 +23,16 @@ public class CarMother {
         car.setType(CarType.BERLINE);
         car.setFiscalHorsePower(10);
         car.setHybrid(false);
-        car.setProductionDate(new Date());
+        car.setRimType(RimType.ALUMINIUM);
+        car.setIdealKm(20000);
+        car.setMaxKm(200000);
+        car.setListPrice(25000.0);
+        car.setMonthlyBenefit(200.0);
+        car.setUpgradeAmount(500.0);
+        car.setDowngradeAmount(500.0);
+        car.setEngine("vroemmmm");
+        car.setHPower(115);
+        car.setProductionDate(LocalDate.now());
     }
 
     public static CarMother init() {
