@@ -14,6 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import static org.hamcrest.Matchers.is;
@@ -58,7 +59,7 @@ public class UserCarHistoryControllerMockTest {
 
     @Test
     public void userCarHistoryIsOnView() throws Exception {
-        when(userCarHistoryRepository.findByUserAndEndDateAfter(isA(User.class), isA(Date.class))).thenReturn(history);
+        when(userCarHistoryRepository.findByUserAndEndDateAfter(isA(User.class), isA(LocalDate.class))).thenReturn(history);
 
         mvc.perform(get("/user/car"))
                 .andExpect(view().name("user/car"))
@@ -68,7 +69,7 @@ public class UserCarHistoryControllerMockTest {
 
     @Test
     public void noCarHistoryFoundPutsErrorOnTheModel() throws Exception {
-        when(userCarHistoryRepository.findByUserAndEndDateAfter(isA(User.class), isA(Date.class))).thenReturn(null);
+        when(userCarHistoryRepository.findByUserAndEndDateAfter(isA(User.class), isA(LocalDate.class))).thenReturn(null);
 
         mvc.perform(get("/user/car"))
                 .andExpect(view().name("user/car"))

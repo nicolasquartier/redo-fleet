@@ -1,32 +1,23 @@
 package com.realdolmen.fleet.service.impl;
 
 import com.realdolmen.fleet.Application;
-import com.realdolmen.fleet.SpringBootTransactionalIntegrationTest;
 import com.realdolmen.fleet.TestConfig;
 import com.realdolmen.fleet.domain.*;
 import com.realdolmen.fleet.mother.*;
 import com.realdolmen.fleet.repository.*;
 import com.realdolmen.fleet.vo.OrderViewObject;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Vector;
 import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
@@ -56,13 +47,18 @@ public class OrderFlowServiceIntegrationTest {
     @Autowired
     private UserCarHistoryRepository userCarHistoryRepository;
 
+    @Autowired
+    private FunctionalLevelRepository functionalLevelRepository;
+
     private OrderViewObject orderViewObject;
 
     private CompanyCar companyCar;
     private Car car;
     private ArrayList<Option> options;
     private UserCarHistory userCarHistory;
+    private FunctionalLevel level;
 
+    @Mock
     private AuthServiceImpl authService;
 
     private User user;
@@ -71,6 +67,7 @@ public class OrderFlowServiceIntegrationTest {
     public void init() {
         orderViewObject = new OrderViewObject();
 
+        initLevel();
         initCar();
         initOptions();
         initCompanyCar();
@@ -87,9 +84,16 @@ public class OrderFlowServiceIntegrationTest {
         orderFlowService.setAuthenticationService(authService);
     }
 
+    private void initLevel() {
+        this.level = FunctionalLevelMother.init().build();
+        level.setFLevel(6);
+        functionalLevelRepository.save(level);
+    }
+
     private void initUser() {
         this.user = UserMother.init().build();
         user.setUsername("flowUser");
+        user.setFunctionalLevel(level);
         userRepository.save(user);
     }
 
@@ -118,6 +122,7 @@ public class OrderFlowServiceIntegrationTest {
 
     private void initCar() {
         this.car = CarMother.init().build();
+        car.setCategory(level);
         carRepository.save(car);
     }
 

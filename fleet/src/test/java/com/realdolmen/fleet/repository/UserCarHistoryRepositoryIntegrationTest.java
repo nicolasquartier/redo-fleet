@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.stream.IntStream;
 
@@ -51,7 +52,7 @@ public class UserCarHistoryRepositoryIntegrationTest {
         expectedHistory.setUser(expectedUser);
         userCarHistoryRepository.save(expectedHistory);
 
-        UserCarHistory resultHistory = userCarHistoryRepository.findByUserAndEndDateAfter(expectedUser, new Date());
+        UserCarHistory resultHistory = userCarHistoryRepository.findByUserAndEndDateAfter(expectedUser, LocalDate.now());
 
         assertNotNull(resultHistory);
         assertSame(expectedHistory, resultHistory);

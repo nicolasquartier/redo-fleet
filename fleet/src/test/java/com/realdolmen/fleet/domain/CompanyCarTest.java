@@ -5,8 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
@@ -96,7 +98,7 @@ public class CompanyCarTest {
 
     @Test
     public void orderDate() throws Exception {
-        Date expected = new Date();
+        LocalDate expected = LocalDate.now();
         companyCar.setOrderDate(expected);
         assertSame(expected, companyCar.getOrderDate());
     }
@@ -107,6 +109,15 @@ public class CompanyCarTest {
         Date expected = new Date();
         companyCar.setDeliveryDate(expected);
         assertSame(expected, companyCar.getDeliveryDate());
+    }
+
+    @Test
+    public void getCategory() {
+        Integer expected = 6;
+        Mockito.when(car.getLevel()).thenReturn(expected);
+        companyCar.setCar(car);
+
+        assertEquals(companyCar.getCategory(), expected);
     }
 
 }

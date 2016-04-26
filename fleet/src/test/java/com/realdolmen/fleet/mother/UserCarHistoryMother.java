@@ -2,6 +2,7 @@ package com.realdolmen.fleet.mother;
 
 import com.realdolmen.fleet.domain.UserCarHistory;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class UserCarHistoryMother {
@@ -12,8 +13,8 @@ public class UserCarHistoryMother {
         this.userCarHistory = new UserCarHistory();
         userCarHistory.setChoosenLevel(0);
         userCarHistory.setCompanyCar(CompanyCarMother.init().build());
-        userCarHistory.setEndDate(new Date(System.currentTimeMillis() + 6_000_000));
-        userCarHistory.setStartDate(new Date(System.currentTimeMillis() - 6_000_000));
+        userCarHistory.setEndDate(LocalDate.now().plusYears(2));
+        userCarHistory.setStartDate(LocalDate.now().minusYears(2));
         userCarHistory.setFunctionalLevelCopy(4);
         userCarHistory.setEstimatedMileage(160000);
         userCarHistory.setReplacement(true);

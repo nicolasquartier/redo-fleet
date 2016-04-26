@@ -75,7 +75,7 @@ public class OrderFlowServiceImplMockTest {
         orderFlowService.save(orderViewObject);
         verify(userCarHistory, times(1)).setCompanyCar(companyCar);
         verify(userCarHistory, times(1)).setUser(user);
-        verify(userCarHistoryRepository, times(2)).save(userCarHistory);
+        verify(userCarHistoryRepository, times(1)).save(userCarHistory);
         verifyNoMoreInteractions(userCarHistoryRepository);
     }
 

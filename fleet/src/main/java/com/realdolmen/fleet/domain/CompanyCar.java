@@ -2,6 +2,7 @@ package com.realdolmen.fleet.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.*;
 
 @Entity
@@ -23,9 +24,7 @@ public class CompanyCar implements Serializable {
     private Boolean active;
     private Boolean approved;
     private String concession;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date orderDate;
+    private LocalDate orderDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date deliveryDate;
@@ -62,7 +61,6 @@ public class CompanyCar implements Serializable {
         return Collections.unmodifiableList(options);
     }
 
-    //    @Transient
     public void setOptions(List<Option> options) {
         this.options = options;
     }
@@ -99,11 +97,11 @@ public class CompanyCar implements Serializable {
         this.concession = concession;
     }
 
-    public Date getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -113,5 +111,10 @@ public class CompanyCar implements Serializable {
 
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
+    }
+
+    @Transient
+    public Integer getCategory() {
+        return car.getLevel();
     }
 }

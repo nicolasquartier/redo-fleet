@@ -7,15 +7,13 @@ import com.realdolmen.fleet.domain.Option;
 import com.realdolmen.fleet.repository.CarRepository;
 import com.realdolmen.fleet.repository.FunctionalLevelRepository;
 import com.realdolmen.fleet.repository.OptionRepository;
-import com.realdolmen.fleet.service.OrderFlowService;
 import com.realdolmen.fleet.service.impl.AuthServiceImpl;
 import com.realdolmen.fleet.service.impl.CompanyCarServiceImpl;
+import com.realdolmen.fleet.service.impl.OrderFlowServiceImpl;
 import com.realdolmen.fleet.vo.OrderViewObject;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.webflow.config.FlowDefinitionResource;
@@ -51,7 +49,7 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
     private FunctionalLevelRepository functionalLevelRepository;
 
     @Mock
-    private OrderFlowService orderFlowService;
+    private OrderFlowServiceImpl orderFlowService;
 
     @Mock
     private Car car;
