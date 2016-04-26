@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
@@ -28,9 +29,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestConfig.class, Application.class})
-@TestPropertySource(locations = "/test.properties")
-@ActiveProfiles("TST")
-@Ignore
+@SpringBootTransactionalIntegrationTest
 public class OrderFlowServiceIntegrationTest {
 
     @Autowired
@@ -131,8 +130,9 @@ public class OrderFlowServiceIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     public void saveSavesACompanyCar() {
-//        assertNull(companyCarRepository.findOne(1L));
+        assertNull(companyCarRepository.findOne(1L));
         orderFlowService.save(orderViewObject);
         CompanyCar result = companyCarRepository.findOne(1L);
 
@@ -147,6 +147,7 @@ public class OrderFlowServiceIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     public void saveSavesCompanyCarAndCarRelation() {
         assertNull(companyCarRepository.findOne(1L));
 
@@ -159,6 +160,7 @@ public class OrderFlowServiceIntegrationTest {
     }
 
     @Test
+    @DirtiesContext
     public void saveSavesUserCarHistoryWithCompanyCarRelation() {
         orderFlowService.save(orderViewObject);
 
@@ -170,6 +172,7 @@ public class OrderFlowServiceIntegrationTest {
 
 
     @Test
+    @DirtiesContext
     public void saveSavesUserCarHistoryWithUserRelation() {
         orderFlowService.save(orderViewObject);
         UserCarHistory userCarHistory = userCarHistoryRepository.findOne(1L);

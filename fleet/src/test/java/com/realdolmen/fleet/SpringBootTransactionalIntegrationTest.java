@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 @ContextConfiguration(classes = TestConfig.class)
 @TestPropertySource(locations = "/test.properties")
-@Transactional(isolation = Isolation.READ_COMMITTED)
+@Transactional
 @ActiveProfiles("TST")
 public @interface SpringBootTransactionalIntegrationTest {
 
