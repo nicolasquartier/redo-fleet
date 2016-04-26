@@ -67,9 +67,9 @@ public class SampleDataImporter {
     @Rollback(false)
     @Transactional
     public void generateSampleData() {
+        generateFunctionalLevels();
         generateDifferentRoleUsers();
         generateAuthoritiesForDiffrentRoles();
-        generateFunctionalLevels();
         generateCars();
         generateOptions();
         generateCompanyCar();
@@ -460,12 +460,14 @@ public class SampleDataImporter {
         adminUser.setPassword(passwordEncoder.encode("123"));
         adminUser.setEnabled(true);
         adminUser.setEmail("admin@realdolmen.com");
+        adminUser.setFunctionalLevel(levelRepo.findOne(3L));
         entityManager.persist(adminUser);
 
         User normalUser = UserMother.init().build();
         normalUser.setUsername("user");
         normalUser.setPassword(passwordEncoder.encode("123"));
         normalUser.setEmail("user@realdolmen.com");
+        normalUser.setFunctionalLevel(levelRepo.findOne(3L));
         entityManager.persist(normalUser);
     }
 

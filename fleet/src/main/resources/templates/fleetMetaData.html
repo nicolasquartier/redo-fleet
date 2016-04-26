@@ -21,9 +21,9 @@
                 <tr>
                     <td class="title"><label th:for="${#ids.next('companyCar.concession')}">Preferred Concession:</label></td>
                     <td>
-                        <input type="text" th:field="*{companyCar.concession}" class="form-control"/>
+                        <input type="text" th:field="${orderViewObject.companyCar.concession}" class="form-control"/>
                         <span th:if="${#fields.hasErrors('companyCar.concession')}" class="help-block"
-                              th:errors="*{companyCar.concession}"></span>
+                              th:errors="*{orderViewObject.companyCar.concession}"></span>
                     </td>
                 </tr>
                 <tr>
