@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 import java.util.stream.IntStream;
@@ -77,7 +78,7 @@ public class CompanyCarServiceImplIntegrationTest {
     private void initCompanyCar() {
         companyCar = CompanyCarMother.init().build();
         companyCar.setCar(null);
-        companyCar.setOptions(new Vector<>());
+        companyCar.setOptions(new LinkedList<>());
     }
 
     private List<Option> listOfOptions() {

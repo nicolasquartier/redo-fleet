@@ -5,9 +5,7 @@ import com.realdolmen.fleet.domain.enums.OptionType;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 @Entity
 @Table(name = "caroption")
@@ -21,7 +19,7 @@ public class Option implements Serializable {
     private Car car;
 
     @ManyToMany(mappedBy = "options")
-    private List<CompanyCar> companyCarList = new Vector<>();
+    private List<CompanyCar> companyCarList = new ArrayList<>();
 
     @Column(length = 300)
     @Size(max = 300)

@@ -2,10 +2,7 @@ package com.realdolmen.fleet.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 @Entity
 public class CompanyCar implements Serializable {
@@ -21,7 +18,7 @@ public class CompanyCar implements Serializable {
     private Car car;
 
     @ManyToMany
-    private List<Option> options = new Vector<>();
+    private List<Option> options = new ArrayList<>();
 
     private Boolean active;
     private Boolean approved;

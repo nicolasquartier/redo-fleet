@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class Car implements Serializable {
     private Date productionDate;
 
     @Min(value = 0)
-    private int fiscalHorsePower;
+    private Integer fiscalHorsePower;
 
     @Enumerated(EnumType.STRING)
     private FuelType fuelType;
@@ -46,14 +47,14 @@ public class Car implements Serializable {
     private CarType type;
 
     @OneToMany(mappedBy = "car")
-    private List<Option> options;
+    private List<Option> options = new ArrayList<>();
 
-    private boolean hybrid;
+    private Boolean hybrid;
 
     @Min(value = 0)
-    private int emission;
+    private Integer emission;
 
-    private boolean active;
+    private Boolean active;
 
     @ManyToOne
     private FunctionalLevel category;
@@ -112,11 +113,11 @@ public class Car implements Serializable {
         this.productionDate = productionDate;
     }
 
-    public int getFiscalHorsePower() {
+    public Integer getFiscalHorsePower() {
         return fiscalHorsePower;
     }
 
-    public void setFiscalHorsePower(int fiscalHorsePower) {
+    public void setFiscalHorsePower(Integer fiscalHorsePower) {
         this.fiscalHorsePower = fiscalHorsePower;
     }
 
@@ -144,27 +145,27 @@ public class Car implements Serializable {
         this.type = type;
     }
 
-    public boolean isHybrid() {
+    public Boolean isHybrid() {
         return hybrid;
     }
 
-    public void setHybrid(boolean hybrid) {
+    public void setHybrid(Boolean hybrid) {
         this.hybrid = hybrid;
     }
 
-    public int getEmission() {
+    public Integer getEmission() {
         return emission;
     }
 
-    public void setEmission(int emission) {
+    public void setEmission(Integer emission) {
         this.emission = emission;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 

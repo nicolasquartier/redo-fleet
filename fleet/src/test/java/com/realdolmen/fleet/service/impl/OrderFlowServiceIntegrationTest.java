@@ -24,6 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 import java.util.stream.IntStream;
@@ -100,7 +101,7 @@ public class OrderFlowServiceIntegrationTest {
 
     private void initCompanyCar() {
         this.companyCar = CompanyCarMother.init().build();
-        companyCar.setOptions(new Vector<>());
+        companyCar.setOptions(new LinkedList<>());
         companyCar.setCar(null);
     }
 
