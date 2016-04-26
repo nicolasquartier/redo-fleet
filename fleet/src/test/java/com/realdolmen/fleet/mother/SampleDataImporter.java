@@ -205,10 +205,10 @@ public class SampleDataImporter {
                 RimType.ALUMINIUM,
                 50000,
                 250000,
-                25000,
-                500,
-                250,
-                250,
+                25000.0,
+                500.0,
+                250.0,
+                250.0,
                 115,
                 "Vroemmmm"
         );

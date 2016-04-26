@@ -63,7 +63,7 @@ public class CarRepositoryIntegrationTest {
     public void findByActiveShouldOnlyReturnActiveCars() {
         List<Car> resultActiveCars = carRepository.findByActive(true);
         assertTrue(resultActiveCars.size() == 2);
-        resultActiveCars.forEach(car -> assertTrue(car.isActive()));
+        resultActiveCars.forEach(car -> assertTrue(car.getActive()));
     }
 
 
@@ -71,7 +71,7 @@ public class CarRepositoryIntegrationTest {
     public void findByActiveShouldOnlyReturnInactiveCars() {
         List<Car> resultActiveCars = carRepository.findByActive(false);
         assertTrue(resultActiveCars.size() == 2);
-        resultActiveCars.forEach(car -> assertFalse(car.isActive()));
+        resultActiveCars.forEach(car -> assertFalse(car.getActive()));
     }
 
 }

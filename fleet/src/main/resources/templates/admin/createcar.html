@@ -19,15 +19,16 @@
             <p class="alert alert-danger" th:if="${#fields.hasErrors('thumbnail')}" th:errors="*{thumbnail}">thumbnail Error</p>
 
             <p>Brand:
-                <select class="form-control" name="brand">
-                    <option th:each="brand : ${T(com.realdolmen.fleet.domain.enums.Brand).values()}" th:value="${brand}"
+                <select th:field="*{brand}" class="form-control" >
+                    <option th:each="brand : ${T(com.realdolmen.fleet.domain.enums.Brand).values()}"
+                            th:value="${brand}"
                             th:text="${brand}" ></option>
                 </select>
             </p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">brand Error</p>
 
             <p>Type:
-                <select class="form-control" name="type">
+                <select th:field="*{type}" class="form-control" name="type">
                     <option th:each="type : ${T(com.realdolmen.fleet.domain.enums.CarType).values()}" th:value="${type}"
                             th:text="${type}" ></option>
                 </select>
@@ -51,8 +52,17 @@
             </script>
            <p class="alert alert-danger" th:if="${#fields.hasErrors('productionDate')}" th:errors="*{productionDate}">Date Error</p>
 
-            <p>Pack: <input type="text" class="form-control"  name="pack"/></p>
-            <p class="alert alert-danger" th:if="${#fields.hasErrors('pack')}" th:errors="*{pack}">pack Error</p>
+            <p>Active: <input type="checkbox" th:field="*{active}" /></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('active')}" th:errors="*{active}">Active Error</p>
+
+            <p>Hybrid: <input type="checkbox" th:field="*{hybrid}" /></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('hybrid')}" th:errors="*{hybrid}">Active Error</p>
+
+            <p>Pack: <input type="text" th:field="*{pack}" class="form-control"/></p>
+            <td th:if="${#fields.hasErrors('pack')}" th:errors="*{pack}">pack Error</td>
+
+            <p>Fiscal HorsePower: <input type="text" th:field="*{fiscalHorsePower}" class="form-control"/></p>
+            <td th:if="${#fields.hasErrors('fiscalHorsePower')}" th:errors="*{fiscalHorsePower}">fiscalHorsePower Error</td>
 
             <p>Options:
                 <select class="form-control"  name="options">
@@ -60,9 +70,10 @@
             </p>
 
             <p>Fueltype:
-                <select class="form-control"  name="fuelType">
+                <select th:field="*{fuelType}" class="form-control" >
                     <option th:each="fueltype : ${T(com.realdolmen.fleet.domain.enums.FuelType).values()}"
-                            th:value="${fueltype}" th:text="${fueltype}"
+                            th:value="${fueltype}"
+                            th:text="${fueltype}"
                             ></option>
                 </select>
             </p>
@@ -72,9 +83,10 @@
             <p class="alert alert-danger" th:if="${#fields.hasErrors('emission')}" th:errors="*{emission}">emission Error</p>
 
             <p>RimType:
-                <select class="form-control"  name="rimType">
+                <select class="form-control" th:field="*{rimType}">
                     <option th:each="rimtype : ${T(com.realdolmen.fleet.domain.enums.RimType).values()}"
-                            th:value="${rimtype}" th:text="${rimtype}"
+                            th:value="${rimtype}"
+                            th:text="${rimtype}"
                             ></option>
                 </select>
             </p>

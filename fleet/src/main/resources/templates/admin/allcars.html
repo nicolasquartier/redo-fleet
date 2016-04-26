@@ -30,7 +30,7 @@
                 <td th:text="${car.model}">model</td>
                 <td th:text="${car.fiscalHorsePower}">fhp</td>
                 <td th:text="${car.fuelType}">fhp</td>
-                <td th:text="${car.active}? #{true} : #{false}">yes</td>
+                <td th:text="${car.active}? #{yes} : #{no}">yes</td>
                 <td><a class="btn btn-lg btn-warning btn-block btn-signin" role="button" th:href="@{/admin/cars/{id}(id=${car.id})}">edit</a></td>
             </tr>
             </tbody>

@@ -20,43 +20,30 @@ public class Car implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Version
     private Long version;
-
     @Enumerated(EnumType.STRING)
     private Brand brand;
-
     @Column(length = 100)
     @Size(max = 100)
     private String model;
-
     @Column(nullable = false)
     private LocalDate productionDate;
-
     @Min(value = 0)
     private Integer fiscalHorsePower;
-
     @Enumerated(EnumType.STRING)
     private FuelType fuelType;
-
     @Column(length = 350)
     @Size(max = 350)
     private String pack;
-
     @Enumerated(EnumType.STRING)
     private CarType type;
-
     private boolean hybrid;
-
     @Min(value = 0)
     private Integer emission;
-
-    private Boolean active;
-
+    private Boolean active=false;
     @Enumerated(EnumType.STRING)
     private RimType rimType;
-
     private Integer idealKm;
     private Integer maxKm;
     private Double listPrice;
@@ -65,13 +52,10 @@ public class Car implements Serializable {
     private Double downgradeAmount;
     private Integer hPower;
     private String engine;
-
     @ManyToMany
     private List<Option> options = new ArrayList<>();
-
     @ManyToOne
     private FunctionalLevel category;
-
     private String thumbnail;
 
     /* Used by JPA */
@@ -222,7 +206,7 @@ public class Car implements Serializable {
         this.type = type;
     }
 
-    public Boolean isHybrid() {
+    public Boolean getHybrid() {
         return hybrid;
     }
 
@@ -238,7 +222,7 @@ public class Car implements Serializable {
         this.emission = emission;
     }
 
-    public Boolean isActive() {
+    public Boolean getActive() {
         return active;
     }
 
@@ -278,8 +262,4 @@ public class Car implements Serializable {
         this.options.remove(option);
     }
 
-    @Transient
-    public Integer getLevel() {
-        return category.getFLevel();
-    }
 }

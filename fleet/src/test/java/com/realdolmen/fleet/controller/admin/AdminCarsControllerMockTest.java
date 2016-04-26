@@ -19,8 +19,10 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -34,6 +36,7 @@ public class AdminCarsControllerMockTest {
 
     @Mock
     private Car carOne, carTwo, carThree, carFour;
+
 
     @InjectMocks
     private AdminCarsController editCarsController;
@@ -76,6 +79,19 @@ public class AdminCarsControllerMockTest {
         Long id = 1L;
         when(carRepository.findOne(id)).thenReturn(carOne);
         preformGetForAndExpectCarModelView("/admin/cars/{id}", id, status().isOk());
+    }
+
+    @Test
+    public void shouldProcessUpdateCar() throws Exception {
+        CarRepository mockRepo = mock(CarRepository.class);
+        AdminCarsController carsController = new AdminCarsController(mockRepo);
+        MockMvc mockMvc = MockMvcBuilders
+                .standaloneSetup(carsController)
+                .build();
+        Long id = 1L;
+        carOne.setId(id);
+       mockMvc.perform(post("/admin/cars/"+carOne.getId()))
+               .andExpect(redirectedUrl("/admin/cars"));
     }
 
     private List<Car> listOf4Cars() {

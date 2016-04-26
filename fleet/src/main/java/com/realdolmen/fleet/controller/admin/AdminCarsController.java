@@ -5,6 +5,7 @@ import com.realdolmen.fleet.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaOptimisticLockingFailureException;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -44,13 +45,15 @@ public class AdminCarsController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public String adminEditCar(@Valid Car car, Errors errors) {
+    @Transactional
+    public String adminEditCar(@PathVariable Long id, @Valid Car car, Errors errors) {
         if(errors.hasErrors()) {
             return "/admin/caredit";
         }
-
-        carRepository.save(car);
-
+        carRepository.setCarInfoById(car.getActive(),car.getBrand(),car.getEmission(),car.getFiscalHorsePower(),car.getFuelType(),
+                car.getHybrid(),car.getModel(),car.getPack(),car.getProductionDate(),car.getRimType(),car.getThumbnail(),car.getType(),
+                car.getVersion(),car.getCategory(),car.getDowngradeAmount(),car.getEngine(),car.getHPower(),car.getIdealKm(),
+                car.getListPrice(),car.getMaxKm(),car.getMonthlyBenefit(),car.getUpgradeAmount(),car.getId());
         return "redirect:/admin/cars";
     }
 
@@ -69,6 +72,6 @@ public class AdminCarsController {
 
         carRepository.save(car);
 
-        return "redirect:/admin/allcars";
+        return "redirect:/admin/cars";
     }
 }

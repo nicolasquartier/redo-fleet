@@ -129,7 +129,7 @@ public class CarTest {
     public void hybrid() throws Exception {
         Boolean expected = false;
         car.setHybrid(expected);
-        assertEquals(expected, car.isHybrid());
+        assertEquals(expected, car.getHybrid());
     }
 
 
@@ -137,7 +137,7 @@ public class CarTest {
     public void active() throws Exception {
         Boolean expected = false;
         car.setActive(expected);
-        assertEquals(expected, car.isActive());
+        assertEquals(expected, car.getActive());
     }
 
     @Test

@@ -16,17 +16,23 @@
             <p class="alert alert-danger" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">model Error</p>
 
             <p>Brand:
-                <select class="form-control">
-                    <option th:each="brand : ${T(com.realdolmen.fleet.domain.enums.Brand).values()}" th:value="${brand}"
-                            th:text="${brand}" th:selected="${brand == car.brand}"></option>
+               <select th:field="*{brand}" class="form-control">
+                    <option th:each="brand : ${T(com.realdolmen.fleet.domain.enums.Brand).values()}"
+                            th:name="*{brand}"
+                            th:value="${brand}"
+                            th:text="${brand}"
+                            th:selected="${brand == car.brand}"></option>
                 </select>
             </p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">brand Error</p>
 
             <p>Type:
-                <select class="form-control">
-                    <option th:each="type : ${T(com.realdolmen.fleet.domain.enums.CarType).values()}" th:value="${type}"
-                            th:text="${type}" th:selected="${type == car.type}"></option>
+                <select th:field="*{type}"  class="form-control">
+                    <option th:each="type : ${T(com.realdolmen.fleet.domain.enums.CarType).values()}"
+                            th:name="*{type}"
+                            th:value="${type}"
+                            th:text="${type}"
+                            th:selected="${type == car.type}"></option>
                 </select>
             </p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('type')}" th:errors="*{type}">model Error</p>
@@ -48,8 +54,18 @@
             </script>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('productionDate')}" th:errors="*{productionDate}">Date Error</p>
 
+            <p>Active: <input type="checkbox" th:field="*{active}" /></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('active')}" th:errors="*{active}">Active Error</p>
+
+            <p>Hybrid: <input type="checkbox" th:field="*{hybrid}" /></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('hybrid')}" th:errors="*{hybrid}">Active Error</p>
+
             <p>Pack: <input type="text" th:field="*{pack}" class="form-control"/></p>
             <td th:if="${#fields.hasErrors('pack')}" th:errors="*{pack}">pack Error</td>
+
+            <p>Fiscal HorsePower: <input type="text" th:field="*{fiscalHorsePower}" class="form-control"/></p>
+            <td th:if="${#fields.hasErrors('fiscalHorsePower')}" th:errors="*{fiscalHorsePower}">fiscalHorsePower Error</td>
+
 
             <p>Options:
                 <select class="form-control">
@@ -57,9 +73,11 @@
             </p>
 
             <p>Fueltype:
-                <select class="form-control">
+                <select th:field="*{fuelType}" class="form-control">
                     <option th:each="fueltype : ${T(com.realdolmen.fleet.domain.enums.FuelType).values()}"
-                            th:value="${fueltype}" th:text="${fueltype}"
+                            th:name="*{fuelType}"
+                            th:value="${fueltype}"
+                            th:text="${fueltype}"
                             th:selected="${fueltype == car.fuelType}"></option>
                 </select>
             </p>
@@ -69,9 +87,11 @@
             <p class="alert alert-danger" th:if="${#fields.hasErrors('emission')}" th:errors="*{emission}">emission Error</p>
 
             <p>RimType:
-                <select class="form-control">
+                <select th:field="*{rimType}" class="form-control">
                     <option th:each="rimtype : ${T(com.realdolmen.fleet.domain.enums.RimType).values()}"
-                            th:value="${rimtype}" th:text="${rimtype}"
+                            th:name="*{rimType}"
+                            th:value="${rimtype}"
+                            th:text="${rimtype}"
                             th:selected="${rimtype == car.rimType}"></option>
                 </select>
             </p>
@@ -83,19 +103,19 @@
             <p>Maximum Km:<input type="text" th:field="*{maxKm}" class="form-control"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('maxKm')}" th:errors="*{maxKm}">emission Error</p>
 
-            <p>List Price:<input type="text" th:field="*{listPrice}" class="form-control"/></p>
+            <p>List Price:<input type="number" min="0" step="1" th:field="*{listPrice}" class="form-control"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('listPrice')}" th:errors="*{listPrice}">emission Error</p>
 
-            <p>Monthly Benefit:<input type="text" th:field="*{monthlyBenefit}" class="form-control"/></p>
+            <p>Monthly Benefit:<input type="number" min="0" step="1" th:field="*{monthlyBenefit}" class="form-control"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('monthlyBenefit')}" th:errors="*{monthlyBenefit}">monthlyBenefit Error</p>
 
-            <p>Upgrade Amount:<input type="text" th:field="*{upgradeAmount}" class="form-control"/></p>
+            <p>Upgrade Amount:<input type="number" min="0" step="1" th:field="*{upgradeAmount}" class="form-control"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('upgradeAmount')}" th:errors="*{upgradeAmount}">upgradeAmount Error</p>
 
-            <p>Downgrade Amount:<input type="text" th:field="*{downgradeAmount}" class="form-control"/></p>
+            <p>Downgrade Amount:<input type="number" min="0" step="1" th:field="*{downgradeAmount}" class="form-control"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('downgradeAmount')}" th:errors="*{downgradeAmount}">downgradeAmount Error</p>
 
-            <p>Horse Power:<input type="text" th:field="*{hPower}" class="form-control"/></p>
+            <p>Horse Power:<input type="number" min="0" step="1" th:field="*{hPower}" class="form-control"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('hPower')}" th:errors="*{hPower}">hPower Error</p>
 
             <p>Engine:<input type="text" th:field="*{engine}" class="form-control"/></p>
