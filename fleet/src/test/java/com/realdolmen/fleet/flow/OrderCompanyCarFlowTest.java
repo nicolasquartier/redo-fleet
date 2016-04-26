@@ -145,4 +145,59 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
         assertSame(carOnView, car);
     }
 
+    //@TODO @FIXME: testOrderCompanyCar
+
+    @Test
+    public void testCancelBtnOnConfigureCarOptionsPage() {
+        setCurrentState("configureCar");
+        MockExternalContext context = new MockExternalContext();
+        context.setEventId("cancel");
+        resumeFlow(context);
+
+        assertFlowExecutionEnded();
+        assertFlowExecutionOutcomeEquals("endState");
+    }
+
+    @Test
+    public void testCancelBtnOnConfirmCompanyCarPage() {
+        setCurrentState("confirm");
+        MockExternalContext context = new MockExternalContext();
+        context.setEventId("cancel");
+        resumeFlow(context);
+
+        assertFlowExecutionEnded();
+        assertFlowExecutionOutcomeEquals("endState");
+    }
+
+    @Test
+    public void testCancelBtnOnFleetMetaDataPage() {
+        setCurrentState("fleetMetaData");
+        MockExternalContext context = new MockExternalContext();
+        context.setEventId("cancel");
+        resumeFlow(context);
+
+        assertFlowExecutionEnded();
+        assertFlowExecutionOutcomeEquals("endState");
+    }
+
+    @Test
+    public void testBackFromFleetMetaDataToConfirmCompanyCar() {
+        setCurrentState("fleetMetaData");
+        MockExternalContext context = new MockExternalContext();
+        context.setEventId("back");
+        resumeFlow(context);
+
+        assertCurrentStateEquals("confirm");
+    }
+
+    @Test
+    public void testBackFromConfirmCompanyCarToConfigureOptions() {
+        setCurrentState("confirm");
+        MockExternalContext context = new MockExternalContext();
+        context.setEventId("back");
+        resumeFlow(context);
+
+        assertCurrentStateEquals("configureCar");
+    }
+
 }
