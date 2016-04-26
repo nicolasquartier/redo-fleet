@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.time.LocalDate;
@@ -221,5 +222,16 @@ public class CarTest {
         String expected = "beast";
         car.setEngine(expected);
         assertEquals(expected, car.getEngine());
+    }
+
+    @Test
+    public void getLevel() {
+        Integer expected = 6;
+
+        FunctionalLevel levelMock = Mockito.mock(FunctionalLevel.class);
+        Mockito.when(levelMock.getFLevel()).thenReturn(expected);
+        car.setCategory(levelMock);
+
+        assertSame(car.getLevel(), expected);
     }
 }

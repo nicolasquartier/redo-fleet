@@ -2,6 +2,7 @@ package com.realdolmen.fleet.mother;
 
 import com.realdolmen.fleet.domain.CompanyCar;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class CompanyCarMother {
@@ -15,7 +16,7 @@ public class CompanyCarMother {
         companyCar.setCar(CarMother.init().build());
         companyCar.setConcession("DON BOSCO Halle");
         companyCar.setDeliveryDate(new Date(System.currentTimeMillis() + 2_000_000));
-        companyCar.setOrderDate(new Date(System.currentTimeMillis() - 2_000_000));
+        companyCar.setOrderDate(LocalDate.now());
     }
 
     public static CompanyCarMother init() {

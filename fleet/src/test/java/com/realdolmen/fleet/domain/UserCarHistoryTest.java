@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -44,14 +45,14 @@ public class UserCarHistoryTest {
 
     @Test
     public void startDate() {
-        Date expected = new Date();
+        LocalDate expected = LocalDate.now();
         userCarHistory.setStartDate(expected);
         assertSame(expected, userCarHistory.getStartDate());
     }
 
     @Test
     public void endDate() {
-        Date expected = new Date();
+        LocalDate expected = LocalDate.now();
         userCarHistory.setEndDate(expected);
         assertSame(expected, userCarHistory.getEndDate());
     }

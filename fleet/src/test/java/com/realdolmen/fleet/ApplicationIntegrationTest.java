@@ -8,4 +8,5 @@ public class ApplicationIntegrationTest {
     public void applicationCanBeStarted() {
         Application.main(new String[0]);
     }
+
 }

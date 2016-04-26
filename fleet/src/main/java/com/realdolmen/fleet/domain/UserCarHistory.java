@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,11 +17,8 @@ public class UserCarHistory implements Serializable{
     @Version
     private Long version;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date startDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     private Boolean replacement = false;
 
@@ -62,19 +60,19 @@ public class UserCarHistory implements Serializable{
         this.version = version;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

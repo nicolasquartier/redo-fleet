@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Controller
@@ -25,7 +26,7 @@ public class UserCarHistoryController {
     @RequestMapping(value = "/car", method = RequestMethod.GET)
     public String getCurrentCompanyCar(Model model) {
         User currentUser = authService.getCurrentUser();
-        UserCarHistory carhistory = userCarHistoryRepository.findByUserAndEndDateAfter(currentUser, new Date(System.currentTimeMillis()));
+        UserCarHistory carhistory = userCarHistoryRepository.findByUserAndEndDateAfter(currentUser, LocalDate.now());
 
         if (carhistory != null) {
             model.addAttribute("carHistoryObj", carhistory);

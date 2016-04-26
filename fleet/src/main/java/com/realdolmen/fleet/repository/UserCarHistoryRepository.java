@@ -7,11 +7,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.TemporalType;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Repository
 public interface UserCarHistoryRepository extends CrudRepository<UserCarHistory, Long> {
 
-    UserCarHistory findByUserAndEndDateAfter(User user, @Temporal(TemporalType.DATE) Date endDate);
+    UserCarHistory findByUserAndEndDateAfter(User user, LocalDate endDate);
 
 }

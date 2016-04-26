@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
@@ -95,5 +96,14 @@ public class UserTest {
         Boolean expected = false;
         user.setEnabled(expected);
         assertSame(expected, user.getEnabled());
+    }
+
+    @Test
+    public void getCategory() {
+        FunctionalLevel levelMock = Mockito.mock(FunctionalLevel.class);
+        Mockito.when(levelMock.getFLevel()).thenReturn(6);
+        user.setFunctionalLevel(levelMock);
+
+        assertEquals(user.getCategory(), new Integer(6));
     }
 }

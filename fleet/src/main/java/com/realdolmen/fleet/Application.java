@@ -2,12 +2,13 @@ package com.realdolmen.fleet;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
-import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
+import org.springframework.data.convert.Jsr310Converters;
 
 @SpringBootApplication
+@EntityScan(basePackageClasses = {Application.class, Jsr310Converters.class})
 public class Application {
 
     @Profile("PRD")

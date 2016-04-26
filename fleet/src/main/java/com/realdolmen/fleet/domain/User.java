@@ -136,4 +136,8 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
+    @Transient
+    public Integer getCategory() {
+        return functionalLevel.getFLevel();
+    }
 }

@@ -278,4 +278,8 @@ public class Car implements Serializable {
         this.options.remove(option);
     }
 
+    @Transient
+    public Integer getLevel() {
+        return category.getFLevel();
+    }
 }
