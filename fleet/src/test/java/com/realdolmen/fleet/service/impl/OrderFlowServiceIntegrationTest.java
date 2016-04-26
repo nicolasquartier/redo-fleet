@@ -1,12 +1,14 @@
 package com.realdolmen.fleet.service.impl;
 
 import com.realdolmen.fleet.Application;
+import com.realdolmen.fleet.SpringBootTransactionalIntegrationTest;
 import com.realdolmen.fleet.TestConfig;
 import com.realdolmen.fleet.domain.*;
 import com.realdolmen.fleet.mother.*;
 import com.realdolmen.fleet.repository.*;
 import com.realdolmen.fleet.vo.OrderViewObject;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -15,6 +17,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -27,6 +30,7 @@ import static org.mockito.Mockito.*;
 @ContextConfiguration(classes = {TestConfig.class, Application.class})
 @TestPropertySource(locations = "/test.properties")
 @ActiveProfiles("TST")
+@Ignore
 public class OrderFlowServiceIntegrationTest {
 
     @Autowired
@@ -164,7 +168,12 @@ public class OrderFlowServiceIntegrationTest {
         assertEquals(userCarHistory.getCompanyCar().getId(), companyCar.getId());
     }
 
-    // test link cc and options
 
-    //  test link user and uch
+    @Test
+    public void saveSavesUserCarHistoryWithUserRelation() {
+        orderFlowService.save(orderViewObject);
+        UserCarHistory userCarHistory = userCarHistoryRepository.findOne(1L);
+        assertEquals(userCarHistory.getUser().getId(), user.getId());
+    }
+
 }
