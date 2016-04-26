@@ -38,7 +38,7 @@ public class Car implements Serializable {
     private String pack;
     @Enumerated(EnumType.STRING)
     private CarType type;
-    private boolean hybrid;
+    private boolean hybrid=false;
     @Min(value = 0)
     private Integer emission;
     private Boolean active=false;
