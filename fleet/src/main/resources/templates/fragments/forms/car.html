@@ -1,0 +1,297 @@
+<!-- Car Form -->
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<link href="../../../static/css/bootstrap.css" rel="stylesheet" type="text/css"> -->
+<!--<link href="../../../static/css/bootstrap-overwrite.css" rel="stylesheet" type="text/css">-->
+<!--<link href="../../../static/css/fleet.css" rel="stylesheet" type="text/css">-->
+<body>
+
+<div th:fragment="car" th:remove="tag">
+    <div class="col-md-5">
+
+        <legend>General info</legend>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-2" for="brand">Brand</label>
+            <select th:field="*{brand}" name="brand" id="brand" class="form-control col-md-10">
+                <option th:each="brand : ${T(com.realdolmen.fleet.domain.enums.Brand).values()}"
+                        th:value="${brand}"
+                        th:text="${brand}"></option>
+            </select>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('brand')}"
+               th:errors="*{brand}">
+                Model
+                Error</p>
+        </fieldset>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-2" for="model">Model</label>
+            <input type="text" name="model" id="model" placeholder="Model" th:field="*{model}"
+                   class="form-control col-md-10"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('model')}"
+               th:errors="*{model}">
+                Model
+                Error</p>
+        </fieldset>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-2" for="type">Type</label>
+            <select th:field="*{type}" name="type" id="type" class="form-control col-md-10">
+                <option th:each="type : ${T(com.realdolmen.fleet.domain.enums.CarType).values()}"
+                        th:value="${type}"
+                        th:text="${type}"></option>
+            </select>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('type')}"
+               th:errors="*{type}">
+                Model
+                Error</p>
+        </fieldset>
+
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-2" for="pack">Pack</label>
+            <input type="text" name="pack" id="pack" placeholder="Pack" th:field="*{pack}"
+                   class="form-control col-md-10"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('pack')}"
+               th:errors="*{pack}">
+                Model
+                Error</p>
+        </fieldset>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-3" for="thumbnail">Thumbnail</label>
+
+            <div class="input-group image-preview col-md-9">
+                <input type="text" name="imgpre" th:field:="*{thumbnail}" id="thumbnail" class="form-control image-preview-filename"
+                       disabled="disabled"/>
+                <!-- don't give a name === doesn't send on POST/GET -->
+                        <span class="input-group-btn">
+                            <!-- image-preview-clear button -->
+                            <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                <span class="glyphicon glyphicon-remove"></span> Clear
+                            </button>
+                            <!-- image-preview-input -->
+                            <div class="btn btn-default image-preview-input">
+                                <span class="glyphicon glyphicon-folder-open"></span>
+                                <span class="image-preview-input-title">Browse</span>
+                                <input type="file" accept="image/png, image/jpeg, image/gif"
+                                       name="thumbnail"/>
+                                <!-- rename it -->
+                            </div>
+                        </span>
+            </div>
+        </fieldset><!-- /input-group image-preview [TO HERE]-->
+
+
+        <legend>Fleet information</legend>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-2" for="category">Available for category</label>
+            <select th:field="*{category}" name="category" id="category" class="form-control col-md-10">
+                <option th:each="level : ${levels}"
+                        th:value="${level.getId()}"
+                        th:text="${level.getFLevel()}"
+                        th:type="${T(com.realdolmen.fleet.domain.FunctionalLevel)}"
+                ></option>
+
+            </select>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('category')}"
+               th:errors="*{category}">
+                Model
+                Error</p>
+        </fieldset>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-4" for="idealKm">Ideal Km</label>
+            <input type="number" name="idealKm" id="idealKm" placeholder="Ideal Km" min="0" step="5000"
+                   th:field="*{idealKm}"
+                   class="form-control col-md-8"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('idealKm')}"
+               th:errors="*{idealKm}">
+                Model
+                Error</p>
+        </fieldset>
+
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-4" for="maxKm">Max Km</label>
+            <input type="number" name="maxKm" id="maxKm" placeholder="Max Km" min="120000" step="5000"
+                   th:field="*{maxKm}"
+                   class="form-control col-md-8"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('maxKm')}"
+               th:errors="*{maxKm}">
+                Model
+                Error</p>
+        </fieldset>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-4" for="listPrice">Price</label>
+            <input type="number" name="listPrice" id="listPrice" placeholder="Price" min="5000" step="0.01"
+                   th:field="*{listPrice}"
+                   class="form-control col-md-8"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('listPrice')}"
+               th:errors="*{listPrice}">
+                Model
+                Error</p>
+        </fieldset>
+
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-6" for="monthlyBenefit">Monthly benefit</label>
+            <input type="number" name="monthlyBenefit" id="monthlyBenefit" placeholder="Monthly benefit" min="0"
+                   step="0.01" th:field="*{monthlyBenefit}"
+                   class="form-control col-md-6"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('monthlyBenefit')}"
+               th:errors="*{monthlyBenefit}">
+                Model
+                Error</p>
+        </fieldset>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-6" for="upgradeAmount">Category upgrade price</label>
+            <input type="number" name="upgradeAmount" id="upgradeAmount" placeholder="Category upgrade price" min="0"
+                   max="5000" step="0.01" th:field="*{upgradeAmount}"
+                   class="form-control col-md-6"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('upgradeAmount')}"
+               th:errors="*{upgradeAmount}">
+                Model
+                Error</p>
+        </fieldset>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-6" for="downgradeAmount">Category downgrade price</label>
+            <input type="number" name="downgradeAmount" id="downgradeAmount" placeholder="Category downgrade price"
+                   min="-5000.0" max="-0.01" step="0.01" th:field="*{downgradeAmount}"
+                   class="form-control col-md-6"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('downgradeAmount')}"
+               th:errors="*{downgradeAmount}">
+                Model
+                Error</p>
+        </fieldset>
+
+        <legend>Fleet application configuration</legend>
+
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-4" for="active">Active</label>
+            <input type="checkbox" name="active" id="active" value="true" th:field="*{active}"
+                   class="form-control col-md-8"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('active')}"
+               th:errors="*{active}">
+                Model
+                Error</p>
+        </fieldset>
+
+    </div>
+    <div class="col-md-5 col-md-offset-2">
+
+
+        <legend>Technical specifications</legend>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-4" for="fuelType">Fuel type</label>
+            <select th:field="*{fuelType}" name="fuelType" id="fuelType" class="form-control col-md-10">
+                <option th:each="fuelType : ${T(com.realdolmen.fleet.domain.enums.FuelType).values()}"
+                        th:value="${fuelType}"
+                        th:text="${fuelType}"></option>
+            </select>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('fuelType')}"
+               th:errors="*{fuelType}">
+                Model
+                Error</p>
+        </fieldset>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-2" for="rimType">Rims</label>
+            <select th:field="*{rimType}" name="rimType" id="rimType" class="form-control col-md-10">
+                <option th:each="rimType : ${T(com.realdolmen.fleet.domain.enums.RimType).values()}"
+                        th:value="${rimType}"
+                        th:text="${rimType}"></option>
+            </select>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('rimType')}"
+               th:errors="*{rimType}">
+                Model
+                Error</p>
+        </fieldset>
+
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-2" for="hPower">HP</label>
+            <input type="text" name="hPower" id="hPower" placeholder="HP" th:field="*{hPower}"
+                   class="form-control col-md-10"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('hPower')}"
+               th:errors="*{hPower}">
+                Model
+                Error</p>
+        </fieldset>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-4" for="fiscalHorsePower">Fiscal HP</label>
+            <input type="text" name="fiscalHorsePower" id="fiscalHorsePower" placeholder="Fiscal HP"
+                   th:field="*{fiscalHorsePower}"
+                   class="form-control col-md-8"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('fiscalHorsePower')}"
+               th:errors="*{fiscalHorsePower}">
+                Model
+                Error</p>
+        </fieldset>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-2" for="engine">Engine</label>
+            <input type="text" name="engine" id="engine" placeholder="Engine" th:field="*{engine}"
+                   class="form-control col-md-10"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('engine')}"
+               th:errors="*{engine}">
+                Model
+                Error</p>
+        </fieldset>
+
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-2" for="emission">Emission</label>
+            <input type="text" name="emission" id="emission" placeholder="Emission" th:field="*{emission}"
+                   class="form-control col-md-10"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('emission')}"
+               th:errors="*{emission}">
+                Model
+                Error</p>
+        </fieldset>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-4" for="hybrid">Hybrid</label>
+            <input type="checkbox" name="hybrid" id="hybrid" value="true" th:field="*{hybrid}"
+                   class="form-control col-md-8"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('hybrid')}"
+               th:errors="*{hybrid}">
+                Model
+                Error</p>
+        </fieldset>
+
+        <fieldset class="form-group row">
+            <label class="form-control-label col-md-4" for="productionDate">Production date</label>
+            <input type="text" name="productionDate" id="productionDate" placeholder="Production date"
+                   th:field="*{productionDate}"
+                   class="form-control col-md-8"
+                    th:required="${true}"/>
+            <p class="alert alert-danger help-box" th:if="${#fields.hasErrors('productionDate')}"
+               th:errors="*{productionDate}">
+                Model
+                Error</p>
+        </fieldset>
+
+    </div>
+
+
+    <!--<p>Options:-->
+    <!--<select class="form-control"  name="options">-->
+    <!--</select>-->
+    <!--</p>-->
+
+
+    <div class="row">
+        <button type="submit" class="btn btn-primary">Save car</button>
+    </div>
+
+</div>
+
+</body>
+</html>
