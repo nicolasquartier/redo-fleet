@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -16,11 +18,11 @@ public class FileUtilTest {
         assertNotNull(fileUtil);
     }
 
-    @Test
+
     public void saveFileToIncorrectPathHandlesTheException() throws Exception {
         byte[] fakeFile = new byte[1];
-        MultipartFile mockMultipartFile = new MockMultipartFile("fake",fakeFile);
-        FileUtil.saveCarImage(mockMultipartFile, "fake");
+        MultipartFile mockMultipartFile = new MockMultipartFile("fake1231",fakeFile);
+        FileUtil.saveCarImage(mockMultipartFile, "fake212");
     }
 
     @Test

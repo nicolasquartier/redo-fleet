@@ -6,20 +6,25 @@ import com.realdolmen.fleet.repository.CarRepository;
 import com.realdolmen.fleet.repository.FunctionalLevelRepository;
 import com.realdolmen.fleet.utils.FileUtil;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.validation.Errors;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -100,11 +105,30 @@ public class AdminCarsControllerMockTest {
 
     @Test
     public void shouldProcessUpdateCar() throws Exception {
-        Long id = 1L;
-
         MockMultipartFile fileMock = new MockMultipartFile("thumbnail", "randomfilename", "multipart/form-data", this.getClass().getResourceAsStream("/test/emptytest.jpg"));
         mvc.perform(MockMvcRequestBuilders.fileUpload("/admin/cars/666").file(fileMock))
                 .andExpect(redirectedUrl("/admin/cars"));
+    }
+
+    @Test(expected = FileNotFoundException.class)
+    @Ignore
+    public void shouldProcessAddCar() throws Exception {
+        MockMultipartFile fileMock = new MockMultipartFile("thumbnail", "randomfilename", "multipart/form-data", this.getClass().getResourceAsStream("/test/emptytest.jpg"));
+        mvc.perform(MockMvcRequestBuilders.fileUpload("/admin/cars/add").file(fileMock))
+                .andExpect(redirectedUrl("/admin/cars"));
+    }
+
+    // @TODO NEVER WORKED
+    @Test
+    @Ignore
+    public void preformPostWithErrorsAndExpectReturnToView() throws Exception {
+        Errors errorsMock = Mockito.mock(Errors.class);
+        Mockito.when(errorsMock.getErrorCount()).thenReturn(5);
+        mvc.perform(post("/admin/cars/5")
+                .contentType(MediaType.MULTIPART_FORM_DATA_VALUE)
+                .requestAttr("car", carFour)
+                .requestAttr("errors", errorsMock))
+                .andExpect(view().name("/admin/caredit"));
     }
 
     private List<Car> listOf4Cars() {
@@ -117,4 +141,6 @@ public class AdminCarsControllerMockTest {
                 .andExpect(model().attributeExists("car"))
                 .andExpect(model().attribute("car", hasProperty("id")));
     }
+
+
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class AdminUsersController {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String showCarsOverview(Model model) {

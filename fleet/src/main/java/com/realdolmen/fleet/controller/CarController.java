@@ -64,10 +64,10 @@ public class CarController {
             } else if (typeStr.equals("ALL") && !brandStr.equals("ALL")) {
                 brand = Enum.valueOf(Brand.class, brandStr);
                 return carRepository.findByCategoryAndBrand(category, brand);
-            } else if (typeStr.equals("ALL") && brandStr.equals("ALL")) {
+            } else {
                 return carRepository.findByCategory(category);
             }
-        } else if (category == null) {
+        } else {
             if (!typeStr.equals("ALL") && !brandStr.equals("ALL")) {
                 type = Enum.valueOf(CarType.class, typeStr);
                 brand = Enum.valueOf(Brand.class, brandStr);
@@ -79,13 +79,13 @@ public class CarController {
             } else if (typeStr.equals("ALL") && !brandStr.equals("ALL")) {
                 brand = Enum.valueOf(Brand.class, brandStr);
                 return carRepository.findByBrand(brand);
-            } else if (typeStr.equals("ALL") && brandStr.equals("ALL")) {
+            } else {
                 return carRepository.findByActive(true);
             }
         }
 
-        return new ArrayList<Car>();
     }
+
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String carcatalog(Model model) {
@@ -99,4 +99,6 @@ public class CarController {
         model.addAttribute("car", carRepository.findOne(id));
         return "cardetail";
     }
+
+
 }

@@ -16,13 +16,16 @@ public class FileUtil {
         return "fileUtil";
     }
 
-    public static void saveCarImage(MultipartFile image, String filename) throws IOException {
-
+    public static void saveCarImage(MultipartFile image, String filename) throws FileNotFoundException {
+        try {
             String directory = "/static/images/cars/";
             BufferedOutputStream stream = new BufferedOutputStream(
                     new FileOutputStream(new File(Application.ROOT + "/" + filename)));
             FileCopyUtils.copy(image.getInputStream(), stream);
             stream.close();
+        } catch (Exception e) {
+            throw new FileNotFoundException("File not found");
+        }
     }
 
     public static String getFilenamefor(String filename) {

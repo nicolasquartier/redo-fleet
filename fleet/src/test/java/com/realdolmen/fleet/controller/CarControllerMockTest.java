@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasProperty;
@@ -43,6 +44,9 @@ public class CarControllerMockTest {
     private Car carOne, carTwo, carThree, carFour;
 
     @Mock
+    private List<Car> carMocks;
+
+    @Mock
     private FunctionalLevel category;
 
     private CarType type;
@@ -59,6 +63,7 @@ public class CarControllerMockTest {
                 .standaloneSetup(carController)
                 .build();
 
+        carMocks = Collections.emptyList();
     }
 
     @Test

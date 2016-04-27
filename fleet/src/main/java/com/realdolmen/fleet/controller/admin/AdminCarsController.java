@@ -6,6 +6,7 @@ import com.realdolmen.fleet.repository.CarRepository;
 import com.realdolmen.fleet.repository.FunctionalLevelRepository;
 import com.realdolmen.fleet.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.orm.jpa.JpaOptimisticLockingFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,9 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 
 @Controller
 @RequestMapping("/admin/cars")
@@ -55,10 +59,10 @@ public class AdminCarsController {
         return "/admin/caredit";
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST, consumes = MULTIPART_FORM_DATA_VALUE)
     @Transactional
     public String adminEditCar(@PathVariable Long id, @Valid Car car, Errors errors, @RequestParam("thumbnail")MultipartFile thumbnail) throws Exception {
-        if(errors.getAllErrors().size() > 1) {
+        if(errors.getErrorCount() > 1) {
             return "/admin/caredit";
         }
         String filename = FileUtil.getFilenamefor(thumbnail.getOriginalFilename());
