@@ -1,25 +1,34 @@
 package com.realdolmen.fleet.controller.admin;
 
 import com.realdolmen.fleet.domain.Car;
+import com.realdolmen.fleet.domain.FunctionalLevel;
 import com.realdolmen.fleet.repository.CarRepository;
+import com.realdolmen.fleet.repository.FunctionalLevelRepository;
+import com.realdolmen.fleet.utils.FileUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -34,19 +43,28 @@ public class AdminCarsControllerMockTest {
     private CarRepository carRepository;
 
     @Mock
+    private FunctionalLevelRepository functionalLevelRepository;
+
+    @Mock
     private Car carOne, carTwo, carThree, carFour;
 
+    @Mock
+    private FunctionalLevel functionalLevel;
 
     @InjectMocks
-    private AdminCarsController editCarsController;
+    private AdminCarsController adminCarsController;
 
     @Before
     public void init() {
         mvc = MockMvcBuilders
-                .standaloneSetup(editCarsController)
+                .standaloneSetup(adminCarsController)
                 .build();
 
         when(carRepository.findAll()).thenReturn(listOf4Cars());
+        when(functionalLevelRepository.findAll()).thenReturn(Collections.singletonList(functionalLevel));
+        when(functionalLevel.getFLevel()).thenReturn(66);
+        when(functionalLevel.getId()).thenReturn(66L);
+        adminCarsController.setFunctionalLevelRepository(functionalLevelRepository);
     }
 
     @Test
@@ -82,14 +100,10 @@ public class AdminCarsControllerMockTest {
 
     @Test
     public void shouldProcessUpdateCar() throws Exception {
-        CarRepository mockRepo = mock(CarRepository.class);
-        AdminCarsController carsController = new AdminCarsController(mockRepo);
-        MockMvc mockMvc = MockMvcBuilders
-                .standaloneSetup(carsController)
-                .build();
         Long id = 1L;
-        carOne.setId(id);
-        mockMvc.perform(post("/admin/cars/" + carOne.getId()))
+
+        MockMultipartFile fileMock = new MockMultipartFile("thumbnail", "randomfilename", "multipart/form-data", this.getClass().getResourceAsStream("/test/emptytest.jpg"));
+        mvc.perform(MockMvcRequestBuilders.fileUpload("/admin/cars/666").file(fileMock))
                 .andExpect(redirectedUrl("/admin/cars"));
     }
 

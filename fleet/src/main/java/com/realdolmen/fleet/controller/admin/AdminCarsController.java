@@ -42,6 +42,7 @@ public class AdminCarsController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String showCarsOverview(Model model) {
         List<Car> adminCars = carRepository.findAll();
+        model.addAttribute("levels", levelRepository.findAll());
         model.addAttribute("cars", adminCars);
         return "admin/allcars";
     }
@@ -49,6 +50,7 @@ public class AdminCarsController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String showAdminEditCar(@PathVariable Long id, Model model) {
         Car car =  carRepository.findOne(id);
+        model.addAttribute("levels", levelRepository.findAll());
         model.addAttribute(car);
         return "/admin/caredit";
     }
@@ -89,9 +91,7 @@ public class AdminCarsController {
         return "redirect:/admin/cars";
     }
 
-    @ModelAttribute
-    public void getLevels(Model model) {
-        model.addAttribute("levels", levelRepository.findAll());
+    void setFunctionalLevelRepository(FunctionalLevelRepository functionalLevelRepository) {
+        this.levelRepository = functionalLevelRepository;
     }
-
 }
