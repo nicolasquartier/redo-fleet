@@ -45,10 +45,39 @@ ul.nav.navbar-nav {
 
 .thumb a img {
     object-fit: cover;
-    width: 255px;
-    height: 400px;
+    width: 253px;
+    height: 253px;
     max-height: 255px;
     max-width: 400px;
+}
+
+.thumb a div.carCategoryLvl {
+    position: relative;
+    top:7px;
+    left:15px;
+    color:WHITE;
+    font-size:20px;
+}
+
+.thumb a div.carCategoryLvlBg {
+    float:right;
+    background-image: url("../images/catlvlCircle1.png");
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    width:40px;
+    height:40px;
+    position: relative;
+    z-index:1;
+}
+
+.thumb a div.carCategoryLvlBg:hover {
+    background-image: url("../images/catlvlCircle2.png");
+}
+
+.thumb a div.carNotCategoryLvl {
+    position: relative;
+    top:-40px;
+    z-index:-1;
 }
 
 .backgroundCarBrandAndModel {
@@ -60,6 +89,7 @@ ul.nav.navbar-nav {
     text-transform: uppercase;
     padding-left: 20px;
     max-width: 300px;
+    max-height: 80px;
 }
 
 .backgroundCarBrandAndModel p {
@@ -138,6 +168,12 @@ div#carimagesthumbnails img {
     position: relative;
     top: 200px;
     width: 375px;
+}
+
+.filterBtn {
+    width:75px;
+    height:30px;
+    line-height:10px;
 }
 
 .Image404 {

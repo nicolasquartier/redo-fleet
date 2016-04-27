@@ -19,6 +19,13 @@ import java.util.List;
 public interface CarRepository extends JpaRepository<Car, Long> {
 
     List<Car> findByActive(Boolean active);
+    List<Car> findByCategoryAndTypeAndBrand(FunctionalLevel category, CarType type, Brand brand);
+    List<Car> findByTypeAndBrand(CarType type, Brand brand);
+    List<Car> findByCategoryAndType(FunctionalLevel category, CarType type);
+    List<Car> findByCategoryAndBrand(FunctionalLevel category, Brand brand);
+    List<Car> findByCategory(FunctionalLevel category);
+    List<Car> findByType(CarType type);
+    List<Car> findByBrand(Brand brand);
 
     @Modifying
     @Query("UPDATE Car car SET car.active=?1,car.brand=?2,car.emission=?3,car.fiscalHorsePower=?4," +
@@ -31,4 +38,5 @@ public interface CarRepository extends JpaRepository<Car, Long> {
                         String thumbnail, CarType carType, Long version, FunctionalLevel category, Double downgradeAmount,
                         String engine, Integer hPower, Integer idealKm, Double listPrice, Integer maxKm, Double monthlyBenefit,
                         Double upgradeAmount, Long id);
+
 }
