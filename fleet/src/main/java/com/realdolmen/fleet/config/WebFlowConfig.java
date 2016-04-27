@@ -45,14 +45,14 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
                 .build();
     }
 
-    @Autowired
-    private Validator validator;
+//    @Autowired
+//    private Validator validator;
 
     @Bean
     public FlowBuilderServices flowBuilderServices() {
         return getFlowBuilderServicesBuilder()
                 .setViewFactoryCreator(mvcViewFactoryCreator())
-//                .setValidator(validator())
+                .setValidator(validator())
                 .setDevelopmentMode(true)
                 .build();
     }
@@ -74,9 +74,9 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
         return factoryCreator;
     }
 
-//    @Bean
-//    public LocalValidatorFactoryBean validator() {
-//        return new LocalValidatorFactoryBean();
-//    }
+    @Bean
+    public LocalValidatorFactoryBean validator() {
+        return new LocalValidatorFactoryBean();
+    }
 
 }

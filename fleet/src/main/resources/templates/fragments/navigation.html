@@ -114,71 +114,101 @@
 <!-- Filter cars -->
 <!--TODO: remove hidden to use the filter SPRINT1-->
 <div th:fragment="filter" th:remove="tag">
-    <div class="panel panel-default col-md-3" id="filter" style="display: none">
-        <div class="panel-heading">
-            <h3 class="panel-title">Filter</h3>
-        </div>
-        <div class="panel-body">
-            <table class="table table-striped">
-                <tr>
-                    <td>
-                        <label id="lblBrand" for="selectBrand">Brand:</label>
-                    </td>
-                    <td>
-                        <select id="selectBrand">
-                            <option>Audi</option>
-                            <option>Volkswagen</option>
-                            <option>Skoda</option>
-                        </select>
-                    </td>
-                </tr>
+    <div class="panel panel-default col-md-3" id="filter">
+        <form class="form-signin" action="/cars/filter" th:method="get">
+            <div class="panel-heading">
+                <h3 class="panel-title">Filter</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <tr>
+                        <td>
+                            <label id="lblCategory" for="categoryLevel">Category Level:</label>
+                        </td>
+                        <td>
+                            <select id="categoryLevel" name="categoryLevel">
+                                <option th:value="0">Choose Category Level</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option th:value="7">6+</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label id="lblType" for="typeCar">Type:</label>
+                        </td>
+                        <td>
+                            <select id="typeCar" name="type">
+                                <option>ALL</option>
+                                <option>BREAK</option>
+                                <option>MONOVOLUME</option>
+                                <option>BERLINE</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label id="lblBrand" for="selectBrand">Brand:</label>
+                        </td>
+                        <td>
+                            <select id="selectBrand" name="brand">
+                                <option>ALL</option>
+                                <option>SKODA</option>
+                                <option>AUDI</option>
+                                <option>VOLKSWAGEN</option>
+                                <option>SEAT</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!--<tr>-->
+                        <!--<td>-->
+                            <!--<label id="lblModel" for="model">Model:</label>-->
+                        <!--</td>-->
+                        <!--<td>-->
+                            <!--<select id="model">-->
+                                <!--<option>A1</option>-->
+                                <!--<option>A3</option>-->
+                                <!--<option>A5</option>-->
+                                <!--<option>...</option>-->
+                            <!--</select>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button class="btn btn-lg btn-primary btn-block btn-signin filterBtn" type="submit">Filter
+                            </button>
+                        </td>
+                    </tr>
+                    <!--<tr>-->
+                    <!--<td>-->
+                    <!--<label id="lblEmission" for="sliderEmission">Emission: (g/km)</label>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                    <!--<b>0</b> <input id="sliderEmission" type="text" class="span2" value="" data-slider-min="0"-->
+                    <!--data-slider-max="200" data-slider-step="5" data-slider-value="[50,150]"/>-->
+                    <!--<b>200</b>-->
+                    <!--</td>-->
+                    <!--</tr>-->
 
-                <tr>
-                    <td>
-                        <label id="lblModel" for="selectModel">Model:</label>
-                    </td>
-                    <td>
-                        <select id="selectModel">
-                            <option>A1</option>
-                            <option>A3</option>
-                            <option>A7</option>
-                            <option>...</option>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <label id="lblEmission" for="sliderEmission">Emission: (g/km)</label>
-                    </td>
-                    <td>
-                        <b>0</b> <input id="sliderEmission" type="text" class="span2" value="" data-slider-min="0"
-                                        data-slider-max="200" data-slider-step="5" data-slider-value="[50,150]"/>
-                        <b>200</b>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <label id="lblHp" for="sliderHp">Horse Power:</label>
-                    </td>
-                    <td>
-                        <b>0</b> <input id="sliderHp" type="text" class="span2" value="" data-slider-min="0"
-                                        data-slider-max="200" data-slider-step="5" data-slider-value="[50,150]"/>
-                        <b>200</b>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <label id="lblMoreStuffToFilter">@TODO: </label>
-                    </td>
-                    <td>
-                        <label id="lblMoreStuffToFilter1">More Stuff to Filter on</label>
-                    </td>
-                </tr>
-            </table>
-        </div>
+                    <!--<tr>-->
+                    <!--<td>-->
+                    <!--<label id="lblHp" for="sliderHp">Horse Power:</label>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                    <!--<b>0</b> <input id="sliderHp" type="text" class="span2" value="" data-slider-min="0"-->
+                    <!--data-slider-max="200" data-slider-step="5" data-slider-value="[50,150]"/>-->
+                    <!--<b>200</b>-->
+                    <!--</td>-->
+                    <!--</tr>-->
+                </table>
+            </div>
+        </form>
     </div>
 </div>
 

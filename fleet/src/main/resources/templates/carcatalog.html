@@ -16,17 +16,34 @@
         </header>
 
         <main class="container">
-            <div th:each="car : ${cars}" class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" th:href="@{/cars/{id}(id=${car.id})}">
-                    <img class="img-responsive" th:if="${car.thumbnail != null}"
-                         th:src="@{/images/cars/{imgurl}(imgurl=${car.thumbnail})}" th:alt="${car.model}"/>
-                    <img class="img-responsive" th:if="${car.thumbnail == null}" th:src="@{/images/unknownCar.png}"
-                         th:alt="${car.model}"/>
-                    <div class="backgroundCarBrandAndModel">
-                        <p class="brand" th:text="${car.brand}"></p>
-                        <p class="model" th:text="${car.model}"></p>
-                    </div>
-                </a>
+            <div th:if="${cars} != null">
+                <div th:each="car : ${cars}" class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" th:href="@{/cars/{id}(id=${car.id})}">
+                        <div class="carCategoryLvlBg">
+                            <div class="carCategoryLvl" th:text="${car.category.fLevel}"></div>
+                        </div>
+                        <div class="carNotCategoryLvl">
+                            <img class="img-responsive" th:if="${car.thumbnail != null}"
+                                 th:src="@{/images/cars/{imgurl}(imgurl=${car.thumbnail})}" th:alt="${car.model}"/>
+                            <img class="img-responsive" th:if="${car.thumbnail == null}" th:src="@{/images/unknownCar.png}"
+                                 th:alt="${car.model}"/>
+                            <div class="backgroundCarBrandAndModel">
+                                <p class="brand" th:text="${car.brand}"></p>
+                                <p class="model" th:text="${car.model}"></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
+            <div th:if="${cars} == null"  class="bg-danger message messageError">
+                <p th:text="${noFilteredCarsFound}"></p>
+                <ul>
+                    <li th:text="'Category Level: ' + ${wantedCategoryLevel}"></li>
+                    <li th:text="'Type: ' + ${wantedType}"></li>
+                    <li th:text="'Brand: ' + ${wantedBrand}"></li>
+                </ul>
             </div>
         </main>
     </div>

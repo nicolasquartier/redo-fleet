@@ -15,6 +15,11 @@ public class CarsSecurityTest extends AbstractSecurityTest {
     }
 
     @Test
+    public void loggedInUserCanAccessFilterUrl() throws Exception {
+        performGetForAndExpect("/cars/filter", status().is3xxRedirection(), status().isOk(), status().isOk());
+    }
+
+    @Test
     public void loggedInUserCanAccessTheirCarUrl() throws Exception {
         performGetForAndExpect("/user/car", status().is3xxRedirection(), status().isOk(), status().isForbidden());
     }
