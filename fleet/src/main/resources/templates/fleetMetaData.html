@@ -54,12 +54,27 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="title"><label th:for="${#ids.next('userCarHistory.choosenLevel')}">Chosen
-                        Category:</label></td>
-                    <td th:switch="*{userCarHistory.user.functionalLevel.fLevel - car.category.fLevel}">
-                        <label class="lblRadioLabel" th:case="-1">Downgrade</label>
+                    <td class="title">
+                        <label th:for="${#ids.next('userCarHistory.choosenLevel')}">
+                            ChosenCategory:
+                        </label>
+                    </td>
+                    <td th:switch="*{userCarHistory.user.getCategory() - car.getLevel()}">
+                        <label class="lblRadioLabel" th:case="1">Downgrade</label>
                         <label class="lblRadioLabel" th:case="0">Normal</label>
-                        <label class="lblRadioLabel" th:case="1">Upgrade</label>
+                        <label class="lblRadioLabel" th:case="-1">Upgrade</label>
+                        <label style="font-weight: bold;" class="lblRadioLabel" th:case="*">Not possible to choose
+                            this car due to your 'Functional Level' &amp; 'Car Category Level'</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">
+                        <label th:for="${#ids.next('userCarHistory.choosenLevel')}">End Price (list price - up/down grade):</label></td>
+                    <td th:switch="*{userCarHistory.user.getCategory() - car.getLevel()}">
+                        <label class="lblRadioLabel" th:case="1"
+                               th:text="*{car.listPrice + ' - ' +  car.downgradeAmount}"></label>
+                        <label class="lblRadioLabel" th:case="0" th:text="*{car.listPrice}"></label>
+                        <label class="lblRadioLabel" th:case="-1"  th:text="*{car.listPrice + ' + ' +  car.upgradeAmount}"></label>
                         <label style="font-weight: bold;" class="lblRadioLabel" th:case="*">Not possible to choose
                             this car due to your 'Functional Level' &amp; 'Car Category Level'</label>
                     </td>
@@ -67,8 +82,9 @@
             </table>
 
             <div class="divOrderButtons">
-                <div th:switch="*{userCarHistory.user.functionalLevel.fLevel - car.category.fLevel}">
-                    <div th:case="-1">
+                <td th:switch="*{userCarHistory.user.getCategory() - car.getLevel()}">
+                    <div th:case="1">
+
                         <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
                         <input type="hidden" name="_eventId" value="order"/>
                         <input type="submit" value="Order" class="btn btn-primary"/>
@@ -88,7 +104,7 @@
                         <a th:href="@{${flowExecutionUrl}(_eventId=back)}" class="btn btn-default">Back</a>
                         <a th:href="@{${flowExecutionUrl}(_eventId=cancel)}" class="btn btn-danger">Cancel</a>
                     </div>
-                    <div th:case="1">
+                    <div th:case="-1">
                         <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
                         <input type="hidden" name="_eventId" value="order"/>
                         <input type="submit" value="Order" class="btn btn-primary"/>
@@ -98,7 +114,6 @@
                         <a th:href="@{${flowExecutionUrl}(_eventId=back)}" class="btn btn-default">Back</a>
                         <a th:href="@{${flowExecutionUrl}(_eventId=cancel)}" class="btn btn-danger">Cancel</a>
                     </div>
-
                     <div class="unableOrder" th:case="*">
                         <a href="#" class="btn btn-primary" disabled="true">Order</a>
                         <label style="font-weight: bold;" class="lblRadioLabel bg-danger message messageError">Not
@@ -107,7 +122,7 @@
                         <a th:href="@{${flowExecutionUrl}(_eventId=back)}" class="btn btn-default">Back</a>
                         <a th:href="@{${flowExecutionUrl}(_eventId=cancel)}" class="btn btn-danger">Cancel</a>
                     </div>
-                </div>
+                </td>
             </div>
         </main>
     </form>

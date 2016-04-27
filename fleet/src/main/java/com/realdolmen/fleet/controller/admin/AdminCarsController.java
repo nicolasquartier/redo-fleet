@@ -57,7 +57,7 @@ public class AdminCarsController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     @Transactional
-    public String adminEditCar(@PathVariable Long id, @Valid Car car, Errors errors, @RequestParam("thumbnail")MultipartFile thumbnail) {
+    public String adminEditCar(@PathVariable Long id, @Valid Car car, Errors errors, @RequestParam("thumbnail")MultipartFile thumbnail) throws Exception {
         if(errors.getAllErrors().size() > 1) {
             return "/admin/caredit";
         }
@@ -79,7 +79,7 @@ public class AdminCarsController {
         return "/admin/createcar";
     }
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String adminCreateCar(@Valid Car car, Errors errors, @RequestParam("thumbnail")MultipartFile thumbnail) {
+    public String adminCreateCar(@Valid Car car, Errors errors, @RequestParam("thumbnail")MultipartFile thumbnail) throws Exception {
         if(errors.hasErrors()) {
             return "/admin/createcar";
         }
