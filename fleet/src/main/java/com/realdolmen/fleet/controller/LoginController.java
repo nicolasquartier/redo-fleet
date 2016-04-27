@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class LoginController {
 
@@ -20,7 +22,7 @@ public class LoginController {
     private AuthServiceImpl authentication;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String getEmptyLoginForm(Model model,
+    public String getEmptyLoginForm(Model model, HttpSession session,
                                     @RequestParam(value = "error", required = false) String error,
                                     @RequestParam(value = "logout", required = false) String logout) {
 
@@ -42,10 +44,15 @@ public class LoginController {
 
         if (auth == null) {
             return "login";
+        } else {
         }
         if (auth.getAuthority().equals("ROLE_ADMIN")) {
+            session.setAttribute("userName", "Welcome Admin " + authentication.getCurrentUser().getFirstName() + " " + authentication.getCurrentUser().getLastName() + "!");
+            session.setAttribute("fLevel",authentication.getCurrentUser().getFunctionalLevel().getFLevel());
             return "redirect:/admin";
         } else if (auth.getAuthority().equals("ROLE_USER")) {
+            session.setAttribute("userName", "Welcome " + authentication.getCurrentUser().getFirstName() + " " + authentication.getCurrentUser().getLastName() + "!");
+            session.setAttribute("fLevel",authentication.getCurrentUser().getFunctionalLevel().getFLevel());
             return "redirect:/cars";
         }
         return "login";
