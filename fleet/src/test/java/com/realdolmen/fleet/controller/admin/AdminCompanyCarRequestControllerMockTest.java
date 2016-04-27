@@ -1,7 +1,5 @@
 package com.realdolmen.fleet.controller.admin;
 
-import com.realdolmen.fleet.domain.Car;
-import com.realdolmen.fleet.domain.CompanyCar;
 import com.realdolmen.fleet.domain.UserCarHistory;
 import com.realdolmen.fleet.repository.UserCarHistoryRepository;
 import org.junit.Before;
@@ -38,7 +36,7 @@ public class AdminCompanyCarRequestControllerMockTest {
     private UserCarHistoryRepository userCarHistoryRepository;
 
     @InjectMocks
-    private AdminRequestControllers adminRequestControllers;
+    private AdminRequestController adminRequestControllers;
 
     @Before
     public void init() {
@@ -47,16 +45,30 @@ public class AdminCompanyCarRequestControllerMockTest {
                 .build();
 
         when(userCarHistoryRepository.findAllByCompanyCarApprovedFalse()).thenReturn(listOf4NonApproveCompanyCars());
+        when(userCarHistoryRepository.findAllByCompanyCarApprovedTrue()).thenReturn(listOf4NonApproveCompanyCars());
     }
 
     @Test
-    public void carsAreAvailableOnView() throws Exception {
+    public void requestsAreAvailableOnView() throws Exception {
 
         listOf4NonApproveCompanyCars();
 
         mvc.perform(get("/admin/requests"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("admin/requests"))
+                .andExpect(model().attributeExists("userCarHistories"))
+                .andExpect(model().attribute("userCarHistories", hasSize(4)))
+        ;
+    }
+
+    @Test
+    public void companyCarsAreAvailableOnView() throws Exception {
+
+        listOf4NonApproveCompanyCars();
+
+        mvc.perform(get("/admin/companyCars"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("admin/companyCars"))
                 .andExpect(model().attributeExists("userCarHistories"))
                 .andExpect(model().attribute("userCarHistories", hasSize(4)))
         ;

@@ -70,12 +70,18 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav adminTopNav">
                 <li th:class="${#httpServletRequest.requestURI} == '/admin/cars' ? 'active' : ''">
                     <a th:href="@{/admin/cars/}">Admin car overview</a>
                 </li>
                 <li th:class="${#httpServletRequest.requestURI} == '/admin/cars/add' ? 'active' : ''">
                     <a th:href="@{/admin/cars/add}">Admin add a car</a>
+                </li>
+                <li th:class="${#httpServletRequest.requestURI} == '/admin/requests' ? 'active' : ''">
+                    <a th:href="@{/admin/requests}">Requests Overview</a>
+                </li>
+                <li th:class="${#httpServletRequest.requestURI} == '/admin/companyCars' ? 'active' : ''">
+                    <a th:href="@{/admin/companyCars}">Company Car Overview</a>
                 </li>
             </ul>
         </div>

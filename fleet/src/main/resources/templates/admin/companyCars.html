@@ -5,8 +5,8 @@
 <div layout:fragment="content" th:remove="tag">
     <header class="header-container">
         <div class="container">
-            <h1 class="page-header">Request-Page</h1>
-            <p class="lead">This is the Request-page. As a Fleet employee, you can approve requests of users and assign their cars to them.</p>
+            <h1 class="page-header">Company Cars</h1>
+            <p class="lead">This is the Company Car-page. As a Fleet employee, you see an overview of all the APPROVED Company Cars.</p>
         </div>
     </header>
 
@@ -41,7 +41,7 @@
             </table>
         </div>
         <div th:if="${userCarHistories.size() == 0}">
-            <p class="bg-danger message messageError"> No Requests found...</p>
+            <p class="bg-danger message messageError"> No Company Cars found...</p>
         </div>
     </main>
 </div>
