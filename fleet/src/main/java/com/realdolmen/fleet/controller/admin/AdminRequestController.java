@@ -6,6 +6,7 @@ import com.realdolmen.fleet.repository.UserCarHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,6 +25,28 @@ public class AdminRequestController {
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public String requestIndex(Model model) {
+        List<UserCarHistory> userCarHistories = userCarHistoryRepository.findAllByCompanyCarApprovedFalse();
+        model.addAttribute("userCarHistories", userCarHistories);
+        return "admin/requests";
+    }
+
+    @RequestMapping(value = "/requests/approve/{id}", method = RequestMethod.GET)
+    public String approveARequest(Model model, @PathVariable("id") Long id) {
+        UserCarHistory currentUserCarHistory = userCarHistoryRepository.findOne(id);
+        currentUserCarHistory.getCompanyCar().setApproved(true);
+        userCarHistoryRepository.save(currentUserCarHistory);
+
+        //get the rest of the non-approved cars
+        List<UserCarHistory> userCarHistories = userCarHistoryRepository.findAllByCompanyCarApprovedFalse();
+        model.addAttribute("userCarHistories", userCarHistories);
+        return "admin/requests";
+    }
+
+    @RequestMapping(value = "/requests/decline/{id}", method = RequestMethod.GET)
+    public String declineARequest(Model model, @PathVariable("id") Long id) {
+        userCarHistoryRepository.delete(id);
+
+        //get the rest of the non-approved cars
         List<UserCarHistory> userCarHistories = userCarHistoryRepository.findAllByCompanyCarApprovedFalse();
         model.addAttribute("userCarHistories", userCarHistories);
         return "admin/requests";

@@ -101,10 +101,10 @@
                         <div th:if="${alreadyOrderedACompanyCar.size() > 0}">
                             <a class="btn btn-primary" disabled="true">Already ordered</a>
                         </div>
-                        <div th:if="not(${alreadyOrderedACompanyCar.size() == 0})">
+                        <div th:if="not(${alreadyOrderedACompanyCar.size() > 0})">
                             <a th:href="@{${flowExecutionUrl}(_eventId=order)}" class="btn btn-primary">Order</a>
                         </div>
-                        <a th:href="@{flowExecutionUrl}(_eventId=back)}" class="btn btn-default">Back</a>
+                        <a th:href="@{${flowExecutionUrl}(_eventId=back)}" class="btn btn-default">Back</a>
                         <a th:href="@{${flowExecutionUrl}(_eventId=cancel)}" class="btn btn-danger">Cancel</a>
                     </div>
                     <div th:case="-1">

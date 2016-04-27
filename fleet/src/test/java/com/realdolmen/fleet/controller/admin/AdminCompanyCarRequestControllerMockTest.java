@@ -1,5 +1,6 @@
 package com.realdolmen.fleet.controller.admin;
 
+import com.realdolmen.fleet.domain.CompanyCar;
 import com.realdolmen.fleet.domain.UserCarHistory;
 import com.realdolmen.fleet.repository.UserCarHistoryRepository;
 import org.junit.Before;
@@ -16,7 +17,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,6 +35,9 @@ public class AdminCompanyCarRequestControllerMockTest {
     private UserCarHistory userCarHistoryOne, userCarHistoryTwo, userCarHistoryThree, userCarHistoryFour;
 
     @Mock
+    private CompanyCar companyCar;
+
+    @Mock
     private UserCarHistoryRepository userCarHistoryRepository;
 
     @InjectMocks
@@ -46,6 +51,8 @@ public class AdminCompanyCarRequestControllerMockTest {
 
         when(userCarHistoryRepository.findAllByCompanyCarApprovedFalse()).thenReturn(listOf4NonApproveCompanyCars());
         when(userCarHistoryRepository.findAllByCompanyCarApprovedTrue()).thenReturn(listOf4NonApproveCompanyCars());
+        when(userCarHistoryRepository.findOne(anyLong())).thenReturn(userCarHistoryOne);
+        when(userCarHistoryOne.getCompanyCar()).thenReturn(companyCar);
     }
 
     @Test
@@ -53,12 +60,38 @@ public class AdminCompanyCarRequestControllerMockTest {
 
         listOf4NonApproveCompanyCars();
 
+
         mvc.perform(get("/admin/requests"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("admin/requests"))
                 .andExpect(model().attributeExists("userCarHistories"))
                 .andExpect(model().attribute("userCarHistories", hasSize(4)))
         ;
+    }
+
+    @Test
+    public void approveRequestShouldApproveUserCarHistory() throws Exception {
+        mvc.perform(get("/admin/requests/approve/1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("admin/requests"))
+                .andExpect(model().attributeExists("userCarHistories"))
+                .andExpect(model().attribute("userCarHistories", hasSize(4)))
+        ;
+        verify(userCarHistoryRepository, times(1)).findOne(anyLong());
+        verify(userCarHistoryRepository, times(1)).save(userCarHistoryOne);
+        verify(userCarHistoryRepository, times(1)).findAllByCompanyCarApprovedFalse();
+    }
+
+    @Test
+    public void declineRequestShouldDeleteUserCarHistory() throws Exception {
+        mvc.perform(get("/admin/requests/decline/1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("admin/requests"))
+                .andExpect(model().attributeExists("userCarHistories"))
+                .andExpect(model().attribute("userCarHistories", hasSize(4)))
+        ;
+        verify(userCarHistoryRepository, times(1)).delete(anyLong());
+        verify(userCarHistoryRepository, times(1)).findAllByCompanyCarApprovedFalse();
     }
 
     @Test

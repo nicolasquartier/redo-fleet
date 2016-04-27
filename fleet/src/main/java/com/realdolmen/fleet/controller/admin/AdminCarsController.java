@@ -79,6 +79,7 @@ public class AdminCarsController {
     public String adminCreateCar(Model model) {
         Car car = new Car();
         model.addAttribute(car);
+        model.addAttribute("levels", levelRepository.findAll());
 
         return "/admin/createcar";
     }

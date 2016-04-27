@@ -21,7 +21,6 @@
                     <th>Car Category Level</th>
                     <th>User Functional Level</th>
                     <th>Choosen Level</th>
-                    <th>Approve</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,10 +31,6 @@
                     <td th:text="${userCarHistory.companyCar.car.category.fLevel}">Car Category Level</td>
                     <td th:text="${userCarHistory.functionalLevelCopy}">User Functional Level</td>
                     <td th:text="${userCarHistory.choosenLevel}">Choosen Level</td>
-                    <td class="btnApproveOrDecline">
-                        <a class="btn btn-lg btn-success btn-block btn-signin" role="button" th:href="@{/admin/requests/#}">Approve</a>
-                        <a class="btn btn-lg btn-danger btn-block btn-signin" role="button" th:href="@{/admin/requests/#}">Decline</a>
-                    </td>
                 </tr>
                 </tbody>
             </table>
