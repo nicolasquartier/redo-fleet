@@ -37,10 +37,6 @@ public class OrderFlowServiceImpl {
         saveHistory(userCarHistory, companyCar);
     }
 
-    @Transactional(readOnly = true)
-    public OrderViewObject createOrderViewObject() {
-        return new OrderViewObject();
-    }
 
     private void saveCompanyCar(CompanyCar companyCar, Car car, List<Option> options) {
         companyCar.setApproved(false);

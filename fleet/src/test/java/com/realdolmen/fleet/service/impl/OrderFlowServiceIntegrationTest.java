@@ -8,25 +8,24 @@ import com.realdolmen.fleet.mother.*;
 import com.realdolmen.fleet.repository.*;
 import com.realdolmen.fleet.vo.OrderViewObject;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestConfig.class, Application.class})
@@ -118,7 +117,7 @@ public class OrderFlowServiceIntegrationTest {
 
     private void initOptions() {
         this.options = new ArrayList<>();
-        IntStream.range(0,3).forEach(index -> {
+        IntStream.range(0, 3).forEach(index -> {
             Option option = OptionMother.init().build();
             option.setCar(car);
             option.setDescription("option" + index);

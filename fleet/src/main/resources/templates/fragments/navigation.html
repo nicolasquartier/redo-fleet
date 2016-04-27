@@ -16,6 +16,16 @@
             </button>
             <a id="navbar-logo" title="REDO FLEET" class="navbar-brand" th:href="@{/}">Logo</a>
         </div>
+        <div class="navbar-collapse navbar-right collapse">
+            <div class="nav navbar-nav">
+                <span class="nav navbar-nav" th:title="${session.userName}" th:placeholder="${session.userName}"
+                      th:text="${session.userName}">Welcome</span>
+                <span class="numberCircle" th:title="${session.fLevel}" th:placeholder="${session.fLevel}"
+                      th:text="${session.fLevel}">0</span>
+                <span sec:authorize="isAuthenticated()" class="nav navbar-nav">
+                    <a th:href="@{/logout}" th:text="'Logout'"></a></span>
+            </div>
+        </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -25,15 +35,13 @@
                 <li th:class="${#httpServletRequest.requestURI} == '/carcatalog' ? 'active' : ''">
                     <a th:href="@{/cars}" th:text="#{rdf.carcatalog}"></a>
                 </li>
-                <li sec:authorize="isAuthenticated()" class="logoutLink">
-                    <a th:href="@{/logout}" th:text="'Logout'"></a>
-                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container -->
 </nav>
+
 
 <!-- Admin-Navigation -->
 <nav th:fragment="adminTop" class="navbar navbar-inverse" role="navigation">
@@ -50,20 +58,24 @@
             </button>
             <a id="navbar-logo" title="REDO FLEET" class="navbar-brand" th:href="@{/}">Logo</a>
         </div>
+        <div class="navbar-collapse navbar-right collapse">
+            <div class="nav navbar-nav">
+                <span class="nav navbar-nav" th:title="${session.userName}" th:placeholder="${session.userName}"
+                      th:text="${session.userName}">Welcome</span>
+                <span class="numberCircle" th:title="${session.fLevel}" th:placeholder="${session.fLevel}"
+                      th:text="${session.fLevel}">0</span>
+                <span sec:authorize="isAuthenticated()" class="nav navbar-nav">
+                    <a th:href="@{/logout}" th:text="'Logout'"></a></span>
+            </div>
+        </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="#">Add Car</a>
+                <li th:class="${#httpServletRequest.requestURI} == '/admin/cars' ? 'active' : ''">
+                    <a th:href="@{/admin/cars/}">Admin car overview</a>
                 </li>
-                <li th:class="${#httpServletRequest.requestURI} == '/carcatalog' ? 'active' : ''">
-                    <a th:href="@{/cars/}" th:text="#{rdf.carcatalog}"></a>
-                </li>
-                <li>
-                    <a th:href="test" th:text="#{rdf.contact}"></a>
-                </li>
-                <li sec:authorize="isAuthenticated()" class="logoutLink">
-                    <a th:href="@{/logout}" th:text="Logout">Logout</a>
+                <li th:class="${#httpServletRequest.requestURI} == '/admin/cars/add' ? 'active' : ''">
+                    <a th:href="@{/admin/cars/add}">Admin add a car</a>
                 </li>
             </ul>
         </div>
@@ -93,14 +105,13 @@
 </nav>
 
 <!-- Side Navigation -->
-<div th:fragment="sideNav" th:remove="tag">
+<!--<div th:fragment="sideNav" th:remove="tag">
     <div class="list-group">
         <a th:href="@{/admin/cars}" class="list-group-item active">Overview cars</a>
         <a th:href="@{/admin/cars/add}" class="list-group-item">Add car</a>
         <a th:href="@{/admin/requests}" class="list-group-item">Overview requests</a>
     </div>
-</div>
-
+</div>-->
 <!-- Filter cars -->
 <!--TODO: remove hidden to use the filter SPRINT1-->
 <div th:fragment="filter" th:remove="tag">
@@ -135,10 +146,18 @@
                         <td>
                             <select id="typeCar" name="type">
                                 <option>ALL</option>
+                                <option th:each="cartype : ${T(com.realdolmen.fleet.domain.enums.CarType).values()}"
+                                        th:name="*{carType}"
+                                        th:value="${cartype}"
+                                        th:text="${cartype}"
+                                        ></option>
+                            </select>
+<!--                            <select id="typeCar" name="type">
+                                <option>ALL</option>
                                 <option>BREAK</option>
                                 <option>MONOVOLUME</option>
                                 <option>BERLINE</option>
-                            </select>
+                            </select>-->
                         </td>
                     </tr>
                     <tr>
@@ -148,25 +167,26 @@
                         <td>
                             <select id="selectBrand" name="brand">
                                 <option>ALL</option>
-                                <option>SKODA</option>
-                                <option>AUDI</option>
-                                <option>VOLKSWAGEN</option>
-                                <option>SEAT</option>
+                                <option th:each="brand : ${T(com.realdolmen.fleet.domain.enums.Brand).values()}"
+                                        th:name="*{brand}"
+                                        th:value="${brand}"
+                                        th:text="${brand}"
+                                ></option>
                             </select>
                         </td>
                     </tr>
                     <!--<tr>-->
-                        <!--<td>-->
-                            <!--<label id="lblModel" for="model">Model:</label>-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<select id="model">-->
-                                <!--<option>A1</option>-->
-                                <!--<option>A3</option>-->
-                                <!--<option>A5</option>-->
-                                <!--<option>...</option>-->
-                            <!--</select>-->
-                        <!--</td>-->
+                    <!--<td>-->
+                    <!--<label id="lblModel" for="model">Model:</label>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                    <!--<select id="model">-->
+                    <!--<option>A1</option>-->
+                    <!--<option>A3</option>-->
+                    <!--<option>A5</option>-->
+                    <!--<option>...</option>-->
+                    <!--</select>-->
+                    <!--</td>-->
                     <!--</tr>-->
                     <tr>
                         <td></td>

@@ -26,36 +26,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/admin/**")
-                    .hasRole("ADMIN")
+                .hasRole("ADMIN")
                 .antMatchers("/user/**")
-                    .hasRole("USER")
+                .hasRole("USER")
                 .antMatchers(HttpMethod.POST, "/admin/**")
                 .hasRole("admin")
                 .antMatchers("/", "/login", "/logout", "/css/**", "/fonts/**", "/js/**", "/images/**", "/loginaction/**", "/403", "/404")
-                    .permitAll()
-            .anyRequest()
+                .permitAll()
+                .anyRequest()
                 .authenticated()
-            .and()
+                .and()
                 .formLogin()
                 .loginPage("/login")
-            .and()
+                .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .permitAll()
-            .and()
+                .and()
                 .exceptionHandling().accessDeniedPage("/403")
-            .and()
+                .and()
         ;
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .jdbcAuthentication()
-            .dataSource(dataSource)
-            .passwordEncoder(passwordEncoder())
+                .jdbcAuthentication()
+                .dataSource(dataSource)
+                .passwordEncoder(passwordEncoder())
         ;
 
     }

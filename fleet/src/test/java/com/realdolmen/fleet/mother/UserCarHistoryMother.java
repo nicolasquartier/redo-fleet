@@ -3,7 +3,6 @@ package com.realdolmen.fleet.mother;
 import com.realdolmen.fleet.domain.UserCarHistory;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class UserCarHistoryMother {
 

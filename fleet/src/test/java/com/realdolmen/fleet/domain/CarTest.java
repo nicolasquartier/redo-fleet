@@ -100,7 +100,7 @@ public class CarTest {
 
     @Test
     public void productionDate() {
-        LocalDate expected = LocalDate.of(10,10,10);
+        LocalDate expected = LocalDate.of(10, 10, 10);
         car.setProductionDate(expected);
         assertEquals(expected, car.getProductionDate());
     }

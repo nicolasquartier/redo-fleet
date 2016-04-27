@@ -9,7 +9,10 @@ import com.realdolmen.fleet.repository.FunctionalLevelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +36,9 @@ public class CarController {
 
         List<Car> filteredCars = filterCarsWithFilterOptions(categoryLevel, typeStr, brandStr);
 
-        if(filteredCars.size() > 0) {
+        if (filteredCars.size() > 0) {
             model.addAttribute("cars", filteredCars);
-        }
-        else {
+        } else {
             model.addAttribute("noFilteredCarsFound", "There were no cars found with this filter settings.");
             model.addAttribute("wantedCategoryLevel", categoryLevel.toString());
             model.addAttribute("wantedType", typeStr);
@@ -50,41 +52,34 @@ public class CarController {
         Brand brand = Brand.AUDI;//just some default
         FunctionalLevel category = functionalLevelRepository.findByFLevel(categoryLevel);
 
-        if(category != null){
-            if(!typeStr.equals("ALL") && !brandStr.equals("ALL")) {
+        if (category != null) {
+            if (!typeStr.equals("ALL") && !brandStr.equals("ALL")) {
                 type = Enum.valueOf(CarType.class, typeStr);
                 brand = Enum.valueOf(Brand.class, brandStr);
                 return carRepository.findByCategoryAndTypeAndBrand(category, type, brand);
-            }
-            else if(!typeStr.equals("ALL") && brandStr.equals("ALL")) {
+            } else if (!typeStr.equals("ALL") && brandStr.equals("ALL")) {
                 type = Enum.valueOf(CarType.class, typeStr);
                 return carRepository.findByCategoryAndType(category, type);
 
-            }
-            else if(typeStr.equals("ALL") && !brandStr.equals("ALL")) {
+            } else if (typeStr.equals("ALL") && !brandStr.equals("ALL")) {
                 brand = Enum.valueOf(Brand.class, brandStr);
                 return carRepository.findByCategoryAndBrand(category, brand);
-            }
-            else if(typeStr.equals("ALL") && brandStr.equals("ALL")) {
+            } else if (typeStr.equals("ALL") && brandStr.equals("ALL")) {
                 return carRepository.findByCategory(category);
             }
-        }
-        else if(category == null) {
-            if(!typeStr.equals("ALL") && !brandStr.equals("ALL")) {
+        } else if (category == null) {
+            if (!typeStr.equals("ALL") && !brandStr.equals("ALL")) {
                 type = Enum.valueOf(CarType.class, typeStr);
                 brand = Enum.valueOf(Brand.class, brandStr);
                 return carRepository.findByTypeAndBrand(type, brand);
-            }
-            else if(!typeStr.equals("ALL") && brandStr.equals("ALL")) {
+            } else if (!typeStr.equals("ALL") && brandStr.equals("ALL")) {
                 type = Enum.valueOf(CarType.class, typeStr);
                 return carRepository.findByType(type);
 
-            }
-            else if(typeStr.equals("ALL") && !brandStr.equals("ALL")) {
+            } else if (typeStr.equals("ALL") && !brandStr.equals("ALL")) {
                 brand = Enum.valueOf(Brand.class, brandStr);
                 return carRepository.findByBrand(brand);
-            }
-            else if(typeStr.equals("ALL") && brandStr.equals("ALL")) {
+            } else if (typeStr.equals("ALL") && brandStr.equals("ALL")) {
                 return carRepository.findByActive(true);
             }
         }

@@ -25,7 +25,8 @@
                         <div class="carNotCategoryLvl">
                             <img class="img-responsive" th:if="${car.thumbnail != null}"
                                  th:src="@{/images/cars/{imgurl}(imgurl=${car.thumbnail})}" th:alt="${car.model}"/>
-                            <img class="img-responsive" th:if="${car.thumbnail == null}" th:src="@{/images/unknownCar.png}"
+                            <img class="img-responsive" th:if="${car.thumbnail == null}"
+                                 th:src="@{/images/unknownCar.png}"
                                  th:alt="${car.model}"/>
                             <div class="backgroundCarBrandAndModel">
                                 <p class="brand" th:text="${car.brand}"></p>
@@ -37,7 +38,7 @@
             </div>
 
 
-            <div th:if="${cars} == null"  class="bg-danger message messageError">
+            <div th:if="${cars} == null" class="bg-danger message messageError">
                 <p th:text="${noFilteredCarsFound}"></p>
                 <ul>
                     <li th:text="'Category Level: ' + ${wantedCategoryLevel}"></li>

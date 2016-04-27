@@ -4,7 +4,6 @@ import com.realdolmen.fleet.domain.enums.Brand;
 import com.realdolmen.fleet.domain.enums.CarType;
 import com.realdolmen.fleet.domain.enums.FuelType;
 import com.realdolmen.fleet.domain.enums.RimType;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -12,7 +11,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
 public class Car implements Serializable {
@@ -38,10 +38,10 @@ public class Car implements Serializable {
     private String pack;
     @Enumerated(EnumType.STRING)
     private CarType type;
-    private boolean hybrid=false;
+    private boolean hybrid = false;
     @Min(value = 0)
     private Integer emission;
-    private Boolean active=false;
+    private Boolean active = false;
     @Enumerated(EnumType.STRING)
     private RimType rimType;
     private Integer idealKm;
@@ -261,6 +261,7 @@ public class Car implements Serializable {
     public void removeOption(Option option) {
         this.options.remove(option);
     }
+
     @Transient
     public Integer getLevel() {
         return category.getFLevel();

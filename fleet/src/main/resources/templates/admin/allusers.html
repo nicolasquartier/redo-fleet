@@ -1,0 +1,36 @@
+<html xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="adminlayout">
+
+<div layout:fragment="content" th:remove="tag">
+    <header class="header-container">
+        <div class="container">
+            <h1 class="page-header">overview cars</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>username</th>
+                <th>firstname</th>
+                <th>lastname</th>
+                <th>Funtional Level</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}">20</td>
+                <td th:text="${user.username}">Tata</td>
+                <td th:text="${user.firstName}">Tata</td>
+                <td th:text="${user.lastName}">Tata</td>
+                <td th:text="${user.functionalLevel}">Tata</td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+</html>

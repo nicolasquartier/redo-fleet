@@ -19,12 +19,19 @@ import java.util.List;
 public interface CarRepository extends JpaRepository<Car, Long> {
 
     List<Car> findByActive(Boolean active);
+
     List<Car> findByCategoryAndTypeAndBrand(FunctionalLevel category, CarType type, Brand brand);
+
     List<Car> findByTypeAndBrand(CarType type, Brand brand);
+
     List<Car> findByCategoryAndType(FunctionalLevel category, CarType type);
+
     List<Car> findByCategoryAndBrand(FunctionalLevel category, Brand brand);
+
     List<Car> findByCategory(FunctionalLevel category);
+
     List<Car> findByType(CarType type);
+
     List<Car> findByBrand(Brand brand);
 
     @Modifying

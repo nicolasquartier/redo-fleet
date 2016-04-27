@@ -1,14 +1,8 @@
 package com.realdolmen.fleet.utils;
 
-import org.springframework.expression.ParseException;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
-import java.beans.PropertyEditorSupport;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 @Converter(autoApply = true)

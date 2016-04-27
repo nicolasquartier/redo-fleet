@@ -5,7 +5,9 @@ import com.realdolmen.fleet.domain.enums.OptionType;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Table(name = "caroption")
