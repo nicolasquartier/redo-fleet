@@ -20,7 +20,7 @@ ul.nav.navbar-nav {
 
 ul.nav.navbar-nav.adminTopNav {
     margin: 0;
-    margin-left:20px;
+
 }
 
 .header-container {
@@ -170,6 +170,20 @@ div#carimagesthumbnails img {
     top: 30px;
 }
 
+/*div#numberCircleBg {*/
+
+    /*float: right;*/
+    /*background-image: url("../images/catlvlCircle1.png");*/
+    /*background-size: 40px 40px;*/
+    /*background-repeat: no-repeat;*/
+    /*width: 40px;*/
+    /*height: 40px;*/
+    /*position: relative;*/
+    /*z-index: 1;*/
+    /*background-color: rgba(0, 0, 0, 0.25);*/
+    /*border-radius: 50%;*/
+/*}*/
+
 .numberCircle {
     border-radius: 50%;
     float: left;
@@ -182,8 +196,19 @@ div#carimagesthumbnails img {
     border: 2px solid #666;
     color: #666;
     text-align: center;
+    position: relative;
+    top: 25px;
 
     font: 25px Arial, sans-serif;
+}
+
+.centerWithHeadNav {
+    position: relative;
+    top:15px;
+}
+
+.centerWithHeadNav a {
+    color: WHITE;
 }
 
 #filter {
