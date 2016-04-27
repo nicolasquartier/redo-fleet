@@ -269,3 +269,12 @@ div#historydetails td.historydetails label {
     left: -190px;
 }
 
+td.btnApproveOrDecline a {
+    height: 25px;
+    line-height: 5px;
+}
+
+table tr.companyCarRequestTr td{
+    line-height: 55px;
+    padding-left: 15px;
+}

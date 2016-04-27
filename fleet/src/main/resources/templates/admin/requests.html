@@ -1,0 +1,43 @@
+<html xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="adminlayout">
+
+<div layout:fragment="content" th:remove="tag">
+    <header class="header-container">
+        <div class="container">
+            <h1 class="page-header">Request-Page</h1>
+            <p class="lead">This is the Request-page. As a Fleet employee, you can approve requests of users and assign their cars to them.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>brand</th>
+                <th>model</th>
+                <th>Car Category Level</th>
+                <th>User Functional Level</th>
+                <th>Choosen Level</th>
+                <th>Approve</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="userCarHistory : ${userCarHistories}" class="companyCarRequestTr">
+                <td th:text="${userCarHistory.companyCar.car.id}">id</td>
+                <td th:text="${userCarHistory.companyCar.car.brand}">brand</td>
+                <td th:text="${userCarHistory.companyCar.car.model}">model</td>
+                <td th:text="${userCarHistory.companyCar.car.category.fLevel}">Car Category Level</td>
+                <td th:text="${userCarHistory.functionalLevelCopy}">User Functional Level</td>
+                <td th:text="${userCarHistory.choosenLevel}">Choosen Level</td>
+                <td class="btnApproveOrDecline">
+                    <a class="btn btn-lg btn-success btn-block btn-signin" role="button" th:href="@{/admin/requests/#}">Approve</a>
+                    <a class="btn btn-lg btn-danger btn-block btn-signin" role="button" th:href="@{/admin/requests/#}">Decline</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+</html>

@@ -9,10 +9,12 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.TemporalType;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface UserCarHistoryRepository extends CrudRepository<UserCarHistory, Long> {
 
     UserCarHistory findByUserAndEndDateAfter(User user, LocalDate endDate);
+    List<UserCarHistory> findAllByCompanyCarApprovedFalse();
 
 }

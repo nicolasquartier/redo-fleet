@@ -84,7 +84,6 @@ public class SampleDataImporter {
         // could loop this by replacing the id with the loop index, be carefull index should stay below #cars and #users
         Long carId = 1L;
         Long userId = 1L;
-
         UserCarHistory userCarHistory = UserCarHistoryMother.init().build();
         userCarHistory.setUser(userRepository.findOne(userId));
         userCarHistory.setCompanyCar(companyCarRepository.findOne(carId));
