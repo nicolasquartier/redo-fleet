@@ -68,6 +68,8 @@ ul.nav.navbar-nav {
     height:40px;
     position: relative;
     z-index:1;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
 }
 
 .thumb a div.carCategoryLvlBg:hover {
