@@ -10,6 +10,7 @@
         <set name="requestScope.carId" value="requestParameters.carId" type="long"/>
         <evaluate expression="carRepository.findOne(requestScope.carId)" result="conversationScope.car"/>
         <evaluate expression="optionRepository.findByCar(car)" result="conversationScope.car.options"/>
+        <evaluate expression="userCarHistoryRepository.findAllByUserAndCompanyCarApprovedFalse(authServiceImpl.getCurrentUser())" result="conversationScope.alreadyOrderedACompanyCar"/>
 
     </on-start>
 
@@ -22,7 +23,7 @@
         <transition to="fleetMetaData" on="goToFleetMetaData"/>
     </view-state>
 
-    <view-state id="fleetMetaData" view="fleetMetaData">
+    <view-state id="fleetMetaData" view="fleetMetaData" model="alreadyOrderedACompanyCar">
         <on-entry>
             <evaluate expression="orderViewObject.setCar(conversationScope.car)"/>
             <evaluate expression="orderViewObject.userCarHistory.setUser(authServiceImpl.getCurrentUser())"/>

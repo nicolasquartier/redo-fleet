@@ -15,13 +15,11 @@ main {
 }
 
 ul.nav.navbar-nav {
-    margin-left: 30%;
-    margin-right: 20%;
+    margin:0px;
 }
 
 ul.nav.navbar-nav.adminTopNav {
     margin: 0;
-
 }
 
 .header-container {
@@ -31,6 +29,10 @@ ul.nav.navbar-nav.adminTopNav {
     margin-right: auto;
     margin-left: auto;
     height: 180px;
+}
+
+.header-container.editCar {
+    height: 100px;
 }
 
 .thumb {
@@ -361,3 +363,47 @@ input#thumbnail  {
     padding:0;
 }
 
+.table.table-striped.table-bordered.tableAllCarsAdmin tr td {
+    line-height: 45px;
+}
+
+.col-md-5 label {
+    width: 100%;
+    padding-left: 0;
+}
+
+.col-md-5 input[type="checkbox"] {
+    width: 25px;
+    line-height: 40px;
+    height: 25px;
+    margin-left: 25px;
+}
+
+.col-md-5 input[type="checkbox"] text {
+    margin-top:50px;
+}
+
+.col-md-12 button {
+    width: 100%;
+    text-transform: uppercase;
+}
+
+legend {
+    margin-top:40px;
+}
+
+.btn.btn-signin.btn-approve, .btn.btn-signin.btn-decline {
+    width:50px;
+    height:50px;
+    float:left;
+    margin:5px;
+    background-size: 48px;
+    background-repeat: no-repeat;
+}
+
+.btn.btn-signin.btn-approve {
+    background-image: url('../images/approve-button-md.png');
+}
+.btn.btn-signin.btn-decline {
+    background-image: url('../images/decline-button-md.png');
+}
