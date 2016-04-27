@@ -10,8 +10,7 @@
     </header>
 
     <main class="container">
-        <div th:if="${carHistoryObj} != null"
-             th:object="${carHistoryObj}">
+        <div th:if="${carHistoryObj} != null" th:object="${carHistoryObj}">
             <div id="historydetails">
                 <h4>General info</h4>
                 <table class="table table-striped table-responsive">
@@ -42,9 +41,9 @@
                     <tr>
                         <td class="title">Chosen category:</td>
                         <td class="historydetails" th:switch="*{choosenLevel}">
-                            <label th:case="-1">Downgrade</label>
+                            <label th:case="1">Downgrade</label>
                             <label th:case="0">Normal</label>
-                            <label th:case="1">Upgrade</label>
+                            <label th:case="-1">Upgrade</label>
                         </td>
                     </tr>
 
@@ -53,7 +52,6 @@
                         </td>
                         <td></td>
                     </tr>
-
                 </table>
             </div>
 
@@ -108,10 +106,74 @@
                 </div>
 
             </div>
+
+            <div th:if="${userOlderCarHistory.size() > 0}">
+                <div class="OlderCarsTable">
+                    <h1 class="page-header">Older cars</h1>
+                    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>brand</th>
+                            <th>model</th>
+                            <th>FHP</th>
+                            <th>Category Level</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="userOlderCarHistory : ${userOlderCarHistory}">
+                            <td th:text="${userOlderCarHistory.startDate}">from</td>
+                            <td th:text="${userOlderCarHistory.endDate}">to</td>
+                            <td th:text="${userOlderCarHistory.companyCar.car.brand}">brand</td>
+                            <td th:text="${userOlderCarHistory.companyCar.car.model}">model</td>
+                            <td th:text="${userOlderCarHistory.companyCar.car.fiscalHorsePower}">fiscalHorsePower</td>
+                            <td th:text="${userOlderCarHistory.companyCar.car.category.fLevel}">fLevel</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div th:if="${userOlderCarHistory.size() == 0}" class="OlderCarsTable">
+                <h1 class="page-header">Older cars</h1>
+                <p class="bg-danger message messageError"> No History of cars found...</p>
+            </div>
         </div>
 
         <div th:if="${noCarFoundError} != null">
             <p class="bg-danger message messageError" th:text="${noCarFoundError}"></p>
+
+            <div th:if="${userOlderCarHistory.size() > 0}">
+                <div class="OlderCarsTable">
+                    <h1 class="page-header">Older cars</h1>
+                    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>brand</th>
+                            <th>model</th>
+                            <th>FHP</th>
+                            <th>Category Level</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="userOlderCarHistory : ${userOlderCarHistory}">
+                            <td th:text="${userOlderCarHistory.startDate}">from</td>
+                            <td th:text="${userOlderCarHistory.endDate}">to</td>
+                            <td th:text="${userOlderCarHistory.companyCar.car.brand}">brand</td>
+                            <td th:text="${userOlderCarHistory.companyCar.car.model}">model</td>
+                            <td th:text="${userOlderCarHistory.companyCar.car.fiscalHorsePower}">fiscalHorsePower</td>
+                            <td th:text="${userOlderCarHistory.companyCar.car.category.fLevel}">fLevel</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div th:if="${userOlderCarHistory.size() == 0}" class="OlderCarsTable">
+                <h1 class="page-header">Older cars</h1>
+                <p class="bg-danger message messageError"> No History of cars found...</p>
+            </div>
         </div>
 
     </main>

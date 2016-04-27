@@ -18,11 +18,11 @@
         </div>
         <div class="navbar-collapse navbar-right collapse">
             <div class="nav navbar-nav">
-                <span class="nav navbar-nav" th:title="${session.userName}" th:placeholder="${session.userName}"
+                <span class="nav navbar-nav centerWithHeadNav" th:title="${session.userName}" th:placeholder="${session.userName}"
                       th:text="${session.userName}">Welcome</span>
                 <span class="numberCircle" th:title="${session.fLevel}" th:placeholder="${session.fLevel}"
                       th:text="${session.fLevel}">0</span>
-                <span sec:authorize="isAuthenticated()" class="nav navbar-nav">
+                <span sec:authorize="isAuthenticated()" class="nav navbar-nav centerWithHeadNav">
                     <a th:href="@{/logout}" th:text="'Logout'"></a></span>
             </div>
         </div>

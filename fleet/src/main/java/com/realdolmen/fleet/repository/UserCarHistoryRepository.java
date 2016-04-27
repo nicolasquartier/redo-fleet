@@ -15,6 +15,7 @@ import java.util.List;
 public interface UserCarHistoryRepository extends CrudRepository<UserCarHistory, Long> {
 
     UserCarHistory findByUserAndEndDateAfter(User user, LocalDate endDate);
+    List<UserCarHistory>  findByUserAndEndDateBefore(User currentUser, LocalDate endDate);
     List<UserCarHistory> findAllByCompanyCarApprovedFalse();
     List<UserCarHistory> findAllByCompanyCarApprovedTrue();
 

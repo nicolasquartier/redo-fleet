@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user/")
@@ -26,6 +27,8 @@ public class UserCarHistoryController {
     public String getCurrentCompanyCar(Model model) {
         User currentUser = authService.getCurrentUser();
         UserCarHistory carhistory = userCarHistoryRepository.findByUserAndEndDateAfter(currentUser, LocalDate.now());
+        List<UserCarHistory> userOlderCarHistory = userCarHistoryRepository.findByUserAndEndDateBefore(currentUser, LocalDate.now());
+        model.addAttribute("userOlderCarHistory", userOlderCarHistory);
 
         if (carhistory != null) {
             model.addAttribute("carHistoryObj", carhistory);
