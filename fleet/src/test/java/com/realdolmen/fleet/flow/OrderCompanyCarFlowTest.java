@@ -7,6 +7,7 @@ import com.realdolmen.fleet.domain.Option;
 import com.realdolmen.fleet.repository.CarRepository;
 import com.realdolmen.fleet.repository.FunctionalLevelRepository;
 import com.realdolmen.fleet.repository.OptionRepository;
+import com.realdolmen.fleet.repository.UserCarHistoryRepository;
 import com.realdolmen.fleet.service.impl.AuthServiceImpl;
 import com.realdolmen.fleet.service.impl.CompanyCarServiceImpl;
 import com.realdolmen.fleet.service.impl.OrderFlowServiceImpl;
@@ -38,6 +39,9 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
 
     @Mock
     private CarRepository carRepository;
+
+    @Mock
+    private UserCarHistoryRepository userCarHistoryRepository;
 
     @Mock
     private OptionRepository optionRepository;
@@ -77,6 +81,7 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
         builderContext.registerBean("companyCarController", companyCarController);
         builderContext.registerBean("orderFlowService", orderFlowService);
         builderContext.registerBean("authServiceImpl", authService);
+        builderContext.registerBean("userCarHistoryRepository", userCarHistoryRepository);
     }
 
     @Before
