@@ -16,5 +16,6 @@ public interface UserCarHistoryRepository extends CrudRepository<UserCarHistory,
 
     UserCarHistory findByUserAndEndDateAfter(User user, LocalDate endDate);
     List<UserCarHistory> findAllByCompanyCarApprovedFalse();
+    List<UserCarHistory> findAllByCompanyCarApprovedTrue();
 
 }

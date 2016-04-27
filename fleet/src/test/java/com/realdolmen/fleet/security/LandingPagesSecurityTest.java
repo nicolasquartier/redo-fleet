@@ -21,6 +21,11 @@ public class LandingPagesSecurityTest extends AbstractSecurityTest {
     }
 
     @Test
+    public void adminCanAccesAdminCompanyCarUrls() throws Exception {
+        performGetForAndExpect("/admin/companyCars", status().is3xxRedirection(), status().isForbidden(), status().isOk());
+    }
+
+    @Test
     public void rootUrlsAreOpen() throws Exception {
         performGetForAndExpect("/", status().is3xxRedirection(), status().is3xxRedirection(), status().is3xxRedirection());
     }

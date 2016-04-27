@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@RequestMapping("/admin/requests")
+@RequestMapping("/admin")
 @Controller
-public class AdminRequestControllers {
+public class AdminRequestController {
 
 
     @Autowired
@@ -22,11 +22,19 @@ public class AdminRequestControllers {
     @Autowired
     private UserCarHistoryRepository userCarHistoryRepository;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public String requestIndex(Model model) {
         List<UserCarHistory> userCarHistories = userCarHistoryRepository.findAllByCompanyCarApprovedFalse();
         model.addAttribute("userCarHistories", userCarHistories);
         return "admin/requests";
     }
+
+    @RequestMapping(value = "/companyCars", method = RequestMethod.GET)
+    public String companyCarsIndex(Model model) {
+        List<UserCarHistory> userCarHistories = userCarHistoryRepository.findAllByCompanyCarApprovedTrue();
+        model.addAttribute("userCarHistories", userCarHistories);
+        return "admin/companyCars";
+    }
+
 
 }

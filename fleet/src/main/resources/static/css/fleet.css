@@ -18,6 +18,11 @@ ul.nav.navbar-nav {
     margin-right: 20%;
 }
 
+ul.nav.navbar-nav.adminTopNav {
+    margin: 0;
+    margin-left:20px;
+}
+
 .header-container {
     background-color: #dedede;
     padding-right: 15px;
