@@ -1,6 +1,7 @@
 package com.realdolmen.fleet.controller;
 
 import com.realdolmen.fleet.domain.Authorities;
+import com.realdolmen.fleet.domain.User;
 import com.realdolmen.fleet.repository.AuthoritiesRepository;
 import com.realdolmen.fleet.service.impl.AuthServiceImpl;
 import org.junit.Before;
@@ -37,6 +38,8 @@ public class LoginControllerMockTest {
     private LoginController loginController = new LoginController();
 
     private MockMvc mvc;
+    @Mock
+    private User user;
 
     @Before
     public void init() {
@@ -48,6 +51,10 @@ public class LoginControllerMockTest {
         when(authentication.getName()).thenReturn("user");
         when(authoritiesRepository.findByUsername("user")).thenReturn(auth);
         when(auth.getAuthority()).thenReturn("");
+        when(authentication.getCurrentUser()).thenReturn(user);
+        when(user.getFirstName()).thenReturn("first name");
+        when(user.getLastName()).thenReturn("last name");
+        when(user.getCategory()).thenReturn(666);
     }
 
     @Test
