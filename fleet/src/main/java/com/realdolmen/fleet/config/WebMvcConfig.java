@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
@@ -24,11 +26,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Autowired
     private SpringTemplateEngine springTemplateEngine;
 
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
-
     @Bean
     public FlowHandlerMapping flowHandlerMapping() {
         FlowHandlerMapping handlerMapping = new FlowHandlerMapping();
@@ -45,11 +42,5 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         return handlerAdapter;
     }
 
-    @Bean
-    public AjaxThymeleafViewResolver tilesViewResolver() {
-        AjaxThymeleafViewResolver viewResolver = new AjaxThymeleafViewResolver();
-        viewResolver.setViewClass(FlowAjaxThymeleafView.class);
-        viewResolver.setTemplateEngine(springTemplateEngine);
-        return viewResolver;
-    }
+
 }

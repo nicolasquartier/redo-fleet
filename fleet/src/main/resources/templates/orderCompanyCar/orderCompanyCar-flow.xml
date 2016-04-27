@@ -4,12 +4,14 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
       start-state="configureCar"
 >
-    <var name="orderViewObject" class="com.realdolmen.fleet.vo.OrderViewObject" />
 
+    <!--<var name="orderViewObject" class="com.realdolmen.fleet.vo.OrderViewObject"/>-->
     <on-start>
-        <set name="requestScope.carId" value="requestParameters.carId" type="long" />
-        <evaluate  expression="carRepository.findOne(requestScope.carId)"  result="conversationScope.car" />
-        <evaluate expression="optionRepository.findByCar(car)" result="conversationScope.car.options" />
+        <set name="requestScope.carId" value="requestParameters.carId" type="long"/>
+        <evaluate expression="orderFlowServiceImpl.createOrderViewObject()" result="flowScope.orderViewObject" />
+        <evaluate expression="carRepository.findOne(requestScope.carId)" result="conversationScope.car"/>
+        <evaluate expression="optionRepository.findByCar(car)" result="conversationScope.car.options"/>
+
     </on-start>
 
     <view-state id="configureCar" view="carConfigure" model="car">
@@ -21,20 +23,20 @@
         <transition to="fleetMetaData" on="goToFleetMetaData"/>
     </view-state>
 
-    <view-state id="fleetMetaData" view="fleetMetaData" model="orderViewObject">
+    <view-state id="fleetMetaData" view="fleetMetaData">
         <on-entry>
             <evaluate expression="orderViewObject.setCar(conversationScope.car)"/>
             <evaluate expression="orderViewObject.userCarHistory.setUser(authServiceImpl.getCurrentUser())"/>
         </on-entry>
         <transition on="back" to="confirm">
         </transition>
-        <transition on="order" to="saveState">
+        <transition on="order" to="saveState" validate="false">
         </transition>
     </view-state>
 
     <action-state id="saveState">
         <!--@FIXME @TODO: Only persist the companycar after user filled in Fleet Meta Data!-->
-        <evaluate expression="orderFlowServiceImpl.save(orderViewObject)"/>
+        <evaluate expression="orderFlowServiceImpl.save(flowScope.orderViewObject)"/>
         <transition to="success"/>
     </action-state>
 
@@ -42,6 +44,6 @@
     <end-state id="endState" view="externalRedirect:/cars"/>
 
     <global-transitions>
-        <transition on="cancel" to="endState"  validate="false"/>
+        <transition on="cancel" to="endState" validate="false"/>
     </global-transitions>
 </flow>

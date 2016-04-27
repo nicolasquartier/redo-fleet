@@ -5,6 +5,8 @@ import com.realdolmen.fleet.domain.Car;
 import com.realdolmen.fleet.domain.CompanyCar;
 import com.realdolmen.fleet.domain.Option;
 import com.realdolmen.fleet.domain.UserCarHistory;
+import org.springframework.webflow.core.collection.MutableAttributeMap;
+import org.springframework.webflow.execution.RequestContext;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,16 +14,18 @@ import java.util.List;
 
 public class OrderViewObject implements Serializable {
 
-    private CompanyCar companyCar;
-    private Car car;
-    private List<Option> options;
-    private UserCarHistory userCarHistory;
+    public CompanyCar companyCar;
+    public Car car;
+    public List<Option> options;
+    public UserCarHistory userCarHistory;
 
     public OrderViewObject() {
         this.companyCar = new CompanyCar();
+        this.companyCar.setConcession("DON BOSCO HALLE");
         this.car = new Car();
         this.options = new ArrayList<Option>();
         this.userCarHistory = new UserCarHistory();
+        this.userCarHistory.setEstimatedMileage(160_000);
     }
 
     public CompanyCar getCompanyCar() {
