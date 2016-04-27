@@ -92,22 +92,22 @@
             </p>
            <p class="alert alert-danger" th:if="${#fields.hasErrors('rimType')}" th:errors="*{rimType}">type Error</p>
 
-            <p>Ideal Km:<input type="number" min="5000" step="500"  name="idealKm" /></p>
+            <p>Ideal Km:<input type="number" min="120000" value="140000" step="1000"   name="idealKm" /></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('idealKm')}" th:errors="*{idealKm}">deal km Error</p>
 
-            <p>Maximum Km:<input type="number" min="5000" step="500"   name="maxKm"  class="form-control"/></p>
+            <p>Maximum Km:<input type="number" min="5000" step="1000" value="180000"  name="maxKm"  class="form-control"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('maxKm')}" th:errors="*{maxKm}">emission Error</p>
 
-            <p>List Price:<input type="number" min="0" step="1"   name="listPrice" class="form-control"/></p>
+            <p>List Price:<input type="number" step=".01" name="listPrice" class="form-control"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('listPrice')}" th:errors="*{listPrice}">emission Error</p>
 
-            <p>Monthly Benefit:<input type="number" min="0" step="1"  name="monthlyBenefit" class="form-control"/></p>
+            <p>Monthly Benefit:<input type="number" min="0" step=".01"  name="monthlyBenefit" class="form-control"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('monthlyBenefit')}" th:errors="*{monthlyBenefit}">monthlyBenefit Error</p>
 
-            <p>Upgrade Amount:<input type="number" min="0" step="1"  name="upgradeAmount"  class="form-control"/></p>
+            <p>Upgrade Amount:<input type="number" step=".01"  name="upgradeAmount"  class="form-control"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('upgradeAmount')}" th:errors="*{upgradeAmount}">upgradeAmount Error</p>
 
-            <p>Downgrade Amount:<input type="number" min="0" step="1" name="downgradeAmount" class="form-control"/></p>
+            <p>Downgrade Amount:<input type="number" step=".01" name="downgradeAmount" class="form-control"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('downgradeAmount')}" th:errors="*{downgradeAmount}">downgradeAmount Error</p>
 
             <p>Horse Power:<input type="number" min="0" step="1" name="hPower" class="form-control"/></p>
