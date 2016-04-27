@@ -53,21 +53,21 @@ ul.nav.navbar-nav {
 
 .thumb a div.carCategoryLvl {
     position: relative;
-    top:7px;
-    left:15px;
-    color:WHITE;
-    font-size:20px;
+    top: 7px;
+    left: 15px;
+    color: WHITE;
+    font-size: 20px;
 }
 
 .thumb a div.carCategoryLvlBg {
-    float:right;
+    float: right;
     background-image: url("../images/catlvlCircle1.png");
     background-size: 40px 40px;
     background-repeat: no-repeat;
-    width:40px;
-    height:40px;
+    width: 40px;
+    height: 40px;
     position: relative;
-    z-index:1;
+    z-index: 1;
     background-color: rgba(0, 0, 0, 0.25);
     border-radius: 50%;
 }
@@ -78,8 +78,8 @@ ul.nav.navbar-nav {
 
 .thumb a div.carNotCategoryLvl {
     position: relative;
-    top:-40px;
-    z-index:-1;
+    top: -40px;
+    z-index: -1;
 }
 
 .backgroundCarBrandAndModel {
@@ -164,9 +164,10 @@ div#carimagesthumbnails img {
     width: 250px;
     top: 30px;
 }
+
 .numberCircle {
     border-radius: 50%;
-    float:left;
+    float: left;
 
     width: 50px;
     height: 50px;
@@ -188,9 +189,9 @@ div#carimagesthumbnails img {
 }
 
 .filterBtn {
-    width:75px;
-    height:30px;
-    line-height:10px;
+    width: 75px;
+    height: 30px;
+    line-height: 10px;
 }
 
 .Image404 {
@@ -245,7 +246,7 @@ div#historydetails td.historydetails label {
     font-weight: normal;
 }
 
-#tableMetaData label{
+#tableMetaData label {
     position: relative;
     top: 6px;
     float: right;
@@ -254,23 +255,23 @@ div#historydetails td.historydetails label {
 #tableMetaData input[type="radio"] {
     width: 25px;
     position: relative;
-    top:-2px;
-    float:left;
+    top: -2px;
+    float: left;
     margin-right: 10px;
 }
 
 #tableMetaData label.lblRadioLabel {
-    float:left;
+    float: left;
     font-weight: normal;
-    margin-right:8px;
+    margin-right: 8px;
 }
 
 #tableMetaData td {
-    width:585px;
+    width: 585px;
 }
 
-.divOrderButtons a{
-    float:left;
+.divOrderButtons a {
+    float: left;
 }
 
 .divOrderButtons div.unableOrder a.btn-default, a.btn-danger {
@@ -278,7 +279,7 @@ div#historydetails td.historydetails label {
 }
 
 .divOrderButtons label {
-    width:620px;
+    width: 620px;
     position: relative;
     top: 55px;
     left: -190px;

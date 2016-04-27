@@ -1,6 +1,6 @@
-<html layout:decorator="adminlayout"
-      xmlns:layout="http://www.thymeleaf.org"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="adminlayout">
 
 <div layout:fragment="content" th:remove="tag">
     <header class="header-container">
@@ -10,7 +10,7 @@
     </header>
 
     <main class="container">
-         <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <th>Id</th>

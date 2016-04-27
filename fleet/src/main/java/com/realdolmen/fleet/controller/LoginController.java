@@ -48,11 +48,11 @@ public class LoginController {
         }
         if (auth.getAuthority().equals("ROLE_ADMIN")) {
             session.setAttribute("userName", "Welcome Admin " + authentication.getCurrentUser().getFirstName() + " " + authentication.getCurrentUser().getLastName() + "!");
-            session.setAttribute("fLevel",authentication.getCurrentUser().getFunctionalLevel().getFLevel());
+            session.setAttribute("fLevel", authentication.getCurrentUser().getFunctionalLevel().getFLevel());
             return "redirect:/admin";
         } else if (auth.getAuthority().equals("ROLE_USER")) {
             session.setAttribute("userName", "Welcome " + authentication.getCurrentUser().getFirstName() + " " + authentication.getCurrentUser().getLastName() + "!");
-            session.setAttribute("fLevel",authentication.getCurrentUser().getFunctionalLevel().getFLevel());
+            session.setAttribute("fLevel", authentication.getCurrentUser().getFunctionalLevel().getFLevel());
             return "redirect:/cars";
         }
         return "login";

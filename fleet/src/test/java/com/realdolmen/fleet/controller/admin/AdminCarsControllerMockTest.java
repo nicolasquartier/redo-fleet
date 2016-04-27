@@ -1,7 +1,6 @@
 package com.realdolmen.fleet.controller.admin;
 
 import com.realdolmen.fleet.domain.Car;
-import com.realdolmen.fleet.mother.CarMother;
 import com.realdolmen.fleet.repository.CarRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -90,8 +89,8 @@ public class AdminCarsControllerMockTest {
                 .build();
         Long id = 1L;
         carOne.setId(id);
-       mockMvc.perform(post("/admin/cars/"+carOne.getId()))
-               .andExpect(redirectedUrl("/admin/cars"));
+        mockMvc.perform(post("/admin/cars/" + carOne.getId()))
+                .andExpect(redirectedUrl("/admin/cars"));
     }
 
     private List<Car> listOf4Cars() {

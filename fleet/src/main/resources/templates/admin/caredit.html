@@ -16,7 +16,7 @@
             <p class="alert alert-danger" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">model Error</p>
 
             <p>Brand:
-               <select th:field="*{brand}" class="form-control">
+                <select th:field="*{brand}" class="form-control">
                     <option th:each="brand : ${T(com.realdolmen.fleet.domain.enums.Brand).values()}"
                             th:name="*{brand}"
                             th:value="${brand}"
@@ -27,7 +27,7 @@
             <p class="alert alert-danger" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">brand Error</p>
 
             <p>Type:
-                <select th:field="*{type}"  class="form-control">
+                <select th:field="*{type}" class="form-control">
                     <option th:each="type : ${T(com.realdolmen.fleet.domain.enums.CarType).values()}"
                             th:name="*{type}"
                             th:value="${type}"
@@ -52,19 +52,22 @@
                     });
                 });
             </script>
-            <p class="alert alert-danger" th:if="${#fields.hasErrors('productionDate')}" th:errors="*{productionDate}">Date Error</p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('productionDate')}" th:errors="*{productionDate}">
+                Date Error</p>
 
-            <p>Active: <input type="checkbox" th:field="*{active}" /></p>
+            <p>Active: <input type="checkbox" th:field="*{active}"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('active')}" th:errors="*{active}">Active Error</p>
 
-            <p>Hybrid: <input type="checkbox" th:field="*{hybrid}" /></p>
+            <p>Hybrid: <input type="checkbox" th:field="*{hybrid}"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('hybrid')}" th:errors="*{hybrid}">Active Error</p>
 
             <p>Pack: <input type="text" th:field="*{pack}" class="form-control"/></p>
             <td th:if="${#fields.hasErrors('pack')}" th:errors="*{pack}">pack Error</td>
 
             <p>Fiscal HorsePower: <input type="text" th:field="*{fiscalHorsePower}" class="form-control"/></p>
-            <td th:if="${#fields.hasErrors('fiscalHorsePower')}" th:errors="*{fiscalHorsePower}">fiscalHorsePower Error</td>
+            <td th:if="${#fields.hasErrors('fiscalHorsePower')}" th:errors="*{fiscalHorsePower}">fiscalHorsePower
+                Error
+            </td>
 
 
             <p>Options:
@@ -81,10 +84,12 @@
                             th:selected="${fueltype == car.fuelType}"></option>
                 </select>
             </p>
-            <p class="alert alert-danger" th:if="${#fields.hasErrors('fuelType')}" th:errors="*{fuelType}">type Error</p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('fuelType')}" th:errors="*{fuelType}">type
+                Error</p>
 
             <p>Emission:<input type="text" th:field="*{emission}" class="form-control"/></p>
-            <p class="alert alert-danger" th:if="${#fields.hasErrors('emission')}" th:errors="*{emission}">emission Error</p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('emission')}" th:errors="*{emission}">emission
+                Error</p>
 
             <p>RimType:
                 <select th:field="*{rimType}" class="form-control">
@@ -98,22 +103,30 @@
             <p class="alert alert-danger" th:if="${#fields.hasErrors('rimType')}" th:errors="*{rimType}">type Error</p>
 
             <p>Ideal Km:<input type="text" th:field="*{idealKm}" min="120000" value="140000" class="form-control"/></p>
-            <p class="alert alert-danger" th:if="${#fields.hasErrors('idealKm')}" th:errors="*{idealKm}">deal km Error</p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('idealKm')}" th:errors="*{idealKm}">deal km
+                Error</p>
 
             <p>Maximum Km:<input type="text" th:field="*{maxKm}" min="120000" value="180000" class="form-control"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('maxKm')}" th:errors="*{maxKm}">emission Error</p>
 
             <p>List Price:<input type="number" min="0" step=".01" th:field="*{listPrice}" class="form-control"/></p>
-            <p class="alert alert-danger" th:if="${#fields.hasErrors('listPrice')}" th:errors="*{listPrice}">emission Error</p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('listPrice')}" th:errors="*{listPrice}">emission
+                Error</p>
 
-            <p>Monthly Benefit:<input type="number" min="0" step=".01" th:field="*{monthlyBenefit}" class="form-control"/></p>
-            <p class="alert alert-danger" th:if="${#fields.hasErrors('monthlyBenefit')}" th:errors="*{monthlyBenefit}">monthlyBenefit Error</p>
+            <p>Monthly Benefit:<input type="number" min="0" step=".01" th:field="*{monthlyBenefit}"
+                                      class="form-control"/></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('monthlyBenefit')}" th:errors="*{monthlyBenefit}">
+                monthlyBenefit Error</p>
 
-            <p>Upgrade Amount:<input type="number" min="0" step=".01" th:field="*{upgradeAmount}" class="form-control"/></p>
-            <p class="alert alert-danger" th:if="${#fields.hasErrors('upgradeAmount')}" th:errors="*{upgradeAmount}">upgradeAmount Error</p>
+            <p>Upgrade Amount:<input type="number" min="0" step=".01" th:field="*{upgradeAmount}" class="form-control"/>
+            </p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('upgradeAmount')}" th:errors="*{upgradeAmount}">
+                upgradeAmount Error</p>
 
-            <p>Downgrade Amount:<input type="number" min="0" step=".01" th:field="*{downgradeAmount}" class="form-control"/></p>
-            <p class="alert alert-danger" th:if="${#fields.hasErrors('downgradeAmount')}" th:errors="*{downgradeAmount}">downgradeAmount Error</p>
+            <p>Downgrade Amount:<input type="number" min="0" step=".01" th:field="*{downgradeAmount}"
+                                       class="form-control"/></p>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('downgradeAmount')}"
+               th:errors="*{downgradeAmount}">downgradeAmount Error</p>
 
             <p>Horse Power:<input type="number" min="0" step="1" th:field="*{hPower}" class="form-control"/></p>
             <p class="alert alert-danger" th:if="${#fields.hasErrors('hPower')}" th:errors="*{hPower}">hPower Error</p>

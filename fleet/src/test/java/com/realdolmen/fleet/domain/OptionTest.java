@@ -10,7 +10,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 

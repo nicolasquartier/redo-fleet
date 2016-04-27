@@ -3,24 +3,17 @@ package com.realdolmen.fleet.service.impl;
 import com.realdolmen.fleet.domain.Car;
 import com.realdolmen.fleet.domain.CompanyCar;
 import com.realdolmen.fleet.domain.Option;
-import com.realdolmen.fleet.mother.CompanyCarMother;
 import com.realdolmen.fleet.repository.CompanyCarRepository;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

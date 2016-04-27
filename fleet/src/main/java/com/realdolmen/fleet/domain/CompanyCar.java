@@ -3,7 +3,10 @@ package com.realdolmen.fleet.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 public class CompanyCar implements Serializable {

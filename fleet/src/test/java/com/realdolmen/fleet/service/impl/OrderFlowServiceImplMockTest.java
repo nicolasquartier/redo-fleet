@@ -61,7 +61,7 @@ public class OrderFlowServiceImplMockTest {
         orderViewObject.setUserCarHistory(userCarHistory);
 
         when(authService.getCurrentUser()).thenReturn(user);
-}
+    }
 
     @Test
     public void saveSavesACallsCompanyCarService() {
