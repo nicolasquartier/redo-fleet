@@ -1,7 +1,9 @@
 package com.realdolmen.fleet.controller;
 
 import com.realdolmen.fleet.domain.Authorities;
+import com.realdolmen.fleet.domain.User;
 import com.realdolmen.fleet.repository.AuthoritiesRepository;
+import com.realdolmen.fleet.repository.UserRepository;
 import com.realdolmen.fleet.service.impl.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,8 @@ public class LoginController {
 
     @Autowired
     private AuthoritiesRepository authoritiesRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private AuthServiceImpl authentication;
@@ -41,18 +45,20 @@ public class LoginController {
         }
 
         Authorities auth = authoritiesRepository.findByUsername(authentication.getName());
+       // User user = userRepository.findByUsername(authentication.getName());
 
         if (auth == null) {
             return "login";
-        } else {
         }
         if (auth.getAuthority().equals("ROLE_ADMIN")) {
+           // session.setAttribute("userName", "Welcome Admin " +user.getUsername()+user.getLastName());
             session.setAttribute("userName", "Welcome Admin " + authentication.getCurrentUser().getFirstName() + " " + authentication.getCurrentUser().getLastName() + "!");
-            session.setAttribute("fLevel", authentication.getCurrentUser().getFunctionalLevel().getFLevel());
+           session.setAttribute("fLevel",authentication.getCurrentUser().getCategory());
             return "redirect:/admin";
         } else if (auth.getAuthority().equals("ROLE_USER")) {
+           // session.setAttribute("userName", "Welcome " +user.getUsername()+user.getLastName());
             session.setAttribute("userName", "Welcome " + authentication.getCurrentUser().getFirstName() + " " + authentication.getCurrentUser().getLastName() + "!");
-            session.setAttribute("fLevel", authentication.getCurrentUser().getFunctionalLevel().getFLevel());
+            session.setAttribute("fLevel",authentication.getCurrentUser().getCategory());
             return "redirect:/cars";
         }
         return "login";
