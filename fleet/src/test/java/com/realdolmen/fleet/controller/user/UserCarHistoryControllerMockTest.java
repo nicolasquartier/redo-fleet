@@ -61,7 +61,7 @@ public class UserCarHistoryControllerMockTest {
 
     @Test
     public void userCarHistoryIsOnView() throws Exception {
-        when(userCarHistoryRepository.findByUserAndEndDateAfter(isA(User.class), isA(LocalDate.class))).thenReturn(history);
+        when(userCarHistoryRepository.findByUserAndEndDateAfterAndCompanyCarApprovedTrueAndCompanyCarActiveTrue(isA(User.class), isA(LocalDate.class))).thenReturn(history);
         when(userCarHistoryRepository.findByUserAndEndDateBefore(isA(User.class), isA(LocalDate.class))).thenReturn(Arrays.asList(historyTwo, HistoryThree));
 
 
