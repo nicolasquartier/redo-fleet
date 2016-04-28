@@ -67,7 +67,7 @@ public class SampleDataImporter {
     private PasswordEncoder passwordEncoder;
 
     @Test
-   // @Ignore
+    @Ignore
     @Rollback(false)
     @Transactional
     public void generateSampleData() {
