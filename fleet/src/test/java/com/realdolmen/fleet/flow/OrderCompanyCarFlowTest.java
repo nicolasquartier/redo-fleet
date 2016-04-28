@@ -1,9 +1,7 @@
 package com.realdolmen.fleet.flow;
 
 
-import com.realdolmen.fleet.domain.Car;
-import com.realdolmen.fleet.domain.CompanyCar;
-import com.realdolmen.fleet.domain.Option;
+import com.realdolmen.fleet.domain.*;
 import com.realdolmen.fleet.repository.CarRepository;
 import com.realdolmen.fleet.repository.FunctionalLevelRepository;
 import com.realdolmen.fleet.repository.OptionRepository;
@@ -27,6 +25,7 @@ import org.springframework.webflow.test.MockRequestContext;
 import org.springframework.webflow.test.execution.AbstractXmlFlowExecutionTests;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
@@ -67,6 +66,12 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
     @Mock
     private OrderViewObject orderViewObject;
 
+    @Mock
+    private User user;
+
+    @Mock
+    private UserCarHistory userCarHistory;
+
     private MockRequestContext requestContext;
 
     @Override
@@ -86,6 +91,9 @@ public class OrderCompanyCarFlowTest extends AbstractXmlFlowExecutionTests {
 
     @Before
     public void init() {
+        when(authService.getCurrentUser()).thenReturn(user);
+        when(userCarHistoryRepository.findAllByUserAndCompanyCarApprovedFalse(user)).thenReturn(Collections.singletonList(userCarHistory));
+
         when(carRepository.findOne(any(Long.class))).thenReturn(car);
         when(optionRepository.findByCar(any(Car.class))).thenReturn(Arrays.asList(optionOne, optionTwo));
 
