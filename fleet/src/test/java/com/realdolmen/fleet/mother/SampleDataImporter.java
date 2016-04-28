@@ -58,6 +58,9 @@ public class SampleDataImporter {
     private UserRepository userRepository;
 
     @Autowired
+    private AuthoritiesRepository authoritiesRepository;
+
+    @Autowired
     private UserCarHistoryRepository userCarHistoryRepository;
 
     @Autowired
@@ -69,59 +72,104 @@ public class SampleDataImporter {
     @Transactional
     public void generateSampleData() {
         generateFunctionalLevels();
-        generateDifferentRoleUsers();
-        generateAuthoritiesForDiffrentRoles();
+        generateUsers();
         generateCars();
         generateOptions();
         generateCompanyCar();
         generateUserCarHistory();
 
-        // TODO: add new method here
     }
 
     @Transactional
     private void generateUserCarHistory() {
         // could loop this by replacing the id with the loop index, be carefull index should stay below #cars and #users
-        Long carId = 1L;
-        Long userId = 1L;
-        UserCarHistory userCarHistory = UserCarHistoryMother.init().build();
-        userCarHistory.setUser(userRepository.findOne(userId));
-        userCarHistory.setCompanyCar(companyCarRepository.findOne(carId));
-        userCarHistoryRepository.save(userCarHistory);
+        for (Long i = 1L; i < 100; i++) {
+            for (Long j = 1L; j < 5; j++) {
+                Long carId = i;
+                Long userId = j;
+                UserCarHistory userCarHistory = UserCarHistoryMother.init().build();
+                userCarHistory.setUser(userRepository.findOne(userId));
+                userCarHistory.setCompanyCar(companyCarRepository.findOne(carId));
+                userCarHistory.setEndDate(LocalDate.now().minusDays(j-1));
+                userCarHistoryRepository.save(userCarHistory);
+            }
+        }
     }
 
     @Test
     @Ignore
+    @Rollback(false)
     @Transactional
     public void generateSampleDataWithClearDatabase() {
+        levelRepo.deleteAll();
         carRepository.deleteAll();
         optionRepository.deleteAll();
         companyCarRepository.deleteAll();
+        userRepository.deleteAll();
+        authoritiesRepository.deleteAll();
         generateSampleData();
     }
+
+    private void generateUser(String firstname, String lastname, String username, String email, String business, int level, String role) {
+        User user = UserMother.init().build();
+        user.setVersion(1L);
+        user.setFirstName(firstname);
+        user.setLastName(lastname);
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setFunctionalLevel(getLevelForFLevel(level));
+        user.setPassword(passwordEncoder.encode("123"));
+        user.setBusinessUnit(business);
+        user.setEnabled(true);
+        entityManager.persist(user);
+
+        Authorities normal = AuthoritiesMother.init().build();
+        normal.setUsername(username);
+        normal.setAuthority(role);
+        entityManager.persist(normal);
+    }
+
+    private void generateUsers() {
+        generateUser("Eddard", "Stark", "nedstark", "eddard@winterfell.com", "Hand of the King", 3, "ROLE_USER");
+        generateUser("Catelyn", "Tully", "cattully", "catelyn@winterfell.com", "Lady of Winterfell", 2, "ROLE_USER");
+        generateUser("Daenerys", "Targaryen ", "daenerys", "khaleesi@stormborn.com", "Dothraki khaleesi", 4, "ROLE_ADMIN");
+        generateUser("Jon", "Snow", "bastard", "jon@winterfell.com", "Night's watch", 3, "ROLE_USER");
+        generateUser("Tyrion", "Lannister", "imp", "Tyrion@lannister.com", "Hand of the king", 6, "ROLE_USER");
+        generateUser("Iam", "Administrator", "admin", "admin@realdolmen.com", "Hand of the king", 3, "ROLE_ADMIN");
+        generateUser("Iam", "user", "user", "user@realdolmen.com", "Java unit", 3, "ROLE_USER");
+    }
+
 
     private void generateCompanyCar() {
 
         // could loop this by replacing the id with the loop index, be carefull index should stay below #cars
-        Long carId = 1L;
+        for (Long i = 1L; i < 12; i++) {
+            for (int j = 1; j < 10; j++) {
 
-        CompanyCar companyCar = CompanyCarMother.init().build();
+                Long carId = i;
 
-        Car carToSet = carRepository.getOne(carId);
-        companyCar.setCar(carToSet);
+                CompanyCar companyCar = CompanyCarMother.init().build();
 
-        entityManager.persist(companyCar);
-        entityManager.flush();
+                Car carToSet = carRepository.getOne(carId);
+                companyCar.setCar(carToSet);
+                if ((j % 2) == 0) {
+                    companyCar.setApproved(true);
+                }
 
-        List<Option> options = companyCar.getOptions();
-        options.stream().forEach(companyCar::removeOption);
+                entityManager.persist(companyCar);
+                entityManager.flush();
 
-        List<Option> optionToSet = optionRepository.findByCar(carToSet);
-        optionToSet.stream().forEach(companyCar::addOption);
-        optionToSet.stream().forEach(option -> option.addCompanyCar(companyCar));
+                List<Option> options = companyCar.getOptions();
+                options.stream().forEach(companyCar::removeOption);
 
-        entityManager.merge(companyCar);
-        entityManager.flush();
+                List<Option> optionToSet = optionRepository.findByCar(carToSet);
+                optionToSet.stream().forEach(companyCar::addOption);
+                optionToSet.stream().forEach(option -> option.addCompanyCar(companyCar));
+
+                entityManager.merge(companyCar);
+                entityManager.flush();
+            }
+        }
     }
 
     private void generateOptions() {
@@ -471,163 +519,6 @@ public class SampleDataImporter {
                 " 1,6 tdi 6v",
                 CarType.BERLINE
         );
-
-        persistACar("30-08-2016",
-                Brand.SKODA,
-                true,
-                getLevelForFLevel(5),
-                106,
-                11,
-                FuelType.DIESEL,
-                "Superb Combi Ambition",
-                false,
-                "Pack Ambition Comfort / Pack Ambition GPs/ lichtmetale velgen helios / reserve wiel / bagageruimte afdekking autom/ elektrische opening en sluiting van de achterklep",
-                "image1.jpg",
-                RimType.STEEL,
-                50000,
-                250000,
-                25000,
-                500,
-                250,
-                250,
-                150,
-                "2,0CRTDI 6v",
-                CarType.BREAK
-        );
-        persistACar("30-08-2016",
-                Brand.SKODA,
-                true,
-                getLevelForFLevel(4),
-                106,
-                9,
-                FuelType.DIESEL,
-                "Superb Combi Style 1,6CRTDI 120 pk 6v",
-                false,
-                "Pack Style Comfort / Pack style GPs / Pack style premium / leder interieur",
-                "image1.jpg",
-                RimType.ALUMINIUM,
-                50000,
-                250000,
-                25000,
-                500,
-                250,
-                250,
-                115,
-                "Vroemmmm",
-                CarType.BERLINE
-        );
-        persistACar("30-08-2016",
-                Brand.SKODA,
-                true,
-                getLevelForFLevel(4),
-                106,
-                9,
-                FuelType.DIESEL,
-                "Superb Berline Style 1,6CRTDI 120 pk 6v",
-                false,
-                "Pack Style Comfort / Pack style GPs / Pack style premium / leder interieur",
-                "image1.jpg",
-                RimType.ALUMINIUM,
-                50000,
-                250000,
-                25000,
-                500,
-                250,
-                250,
-                115,
-                "Vroemmmm",
-                CarType.BERLINE
-        );
-        persistACar("30-08-2016",
-                Brand.SKODA,
-                true,
-                getLevelForFLevel(2),
-                90,
-                9,
-                FuelType.DIESEL,
-                "Octavia combi 1,6 tdi 110 pk  greenline",
-                false,
-                "Pack Ambition GPs",
-                "image1.jpg",
-                RimType.ALUMINIUM,
-                50000,
-                250000,
-                25000,
-                500,
-                250,
-                250,
-                115,
-                "Vroemmmm",
-                CarType.BERLINE
-        );
-
-        persistACar("30-08-2016",
-                Brand.SKODA,
-                true,
-                getLevelForFLevel(3),
-                106,
-                9,
-                FuelType.DIESEL,
-                "Superb Combi Ambition 1,6 tdi 120 pk 6v",
-                false,
-                "ack Ambition Comfort / Pack Ambition GPs/ lichtmetale velgen orion",
-                "image1.jpg",
-                RimType.ALUMINIUM,
-                50000,
-                250000,
-                25000,
-                500,
-                250,
-                250,
-                115,
-                "Vroemmmm",
-                CarType.BERLINE
-        );
-
-        persistACar("30-08-2016",
-                Brand.SEAT,
-                true,
-                getLevelForFLevel(6),
-                130,
-                11,
-                FuelType.DIESEL,
-                "Alhambra Style",
-                false,
-                "Pack technology / Pack executive/Alcantara zetels",
-                "image1.jpg",
-                RimType.ALUMINIUM,
-                140000,
-                180000,
-                37265.09,
-                250.21,
-                4872.28,
-                0.0,
-                150,
-                "2,0 tdi",
-                CarType.BERLINE
-        );
-        persistACar("30-08-2016",
-                Brand.SEAT,
-                true,
-                getLevelForFLevel(7),
-                130,
-                11,
-                FuelType.DIESEL,
-                "Alhambra Style2,0 tdi 150 pk",
-                false,
-                "Pack technology / Pack executive",
-                "image1.jpg",
-                RimType.ALUMINIUM,
-                140000,
-                180000,
-                45378.84,
-                285.79,
-                3464.29,
-                0.0,
-                115,
-                "Vroemmmm",
-                CarType.BERLINE
-        );
     }
 
     private void generateFunctionalLevels() {
@@ -638,7 +529,7 @@ public class SampleDataImporter {
         }
     }
 
-    @Transactional
+/*    @Transactional
     private void generateDifferentRoleUsers() {
         User adminUser = UserMother.init().build();
         adminUser.setUsername("admin");
@@ -654,10 +545,10 @@ public class SampleDataImporter {
         normalUser.setEmail("user@realdolmen.com");
         normalUser.setFunctionalLevel(levelRepo.findOne(3L));
         entityManager.persist(normalUser);
-    }
+    }*/
 
 
-    @Transactional
+   /* @Transactional
     private void generateAuthoritiesForDiffrentRoles() {
         Authorities adminRole = AuthoritiesMother.init().build();
         adminRole.setUsername("admin");
@@ -668,7 +559,7 @@ public class SampleDataImporter {
         normal.setUsername("user");
         normal.setAuthority("ROLE_USER");
         entityManager.persist(normal);
-    }
+    }*/
 
     // TODO: implement method using mother and persist entity
 
