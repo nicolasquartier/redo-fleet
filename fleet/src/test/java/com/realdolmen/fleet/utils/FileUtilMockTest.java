@@ -34,7 +34,7 @@ public class FileUtilMockTest {
         when(inputStream.read(any())).thenReturn(-1);
     }
 
-    @Test
+    @Test(expected = IOException.class)
     public void saveFileToIncorrectPathHandlesTheException() throws Exception {
         fileUtil.saveCarImage(multipartFile, "fake212");
     }
