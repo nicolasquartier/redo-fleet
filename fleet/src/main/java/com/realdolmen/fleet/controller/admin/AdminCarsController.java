@@ -39,6 +39,9 @@ public class AdminCarsController {
     private FunctionalLevelRepository levelRepository;
 
     @Autowired
+    private FileUtil fileUtil;
+
+    @Autowired
     public AdminCarsController(CarRepository carRepository) {
         this.carRepository = carRepository;
     }
@@ -65,8 +68,8 @@ public class AdminCarsController {
         if(errors.getErrorCount() > 1) {
             return "/admin/caredit";
         }
-        String filename = FileUtil.getFilenamefor(thumbnail.getOriginalFilename());
-        FileUtil.saveCarImage(thumbnail, filename);
+        String filename = fileUtil.getFilenamefor(thumbnail.getOriginalFilename());
+        fileUtil.saveCarImage(thumbnail, filename);
 
         carRepository.setCarInfoById(car.getActive(),car.getBrand(),car.getEmission(),car.getFiscalHorsePower(),car.getFuelType(),
                 car.getHybrid(),car.getModel(),car.getPack(),car.getProductionDate(),car.getRimType(), filename,car.getType(),
@@ -88,8 +91,8 @@ public class AdminCarsController {
         if(errors.hasErrors()) {
             return "/admin/createcar";
         }
-        String filename = FileUtil.getFilenamefor(thumbnail.getOriginalFilename());
-        FileUtil.saveCarImage(thumbnail, filename);
+        String filename = fileUtil.getFilenamefor(thumbnail.getOriginalFilename());
+        fileUtil.saveCarImage(thumbnail, filename);
         car.setThumbnail(filename);
         carRepository.save(car);
 
