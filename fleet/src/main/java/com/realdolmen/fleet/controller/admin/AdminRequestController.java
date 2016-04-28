@@ -1,8 +1,10 @@
 package com.realdolmen.fleet.controller.admin;
 
+import com.realdolmen.fleet.domain.User;
 import com.realdolmen.fleet.domain.UserCarHistory;
 import com.realdolmen.fleet.repository.CompanyCarRepository;
 import com.realdolmen.fleet.repository.UserCarHistoryRepository;
+import com.realdolmen.fleet.service.impl.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +12,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.time.LocalDate;
+import java.time.temporal.TemporalAmount;
 import java.util.List;
 
 @RequestMapping("/admin")
 @Controller
 public class AdminRequestController {
 
+    @Autowired
+    private AuthServiceImpl authService;
 
     @Autowired
     private CompanyCarRepository companyCarRepository;
@@ -32,7 +38,18 @@ public class AdminRequestController {
 
     @RequestMapping(value = "/requests/approve/{id}", method = RequestMethod.GET)
     public String approveARequest(Model model, @PathVariable("id") Long id) {
+        //remove current car
         UserCarHistory currentUserCarHistory = userCarHistoryRepository.findOne(id);
+        User user = currentUserCarHistory.getUser();
+
+        UserCarHistory userPreviousCar = userCarHistoryRepository.findByUserAndEndDateAfterAndCompanyCarApprovedTrueAndCompanyCarActiveTrue(user, LocalDate.now());
+        if(userPreviousCar != null) {
+            userPreviousCar.getCompanyCar().setActive(false);
+            userPreviousCar.setEndDate(LocalDate.now().minusDays(1));
+            userCarHistoryRepository.save(userPreviousCar);
+        }
+
+        //approve new car
         currentUserCarHistory.getCompanyCar().setApproved(true);
         userCarHistoryRepository.save(currentUserCarHistory);
 

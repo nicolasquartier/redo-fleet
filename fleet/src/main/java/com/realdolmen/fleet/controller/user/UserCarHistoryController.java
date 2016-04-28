@@ -26,9 +26,11 @@ public class UserCarHistoryController {
     @RequestMapping(value = "/car", method = RequestMethod.GET)
     public String getCurrentCompanyCar(Model model) {
         User currentUser = authService.getCurrentUser();
-        UserCarHistory carhistory = userCarHistoryRepository.findByUserAndEndDateAfter(currentUser, LocalDate.now());
+        UserCarHistory carhistory = userCarHistoryRepository.findByUserAndEndDateAfterAndCompanyCarApprovedTrueAndCompanyCarActiveTrue(currentUser, LocalDate.now());
+        UserCarHistory requestMustBeApproved = userCarHistoryRepository.findByUserAndEndDateAfterAndCompanyCarApprovedFalseAndCompanyCarActiveTrue(currentUser, LocalDate.now());
         List<UserCarHistory> userOlderCarHistory = userCarHistoryRepository.findByUserAndEndDateBefore(currentUser, LocalDate.now());
         model.addAttribute("userOlderCarHistory", userOlderCarHistory);
+        model.addAttribute("requestMustBeApproved", requestMustBeApproved);
 
         if (carhistory != null) {
             model.addAttribute("carHistoryObj", carhistory);
