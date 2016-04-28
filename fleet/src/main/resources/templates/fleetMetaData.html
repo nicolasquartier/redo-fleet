@@ -72,9 +72,9 @@
                         <label th:for="${#ids.next('userCarHistory.choosenLevel')}">End Price:</label></td>
                     <td th:switch="*{userCarHistory.user.getCategory() - car.getLevel()}">
                         <label class="lblRadioLabel" th:case="1"
-                               th:text="${T(Math).ceil(car.listPrice - car.downgradeAmount)}"></label>
+                               th:text="${T(Math).ceil(car.listPrice + car.downgradeAmount)}"></label>
                         <label class="lblRadioLabel" th:case="0" th:text="*{car.listPrice}"></label>
-                        <label class="lblRadioLabel" th:case="-1"  th:text="${T(Math).ceil(car.listPrice - car.upgradeAmount)}"></label>
+                        <label class="lblRadioLabel" th:case="-1"  th:text="${T(Math).ceil(car.listPrice + car.upgradeAmount)}"></label>
                         <label style="font-weight: bold;" class="lblRadioLabel" th:case="*">Not possible to choose
                             this car due to your 'Functional Level' &amp; 'Car Category Level'</label>
                     </td>

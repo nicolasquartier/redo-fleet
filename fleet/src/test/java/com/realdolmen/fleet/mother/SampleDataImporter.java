@@ -67,7 +67,7 @@ public class SampleDataImporter {
     private PasswordEncoder passwordEncoder;
 
     @Test
-    @Ignore
+   // @Ignore
     @Rollback(false)
     @Transactional
     public void generateSampleData() {
@@ -258,7 +258,7 @@ public class SampleDataImporter {
                 25048.99,
                 104.17,
                 0.0,
-                3924.43,
+                -3924.43,
                 110,
                 "1,6 tdi",
                 CarType.BERLINE
@@ -281,7 +281,7 @@ public class SampleDataImporter {
                 19945.49,
                 104.17,
                 0.0,
-                2479.89,
+               -2479.89,
                 105,
                 "1,6 crtdi",
                 CarType.BREAK
@@ -304,7 +304,7 @@ public class SampleDataImporter {
                 25971.52,
                 104.17,
                 0.0,
-                5491.27,
+                -5491.27,
                 110,
                 "1,6 tdi",
                 CarType.BERLINE
@@ -328,7 +328,7 @@ public class SampleDataImporter {
                 24566.82,
                 104.17,
                 0.0,
-                4253.93,
+                -4253.93,
                 110,
                 "1,6 tdi",
                 CarType.BERLINE
@@ -351,7 +351,7 @@ public class SampleDataImporter {
                 25343.22,
                 104.17,
                 0.0,
-                4042.73,
+                -4042.73,
                 110,
                 "1,6 tdi",
                 CarType.BREAK
@@ -374,7 +374,7 @@ public class SampleDataImporter {
                 19876.19,
                 104.17,
                 0,
-                1907.41,
+                -1907.41,
                 75,
                 "1,2 crtdi",
                 CarType.MONOVOLUME
@@ -397,7 +397,7 @@ public class SampleDataImporter {
                 27476.95,
                 123.65,
                 0,
-                1369.33,
+                -1369.33,
                 110,
                 "1,6 crtdi",
                 CarType.BERLINE
@@ -421,7 +421,7 @@ public class SampleDataImporter {
                 26696.57,
                 123.86,
                 0,
-                1407.33,
+                -1407.33,
                 110,
                 "1,6 crtdi",
                 CarType.MONOVOLUME
@@ -444,7 +444,7 @@ public class SampleDataImporter {
                 24240.15,
                 122.93,
                 2431.85,
-                2795.35,
+                -2795.35,
                 110,
                 "2.0 tdi",
                 CarType.BERLINE
@@ -468,7 +468,7 @@ public class SampleDataImporter {
                 28668.01,
                 129.01,
                 2197.09,
-                3165.90,
+                -3165.90,
                 110,
                 "1,6 tdi",
                 CarType.BERLINE
@@ -491,7 +491,7 @@ public class SampleDataImporter {
                 28668.88,
                 134.86,
                 2061.39,
-                3165.90,
+                -3165.90,
                 110,
                 "1,6 crtdi",
                 CarType.BREAK
@@ -514,7 +514,7 @@ public class SampleDataImporter {
                 28618,
                 134,
                 2061,
-                3165,
+                -3165,
                 120,
                 " 1,6 tdi 6v",
                 CarType.BERLINE
